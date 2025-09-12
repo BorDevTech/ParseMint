@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth, SessionTimeout } from '../contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
 interface ProfileData {
@@ -25,7 +25,7 @@ interface PreferencesData {
 }
 
 export default function AccountPage() {
-  const { isAuthenticated, currentUser, updateUserData } = useAuth();
+  const { isAuthenticated, currentUser, updateUserData, loading, sessionTimeout, setSessionTimeout } = useAuth();
   const router = useRouter();
   const [profileData, setProfileData] = useState<ProfileData>({
     fullName: '',
@@ -50,10 +50,11 @@ export default function AccountPage() {
   }, [currentUser]);
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    // Only redirect if not loading and not authenticated
+    if (!loading && !isAuthenticated) {
       router.push('/login');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, loading, router]);
 
   const handleProfileChange = (field: keyof ProfileData, value: string) => {
     setProfileData(prev => ({
@@ -87,8 +88,35 @@ export default function AccountPage() {
     }, 1000);
   };
 
+  // Show loading state while authentication is being determined
+  if (loading) {
+    return (
+      <Box 
+        minH="100vh" 
+        bg="gray.50" 
+        display="flex" 
+        alignItems="center" 
+        justifyContent="center"
+      >
+        <VStack gap={4}>
+          <Box 
+            w="12" 
+            h="12" 
+            border="4px solid" 
+            borderColor="teal.200" 
+            borderTopColor="teal.500" 
+            borderRadius="full" 
+            animation="spin 1s linear infinite"
+          />
+          <Text color="gray.600">Loading...</Text>
+        </VStack>
+      </Box>
+    );
+  }
+
+  // Don't render if not authenticated (will redirect)
   if (!isAuthenticated) {
-    return null; // Will redirect to login
+    return null;
   }
 
   return (
@@ -216,6 +244,33 @@ export default function AccountPage() {
               <Heading size="md" color="gray.700">
                 Security Settings
               </Heading>
+
+              {/* Session Timeout Settings */}
+              <Box>
+                <Text fontWeight="medium" mb={2} color="gray.700">
+                  Auto-Logout After Inactivity
+                </Text>
+                <select
+                  value={sessionTimeout}
+                  onChange={(e) => setSessionTimeout(e.target.value as SessionTimeout)}
+                  style={{
+                    width: '100%',
+                    padding: '8px 12px',
+                    backgroundColor: 'white',
+                    border: '1px solid #E2E8F0',
+                    borderRadius: '6px',
+                    fontSize: '16px',
+                  }}
+                >
+                  <option value="3min">3 minutes</option>
+                  <option value="5min">5 minutes (Default)</option>
+                  <option value="10min">10 minutes</option>
+                  <option value="never">Never</option>
+                </select>
+                <Text fontSize="sm" color="gray.500" mt={1}>
+                  Automatically log out after the specified period of inactivity. This includes tab switching and background activity.
+                </Text>
+              </Box>
 
               <Box>
                 <Text fontWeight="medium" mb={2} color="gray.700">

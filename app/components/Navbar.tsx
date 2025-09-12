@@ -14,7 +14,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { ThemeToggle } from './ThemeToggle';
 
 export function Navbar() {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, loading } = useAuth();
   const { theme } = useTheme();
 
   return (
@@ -49,7 +49,10 @@ export function Navbar() {
           {/* Navigation */}
           <HStack gap={4}>
             <ThemeToggle />
-            {isAuthenticated ? (
+            {loading ? (
+              // Show loading placeholder to prevent flash
+              <Box w="200px" h="10" bg="gray.200" borderRadius="md" />
+            ) : isAuthenticated ? (
               <>
                 <Link href="/dashboard">
                   <Button 

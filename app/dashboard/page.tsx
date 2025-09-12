@@ -445,18 +445,46 @@ function ReferralsTab() {
 }
 
 export default function DashboardPage() {
-  const { isAuthenticated, currentUser } = useAuth();
+  const { isAuthenticated, currentUser, loading } = useAuth();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    // Only redirect if not loading and not authenticated
+    if (!loading && !isAuthenticated) {
       router.push('/login');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, loading, router]);
 
+  // Show loading state while authentication is being determined
+  if (loading) {
+    return (
+      <Box 
+        minH="100vh" 
+        bg="gray.50" 
+        display="flex" 
+        alignItems="center" 
+        justifyContent="center"
+      >
+        <VStack gap={4}>
+          <Box 
+            w="12" 
+            h="12" 
+            border="4px solid" 
+            borderColor="teal.200" 
+            borderTopColor="teal.500" 
+            borderRadius="full" 
+            animation="spin 1s linear infinite"
+          />
+          <Text color="gray.600">Loading...</Text>
+        </VStack>
+      </Box>
+    );
+  }
+
+  // Don't render if not authenticated (will redirect)
   if (!isAuthenticated) {
-    return null; // Will redirect to login
+    return null;
   }
 
   const sidebarItems = [
