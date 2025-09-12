@@ -19,18 +19,39 @@ export function Navbar() {
 
   return (
     <Box 
-      bg={theme === 'light' ? 'white' : 'gray.800'} 
-      shadow="lg" 
+      bgGradient={theme === 'light' 
+        ? "linear(to-r, brand.500, secondary.500, accent.500)" 
+        : "linear(to-r, gray.800, gray.900, black)"
+      }
+      shadow="xl" 
       position="sticky" 
       top={0} 
       zIndex={10}
-      borderBottom="2px"
-      borderColor="brand.100"
+      borderBottom="3px"
+      borderColor="white"
     >
       <Container maxW="container.xl">
-        <Flex h={16} alignItems="center" justifyContent="space-between">
-          {/* Logo/Brand - Only show on non-dashboard pages */}
-          {!isAuthenticated && (
+        {/* Table-like layout with ParseMint centered */}
+        <Flex h={20} alignItems="center" justify="space-between" gap={8}>
+          {/* Left spacer */}
+          <Box flex="1" />
+          
+          {/* Center - ParseMint Brand (Always visible) */}
+          <Box 
+            textAlign="center" 
+            bg="white" 
+            px={8} 
+            py={3} 
+            borderRadius="full"
+            shadow="lg"
+            border="2px"
+            borderColor="white"
+            _hover={{ 
+              transform: 'scale(1.05)',
+              shadow: 'xl'
+            }}
+            transition="all 0.3s"
+          >
             <Link href="/">
               <Heading
                 as="h1"
@@ -40,98 +61,117 @@ export function Navbar() {
                 fontWeight="bold"
                 fontSize="2xl"
                 letterSpacing="tight"
-                _hover={{ 
-                  transform: 'scale(1.05)'
-                }}
-                transition="all 0.2s"
               >
                 ParseMint
               </Heading>
             </Link>
-          )}
-          
-          {/* Empty space for authenticated users to push navigation to the right */}
-          {isAuthenticated && <Box />}
+          </Box>
 
-          {/* Navigation */}
-          <HStack gap={6}>
-            <ThemeToggle />
-            {loading ? (
-              // Show loading placeholder to prevent flash
-              <Box w="200px" h="10" bg="gray.200" borderRadius="md" />
-            ) : isAuthenticated ? (
-              <>
-                <Link href="/dashboard">
+          {/* Right - Navigation */}
+          <Flex flex="1" justify="flex-end">
+            <HStack gap={4}>
+              <ThemeToggle />
+              {loading ? (
+                // Show loading placeholder to prevent flash
+                <Box w="200px" h="10" bg="whiteAlpha.300" borderRadius="md" />
+              ) : isAuthenticated ? (
+                <>
+                  <Link href="/dashboard">
+                    <Button 
+                      variant="solid"
+                      bg="whiteAlpha.200"
+                      color="white"
+                      borderWidth="2px"
+                      borderColor="whiteAlpha.300"
+                      _hover={{ 
+                        bg: 'whiteAlpha.300',
+                        borderColor: 'white',
+                        transform: 'translateY(-1px)'
+                      }}
+                      fontWeight="semibold"
+                      transition="all 0.2s"
+                    >
+                      Dashboard
+                    </Button>
+                  </Link>
+                  <Link href="/account">
+                    <Button 
+                      variant="solid"
+                      bg="whiteAlpha.200"
+                      color="white"
+                      borderWidth="2px"
+                      borderColor="whiteAlpha.300"
+                      _hover={{ 
+                        bg: 'whiteAlpha.300',
+                        borderColor: 'white',
+                        transform: 'translateY(-1px)'
+                      }}
+                      fontWeight="semibold"
+                      transition="all 0.2s"
+                    >
+                      Profile Settings
+                    </Button>
+                  </Link>
                   <Button 
-                    variant="ghost" 
-                    colorScheme="brand"
-                    _hover={{ 
-                      bg: 'brand.50',
-                      color: 'brand.700'
-                    }}
-                  >
-                    Dashboard
-                  </Button>
-                </Link>
-                <Link href="/account">
-                  <Button 
-                    variant="ghost" 
-                    colorScheme="secondary"
-                    _hover={{ 
-                      bg: 'secondary.50',
-                      color: 'secondary.700'
-                    }}
-                  >
-                    Profile Settings
-                  </Button>
-                </Link>
-                <Button 
-                  onClick={logout} 
-                  bg="red.500"
-                  color="white"
-                  _hover={{ 
-                    bg: 'red.600',
-                    transform: 'translateY(-1px)'
-                  }}
-                  _active={{ transform: 'translateY(0)' }}
-                  transition="all 0.2s"
-                >
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <Link href="/login">
-                  <Button 
-                    variant="ghost" 
-                    color="secondary.600"
-                    _hover={{ 
-                      bg: 'secondary.50',
-                      color: 'secondary.700'
-                    }}
-                  >
-                    Login
-                  </Button>
-                </Link>
-                <Link href="/signup">
-                  <Button 
-                    bg="accent.500"
+                    onClick={logout} 
+                    bg="red.500"
                     color="white"
+                    borderWidth="2px"
+                    borderColor="red.400"
                     _hover={{ 
-                      bg: 'accent.600',
-                      transform: 'translateY(-1px)',
-                      shadow: 'md'
+                      bg: 'red.600',
+                      borderColor: 'red.300',
+                      transform: 'translateY(-1px)'
                     }}
                     _active={{ transform: 'translateY(0)' }}
                     transition="all 0.2s"
                     fontWeight="semibold"
                   >
-                    Sign Up
+                    Logout
                   </Button>
-                </Link>
-              </>
-            )}
-          </HStack>
+                </>
+              ) : (
+                <>
+                  <Link href="/login">
+                    <Button 
+                      variant="solid"
+                      bg="whiteAlpha.200"
+                      color="white"
+                      borderWidth="2px"
+                      borderColor="whiteAlpha.300"
+                      _hover={{ 
+                        bg: 'whiteAlpha.300',
+                        borderColor: 'white',
+                        transform: 'translateY(-1px)'
+                      }}
+                      fontWeight="semibold"
+                      transition="all 0.2s"
+                    >
+                      Login
+                    </Button>
+                  </Link>
+                  <Link href="/signup">
+                    <Button 
+                      bg="white"
+                      color="brand.600"
+                      borderWidth="2px"
+                      borderColor="white"
+                      _hover={{ 
+                        bg: 'gray.100',
+                        transform: 'translateY(-1px)',
+                        shadow: 'md'
+                      }}
+                      _active={{ transform: 'translateY(0)' }}
+                      transition="all 0.2s"
+                      fontWeight="bold"
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
+                </>
+              )}
+            </HStack>
+          </Flex>
         </Flex>
       </Container>
     </Box>

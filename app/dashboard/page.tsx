@@ -36,10 +36,10 @@ interface SidebarItemProps {
 }
 
 function SidebarItem({ icon, label, isActive, onClick }: SidebarItemProps) {
-  const bgColor = isActive ? 'brand.50' : 'transparent';
-  const textColor = isActive ? 'brand.700' : 'gray.600';
-  const borderColor = 'brand.500';
-  const iconColor = isActive ? 'brand.600' : 'gray.500';
+  const bgColor = isActive ? 'whiteAlpha.200' : 'transparent';
+  const textColor = isActive ? 'white' : 'whiteAlpha.800';
+  const borderColor = 'white';
+  const iconColor = isActive ? 'white' : 'whiteAlpha.700';
 
   return (
     <Button
@@ -54,13 +54,13 @@ function SidebarItem({ icon, label, isActive, onClick }: SidebarItemProps) {
       borderRadius="md"
       mx={1}
       my={0.5}
-      fontWeight={isActive ? "semibold" : "medium"}
+      fontWeight={isActive ? "bold" : "medium"}
       fontSize="sm"
       _hover={{
-        bg: 'brand.50',
-        color: 'brand.700',
+        bg: 'whiteAlpha.200',
+        color: 'white',
         transform: 'translateX(4px)',
-        shadow: 'sm',
+        shadow: 'lg',
       }}
       transition="all 0.2s ease"
       onClick={onClick}
@@ -91,30 +91,32 @@ function OverviewTab() {
       {/* Stats Cards */}
       <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
         <Box 
-          bg="gradient-to-br from-white to-brand.25" 
+          bgGradient="linear(to-br, brand.400, brand.600)" 
           p={6} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
-          borderTopColor="brand.500"
-          border="1px"
-          borderColor="brand.100"
+          borderTopColor="white"
+          border="2px"
+          borderColor="brand.300"
+          color="white"
           _hover={{ 
-            transform: 'translateY(-2px)',
-            shadow: '2xl'
+            transform: 'translateY(-4px)',
+            shadow: '2xl',
+            bgGradient: "linear(to-br, brand.500, brand.700)"
           }}
           transition="all 0.3s"
         >
           <Flex align="center" gap={3} mb={4}>
-            <Icon as={MdReceipt} boxSize={10} color="brand.500" />
+            <Icon as={MdReceipt} boxSize={10} color="white" />
             <Box>
-              <Text fontSize="sm" fontWeight="semibold" color="gray.600" textTransform="uppercase" letterSpacing="wide">
+              <Text fontSize="sm" fontWeight="semibold" color="whiteAlpha.800" textTransform="uppercase" letterSpacing="wide">
                 Receipts Uploaded
               </Text>
-              <Text fontSize="4xl" fontWeight="bold" color="brand.600">
+              <Text fontSize="4xl" fontWeight="bold" color="white">
                 24
               </Text>
-              <Text fontSize="sm" color="green.500" fontWeight="medium">
+              <Text fontSize="sm" color="green.200" fontWeight="medium">
                 +3 this week
               </Text>
             </Box>
@@ -122,30 +124,32 @@ function OverviewTab() {
         </Box>
 
         <Box 
-          bg="gradient-to-br from-white to-secondary.25" 
+          bgGradient="linear(to-br, secondary.400, secondary.600)" 
           p={6} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
-          borderTopColor="secondary.500"
-          border="1px"
-          borderColor="secondary.100"
+          borderTopColor="white"
+          border="2px"
+          borderColor="secondary.300"
+          color="white"
           _hover={{ 
-            transform: 'translateY(-2px)',
-            shadow: '2xl'
+            transform: 'translateY(-4px)',
+            shadow: '2xl',
+            bgGradient: "linear(to-br, secondary.500, secondary.700)"
           }}
           transition="all 0.3s"
         >
           <Flex align="center" gap={3} mb={4}>
-            <Icon as={MdStars} boxSize={10} color="secondary.500" />
+            <Icon as={MdStars} boxSize={10} color="white" />
             <Box>
-              <Text fontSize="sm" fontWeight="semibold" color="gray.600" textTransform="uppercase" letterSpacing="wide">
+              <Text fontSize="sm" fontWeight="semibold" color="whiteAlpha.800" textTransform="uppercase" letterSpacing="wide">
                 Points Earned
               </Text>
-              <Text fontSize="4xl" fontWeight="bold" color="secondary.600">
+              <Text fontSize="4xl" fontWeight="bold" color="white">
                 1,247
               </Text>
-              <Text fontSize="sm" color="green.500" fontWeight="medium">
+              <Text fontSize="sm" color="green.200" fontWeight="medium">
                 +156 this week
               </Text>
             </Box>
@@ -153,30 +157,32 @@ function OverviewTab() {
         </Box>
 
         <Box 
-          bg="gradient-to-br from-white to-accent.25" 
+          bgGradient="linear(to-br, accent.400, accent.600)" 
           p={6} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
-          borderTopColor="accent.500"
-          border="1px"
-          borderColor="accent.100"
+          borderTopColor="white"
+          border="2px"
+          borderColor="accent.300"
+          color="white"
           _hover={{ 
-            transform: 'translateY(-2px)',
-            shadow: '2xl'
+            transform: 'translateY(-4px)',
+            shadow: '2xl',
+            bgGradient: "linear(to-br, accent.500, accent.700)"
           }}
           transition="all 0.3s"
         >
           <Flex align="center" gap={3} mb={4}>
-            <Icon as={MdAccountBalanceWallet} boxSize={10} color="accent.500" />
+            <Icon as={MdAccountBalanceWallet} boxSize={10} color="white" />
             <Box>
-              <Text fontSize="sm" fontWeight="semibold" color="gray.600" textTransform="uppercase" letterSpacing="wide">
+              <Text fontSize="sm" fontWeight="semibold" color="whiteAlpha.800" textTransform="uppercase" letterSpacing="wide">
                 Cash Value
               </Text>
-              <Text fontSize="4xl" fontWeight="bold" color="accent.600">
+              <Text fontSize="4xl" fontWeight="bold" color="white">
                 $12.47
               </Text>
-              <Text fontSize="sm" color="gray.500" fontWeight="medium">
+              <Text fontSize="sm" color="green.200" fontWeight="medium">
                 Ready to redeem
               </Text>
             </Box>
@@ -293,37 +299,41 @@ function RedeemTab() {
 
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
         <Box 
-          bg="gradient-to-br from-white to-green.25" 
+          bgGradient="linear(to-br, green.400, green.600)" 
           p={6} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
-          borderTopColor="green.500"
-          border="1px"
-          borderColor="green.100"
+          borderTopColor="white"
+          border="2px"
+          borderColor="green.300"
+          color="white"
           _hover={{ 
             transform: 'translateY(-4px)',
-            shadow: '2xl'
+            shadow: '2xl',
+            bgGradient: "linear(to-br, green.500, green.700)"
           }}
           transition="all 0.3s"
         >
           <VStack gap={4}>
-            <Icon as={MdAccountBalanceWallet} boxSize={14} color="green.500" />
-            <Heading as="h3" size="lg" fontWeight="bold" color="gray.800">PayPal Cash</Heading>
-            <Text color="gray.600" textAlign="center" fontSize="md">
+            <Icon as={MdAccountBalanceWallet} boxSize={14} color="white" />
+            <Heading as="h3" size="lg" fontWeight="bold" color="white">PayPal Cash</Heading>
+            <Text color="whiteAlpha.900" textAlign="center" fontSize="md">
               Direct cash transfer to your PayPal account
             </Text>
-            <Text fontSize="sm" color="gray.500" fontWeight="medium">
+            <Text fontSize="sm" color="whiteAlpha.800" fontWeight="medium">
               Minimum: 1,000 points = $10
             </Text>
             <Button 
-              colorScheme="green" 
+              bg="white"
+              color="green.600"
               size="lg" 
               w="full"
               fontWeight="bold"
               _hover={{ 
                 transform: 'translateY(-1px)',
-                shadow: 'lg'
+                shadow: 'lg',
+                bg: 'gray.100'
               }}
             >
               Redeem Now
@@ -332,37 +342,41 @@ function RedeemTab() {
         </Box>
 
         <Box 
-          bg="gradient-to-br from-white to-orange.25" 
+          bgGradient="linear(to-br, orange.400, orange.600)" 
           p={6} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
-          borderTopColor="orange.500"
-          border="1px"
-          borderColor="orange.100"
+          borderTopColor="white"
+          border="2px"
+          borderColor="orange.300"
+          color="white"
           _hover={{ 
             transform: 'translateY(-4px)',
-            shadow: '2xl'
+            shadow: '2xl',
+            bgGradient: "linear(to-br, orange.500, orange.700)"
           }}
           transition="all 0.3s"
         >
           <VStack gap={4}>
-            <Icon as={MdLocalOffer} boxSize={14} color="orange.500" />
-            <Heading as="h3" size="lg" fontWeight="bold" color="gray.800">Amazon Gift Card</Heading>
-            <Text color="gray.600" textAlign="center" fontSize="md">
+            <Icon as={MdLocalOffer} boxSize={14} color="white" />
+            <Heading as="h3" size="lg" fontWeight="bold" color="white">Amazon Gift Card</Heading>
+            <Text color="whiteAlpha.900" textAlign="center" fontSize="md">
               Get Amazon gift cards for online shopping
             </Text>
-            <Text fontSize="sm" color="gray.500" fontWeight="medium">
+            <Text fontSize="sm" color="whiteAlpha.800" fontWeight="medium">
               Available: $5, $10, $25, $50
             </Text>
             <Button 
-              colorScheme="orange" 
+              bg="white"
+              color="orange.600"
               size="lg" 
               w="full"
               fontWeight="bold"
               _hover={{ 
                 transform: 'translateY(-1px)',
-                shadow: 'lg'
+                shadow: 'lg',
+                bg: 'gray.100'
               }}
             >
               Redeem Now
@@ -371,37 +385,41 @@ function RedeemTab() {
         </Box>
 
         <Box 
-          bg="gradient-to-br from-white to-purple.25" 
+          bgGradient="linear(to-br, purple.400, purple.600)" 
           p={6} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
-          borderTopColor="purple.500"
-          border="1px"
-          borderColor="purple.100"
+          borderTopColor="white"
+          border="2px"
+          borderColor="purple.300"
+          color="white"
           _hover={{ 
             transform: 'translateY(-4px)',
-            shadow: '2xl'
+            shadow: '2xl',
+            bgGradient: "linear(to-br, purple.500, purple.700)"
           }}
           transition="all 0.3s"
         >
           <VStack gap={4}>
-            <Icon as={MdStars} boxSize={14} color="purple.500" />
-            <Heading as="h3" size="lg" fontWeight="bold" color="gray.800">Store Credit</Heading>
-            <Text color="gray.600" textAlign="center" fontSize="md">
+            <Icon as={MdStars} boxSize={14} color="white" />
+            <Heading as="h3" size="lg" fontWeight="bold" color="white">Store Credit</Heading>
+            <Text color="whiteAlpha.900" textAlign="center" fontSize="md">
               Use credit at participating retail partners
             </Text>
-            <Text fontSize="sm" color="gray.500" fontWeight="medium">
+            <Text fontSize="sm" color="whiteAlpha.800" fontWeight="medium">
               500 points = $5 credit
             </Text>
             <Button 
-              colorScheme="purple" 
+              bg="white"
+              color="purple.600"
               size="lg" 
               w="full"
               fontWeight="bold"
               _hover={{ 
                 transform: 'translateY(-1px)',
-                shadow: 'lg'
+                shadow: 'lg',
+                bg: 'gray.100'
               }}
             >
               Redeem Now
@@ -426,28 +444,32 @@ function ReceiptsTab() {
         <Box h="3px" bg="brand.500" w="100px" mx="auto" borderRadius="full" mt={4} />
       </Box>
 
-      <HStack justify="space-between" wrap="wrap" bg="gradient-to-r from-white to-brand.25" p={4} borderRadius="xl" shadow="lg" border="1px" borderColor="brand.100">
+      <HStack justify="space-between" wrap="wrap" bgGradient="linear(to-r, brand.400, secondary.400)" p={6} borderRadius="xl" shadow="xl" border="2px" borderColor="white" color="white">
         <Button 
-          colorScheme="brand" 
+          bg="white"
+          color="brand.600"
           size="lg"
           fontWeight="bold"
           _hover={{ 
             transform: 'translateY(-1px)',
-            shadow: 'lg'
+            shadow: 'xl',
+            bg: 'gray.100'
           }}
+          transition="all 0.2s"
         >
           <HStack gap={2}>
             <Icon as={MdReceipt} />
             <Text>Upload New Receipt</Text>
           </HStack>
         </Button>
-        <HStack bg="gray.50" p={3} borderRadius="lg" border="1px" borderColor="gray.200">
-          <Text fontSize="sm" color="gray.700" fontWeight="semibold">Sort by:</Text>
+        <HStack bg="whiteAlpha.200" p={3} borderRadius="lg" border="2px" borderColor="whiteAlpha.300">
+          <Text fontSize="sm" color="white" fontWeight="semibold">Sort by:</Text>
           <NativeSelectRoot size="sm">
             <NativeSelectField
               bg="white"
-              borderColor="gray.200"
-              _hover={{ borderColor: "brand.400" }}
+              color="gray.800"
+              borderColor="white"
+              _hover={{ borderColor: "gray.300" }}
               _focus={{ borderColor: "brand.500", boxShadow: "0 0 0 1px var(--chakra-colors-brand-500)" }}
               fontWeight="medium"
             >
@@ -463,37 +485,39 @@ function ReceiptsTab() {
         {[1, 2, 3, 4, 5].map((item) => (
           <Box 
             key={item} 
-            bg="gradient-to-r from-white to-brand.25" 
+            bgGradient="linear(to-r, brand.300, secondary.300)" 
             p={6} 
             borderRadius="xl" 
             shadow="xl"
             borderLeft="4px"
-            borderLeftColor="brand.500"
-            border="1px"
-            borderColor="brand.100"
+            borderLeftColor="white"
+            border="2px"
+            borderColor="brand.200"
+            color="white"
             _hover={{ 
               transform: 'translateX(4px)',
-              shadow: '2xl'
+              shadow: '2xl',
+              bgGradient: "linear(to-r, brand.400, secondary.400)"
             }}
             transition="all 0.2s"
           >
             <Flex justify="space-between" align="center">
               <HStack gap={4}>
-                <Icon as={MdReceipt} boxSize={10} color="brand.500" />
+                <Icon as={MdReceipt} boxSize={10} color="white" />
                 <Box>
-                  <Text fontWeight="bold" color="gray.800" fontSize="lg">
+                  <Text fontWeight="bold" color="white" fontSize="lg">
                     Target Store #{item}
                   </Text>
-                  <Text fontSize="sm" color="gray.500" fontWeight="medium">
+                  <Text fontSize="sm" color="whiteAlpha.800" fontWeight="medium">
                     {new Date(Date.now() - item * 24 * 60 * 60 * 1000).toLocaleDateString()}
                   </Text>
                 </Box>
               </HStack>
               <VStack align="end" gap={1}>
-                <Text fontWeight="bold" color="gray.800" fontSize="xl">
+                <Text fontWeight="bold" color="white" fontSize="xl">
                   ${(Math.random() * 100 + 10).toFixed(2)}
                 </Text>
-                <Text fontSize="sm" color="green.600" fontWeight="bold">
+                <Text fontSize="sm" color="green.200" fontWeight="bold">
                   +{Math.floor(Math.random() * 50 + 10)} points
                 </Text>
               </VStack>
@@ -788,38 +812,40 @@ function ReferralsTab() {
 
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
         <Box 
-          bg="gradient-to-br from-white to-brand.25" 
+          bgGradient="linear(to-br, brand.400, brand.600)" 
           p={8} 
           borderRadius="xl" 
           shadow="xl"
           borderTop="4px"
-          borderTopColor="brand.500"
-          border="1px"
-          borderColor="brand.100"
+          borderTopColor="white"
+          border="2px"
+          borderColor="brand.300"
+          color="white"
           _hover={{ 
             transform: 'translateY(-2px)',
-            shadow: '2xl'
+            shadow: '2xl',
+            bgGradient: "linear(to-br, brand.500, brand.700)"
           }}
           transition="all 0.3s"
         >
           <VStack gap={6}>
-            <Heading as="h3" size="lg" color="gray.800" fontWeight="bold">
+            <Heading as="h3" size="lg" color="white" fontWeight="bold">
               Your Referral Stats
             </Heading>
             <SimpleGrid columns={2} gap={6} w="full">
               <Box textAlign="center">
-                <Text fontSize="5xl" fontWeight="bold" color="brand.600">
+                <Text fontSize="5xl" fontWeight="bold" color="white">
                   3
                 </Text>
-                <Text fontSize="sm" color="gray.600" fontWeight="semibold" textTransform="uppercase" letterSpacing="wide">
+                <Text fontSize="sm" color="whiteAlpha.800" fontWeight="semibold" textTransform="uppercase" letterSpacing="wide">
                   Friends Invited
                 </Text>
               </Box>
               <Box textAlign="center">
-                <Text fontSize="5xl" fontWeight="bold" color="green.600">
+                <Text fontSize="5xl" fontWeight="bold" color="green.200">
                   2
                 </Text>
-                <Text fontSize="sm" color="gray.600" fontWeight="semibold" textTransform="uppercase" letterSpacing="wide">
+                <Text fontSize="sm" color="whiteAlpha.800" fontWeight="semibold" textTransform="uppercase" letterSpacing="wide">
                   Successfully Joined
                 </Text>
               </Box>
@@ -828,28 +854,30 @@ function ReferralsTab() {
         </Box>
 
         <Box 
-          bg="gradient-to-br from-white to-premium.25" 
+          bgGradient="linear(to-br, premium.400, premium.600)" 
           p={8} 
           borderRadius="xl" 
           shadow="xl"
           borderTop="4px"
-          borderTopColor="premium.500"
-          border="1px"
-          borderColor="premium.100"
+          borderTopColor="white"
+          border="2px"
+          borderColor="premium.300"
+          color="white"
           _hover={{ 
             transform: 'translateY(-2px)',
-            shadow: '2xl'
+            shadow: '2xl',
+            bgGradient: "linear(to-br, premium.500, premium.700)"
           }}
           transition="all 0.3s"
         >
           <VStack gap={6}>
-            <Heading as="h3" size="lg" color="gray.800" fontWeight="bold">
+            <Heading as="h3" size="lg" color="white" fontWeight="bold">
               Bonus Points Earned
             </Heading>
-            <Text fontSize="6xl" fontWeight="bold" color="premium.600">
+            <Text fontSize="6xl" fontWeight="bold" color="white">
               2,000
             </Text>
-            <Text fontSize="sm" color="gray.600" textAlign="center" fontWeight="medium">
+            <Text fontSize="sm" color="whiteAlpha.800" textAlign="center" fontWeight="medium">
               Total points earned from referrals this month
             </Text>
           </VStack>
@@ -928,37 +956,33 @@ export default function DashboardPage() {
   };
 
   return (
-    <Box minH="100vh" bg="gray.50">
-      <Flex h="100vh">
+    <Box minH="100vh" bgGradient="linear(to-br, brand.25, secondary.25, accent.25)">
+      <Flex minH="calc(100vh - 80px)">
         {/* Sidebar */}
         <Box
           w="280px"
-          bg="white"
+          bgGradient="linear(to-b, brand.500, secondary.500)"
           borderRight="1px solid"
-          borderRightColor="gray.200"
+          borderRightColor="whiteAlpha.200"
           py={6}
-          shadow="lg"
-          bgGradient="linear(to-b, white, brand.25)"
+          shadow="xl"
+          color="white"
         >
           <VStack gap={2} align="stretch" px={4}>
-            {/* ParseMint Brand - Centered above Dashboard */}
+            {/* Dashboard Header */}
             <Box mb={6} textAlign="center" px={2}>
-              <Heading
-                as="h1"
-                size="xl"
-                className="brand-gradient"
+              <Heading 
+                as="h1" 
+                size="xl" 
+                color="white" 
+                mb={3} 
                 fontWeight="bold"
-                fontSize="2xl"
-                letterSpacing="tight"
-                mb={4}
+                textShadow="0 2px 4px rgba(0,0,0,0.3)"
               >
-                ParseMint
-              </Heading>
-              <Box h="2px" bg="brand.500" w="70%" mx="auto" borderRadius="full" mb={4} />
-              <Heading as="h2" size="md" color="gray.700" mb={2} fontWeight="bold">
                 Dashboard
               </Heading>
-              <Text fontSize="sm" color="gray.600" fontWeight="medium">
+              <Box h="3px" bg="white" w="80%" mx="auto" borderRadius="full" mb={4} opacity={0.8} />
+              <Text fontSize="md" color="whiteAlpha.900" fontWeight="medium">
                 Welcome, {currentUser?.fullName || 'User'}
               </Text>
             </Box>
@@ -976,7 +1000,12 @@ export default function DashboardPage() {
         </Box>
 
         {/* Main Content */}
-        <Box flex="1" p={8} overflowY="auto" bg="gray.25">
+        <Box 
+          flex="1" 
+          p={8} 
+          overflowY="auto" 
+          bgGradient="linear(to-br, white, brand.50, secondary.50)"
+        >
           <Container maxW="container.xl" centerContent>
             <Box w="full" maxW="container.lg">
               {renderTabContent()}

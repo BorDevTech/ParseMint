@@ -23,9 +23,18 @@ export default function RootLayout({
         <Providers>
           <ThemeProvider>
             <AuthProvider>
-              <Box minH="100vh" display="flex" flexDirection="column">
+              <Box 
+                minH="100vh" 
+                display="flex" 
+                flexDirection="column"
+                bgGradient="linear(to-br, brand.25, secondary.25, accent.25, premium.25)"
+              >
                 <Navbar />
-                <Box flex="1">
+                <Box 
+                  flex="1"
+                  bgGradient="linear(to-br, white, brand.50, secondary.50)"
+                  minH="calc(100vh - 140px)"
+                >
                   {children}
                 </Box>
                 <Footer />
