@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { User } from '../data/controls/users/userCreate';
 import UserFetchByEmail from '../data/controls/users/userFetchByEmail';
 
@@ -10,14 +10,53 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   loading: boolean;
+  updateUserData: (userData: Partial<User>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+// Session storage keys
+const SESSION_KEYS = {
+  IS_AUTHENTICATED: 'parsemint_is_authenticated',
+  CURRENT_USER: 'parsemint_current_user',
+};
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // Load session data on mount
+  useEffect(() => {
+    try {
+      const storedAuth = sessionStorage.getItem(SESSION_KEYS.IS_AUTHENTICATED);
+      const storedUser = sessionStorage.getItem(SESSION_KEYS.CURRENT_USER);
+      
+      if (storedAuth === 'true' && storedUser) {
+        setIsAuthenticated(true);
+        setCurrentUser(JSON.parse(storedUser));
+      }
+    } catch (error) {
+      console.error('Error loading session data:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  // Save to session storage whenever auth state changes
+  const saveToSession = (authenticated: boolean, user: User | null) => {
+    try {
+      if (authenticated && user) {
+        sessionStorage.setItem(SESSION_KEYS.IS_AUTHENTICATED, 'true');
+        sessionStorage.setItem(SESSION_KEYS.CURRENT_USER, JSON.stringify(user));
+      } else {
+        sessionStorage.removeItem(SESSION_KEYS.IS_AUTHENTICATED);
+        sessionStorage.removeItem(SESSION_KEYS.CURRENT_USER);
+      }
+    } catch (error) {
+      console.error('Error saving session data:', error);
+    }
+  };
 
   const login = async (email: string, password: string): Promise<boolean> => {
     setLoading(true);
@@ -49,6 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (testUser) {
         setCurrentUser(testUser);
         setIsAuthenticated(true);
+        saveToSession(true, testUser);
         setLoading(false);
         return true;
       }
@@ -59,11 +99,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (user && user.password === password) {
           setCurrentUser(user);
           setIsAuthenticated(true);
+          saveToSession(true, user);
           setLoading(false);
           return true;
         }
       } catch (blobError) {
-        console.log('Blob storage not available, using test users only');
+        console.log('Blob storage not available, using test users only', blobError);
       }
       
       setLoading(false);
@@ -78,10 +119,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setIsAuthenticated(false);
     setCurrentUser(null);
+    saveToSession(false, null);
+  };
+
+  const updateUserData = (userData: Partial<User>) => {
+    if (currentUser) {
+      const updatedUser = { ...currentUser, ...userData };
+      setCurrentUser(updatedUser);
+      saveToSession(true, updatedUser);
+    }
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, currentUser, login, logout, loading }}>
+    <AuthContext.Provider value={{ 
+      isAuthenticated, 
+      currentUser, 
+      login, 
+      logout, 
+      loading, 
+      updateUserData 
+    }}>
       {children}
     </AuthContext.Provider>
   );

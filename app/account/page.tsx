@@ -25,18 +25,29 @@ interface PreferencesData {
 }
 
 export default function AccountPage() {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, currentUser, updateUserData } = useAuth();
   const router = useRouter();
   const [profileData, setProfileData] = useState<ProfileData>({
-    fullName: 'John Doe',
-    email: 'john.doe@example.com',
-    phone: '+1 (555) 123-4567',
+    fullName: '',
+    email: '',
+    phone: '',
   });
   const [preferences, setPreferences] = useState<PreferencesData>({
     colorTheme: 'teal-blue',
     notifications: true,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Load user data when component mounts or currentUser changes
+  useEffect(() => {
+    if (currentUser) {
+      setProfileData({
+        fullName: currentUser.fullName || '',
+        email: currentUser.email || '',
+        phone: currentUser.phone || '',
+      });
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -61,6 +72,13 @@ export default function AccountPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Update user data in context and session storage
+    updateUserData({
+      fullName: profileData.fullName,
+      email: profileData.email,
+      phone: profileData.phone,
+    });
 
     // Simulate save process
     setTimeout(() => {
