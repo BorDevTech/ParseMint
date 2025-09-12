@@ -90,7 +90,21 @@ function OverviewTab() {
 
       {/* Stats Cards */}
       <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-        <Box bg="white" p={6} borderRadius="xl" shadow="lg" borderTop="4px" borderTopColor="brand.500">
+        <Box 
+          bg="gradient-to-br from-white to-brand.25" 
+          p={6} 
+          borderRadius="xl" 
+          shadow="xl" 
+          borderTop="4px" 
+          borderTopColor="brand.500"
+          border="1px"
+          borderColor="brand.100"
+          _hover={{ 
+            transform: 'translateY(-2px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
           <Flex align="center" gap={3} mb={4}>
             <Icon as={MdReceipt} boxSize={10} color="brand.500" />
             <Box>
@@ -107,7 +121,21 @@ function OverviewTab() {
           </Flex>
         </Box>
 
-        <Box bg="white" p={6} borderRadius="xl" shadow="lg" borderTop="4px" borderTopColor="secondary.500">
+        <Box 
+          bg="gradient-to-br from-white to-secondary.25" 
+          p={6} 
+          borderRadius="xl" 
+          shadow="xl" 
+          borderTop="4px" 
+          borderTopColor="secondary.500"
+          border="1px"
+          borderColor="secondary.100"
+          _hover={{ 
+            transform: 'translateY(-2px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
           <Flex align="center" gap={3} mb={4}>
             <Icon as={MdStars} boxSize={10} color="secondary.500" />
             <Box>
@@ -124,7 +152,21 @@ function OverviewTab() {
           </Flex>
         </Box>
 
-        <Box bg="white" p={6} borderRadius="xl" shadow="lg" borderTop="4px" borderTopColor="accent.500">
+        <Box 
+          bg="gradient-to-br from-white to-accent.25" 
+          p={6} 
+          borderRadius="xl" 
+          shadow="xl" 
+          borderTop="4px" 
+          borderTopColor="accent.500"
+          border="1px"
+          borderColor="accent.100"
+          _hover={{ 
+            transform: 'translateY(-2px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
           <Flex align="center" gap={3} mb={4}>
             <Icon as={MdAccountBalanceWallet} boxSize={10} color="accent.500" />
             <Box>
@@ -251,12 +293,14 @@ function RedeemTab() {
 
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
         <Box 
-          bg="white" 
+          bg="gradient-to-br from-white to-green.25" 
           p={6} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
           borderTopColor="green.500"
+          border="1px"
+          borderColor="green.100"
           _hover={{ 
             transform: 'translateY(-4px)',
             shadow: '2xl'
@@ -288,12 +332,14 @@ function RedeemTab() {
         </Box>
 
         <Box 
-          bg="white" 
+          bg="gradient-to-br from-white to-orange.25" 
           p={6} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
           borderTopColor="orange.500"
+          border="1px"
+          borderColor="orange.100"
           _hover={{ 
             transform: 'translateY(-4px)',
             shadow: '2xl'
@@ -325,12 +371,14 @@ function RedeemTab() {
         </Box>
 
         <Box 
-          bg="white" 
+          bg="gradient-to-br from-white to-purple.25" 
           p={6} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
           borderTopColor="purple.500"
+          border="1px"
+          borderColor="purple.100"
           _hover={{ 
             transform: 'translateY(-4px)',
             shadow: '2xl'
@@ -378,7 +426,7 @@ function ReceiptsTab() {
         <Box h="3px" bg="brand.500" w="100px" mx="auto" borderRadius="full" mt={4} />
       </Box>
 
-      <HStack justify="space-between" wrap="wrap" bg="white" p={4} borderRadius="xl" shadow="md">
+      <HStack justify="space-between" wrap="wrap" bg="gradient-to-r from-white to-brand.25" p={4} borderRadius="xl" shadow="lg" border="1px" borderColor="brand.100">
         <Button 
           colorScheme="brand" 
           size="lg"
@@ -393,7 +441,7 @@ function ReceiptsTab() {
             <Text>Upload New Receipt</Text>
           </HStack>
         </Button>
-        <HStack bg="gray.50" p={3} borderRadius="lg">
+        <HStack bg="gray.50" p={3} borderRadius="lg" border="1px" borderColor="gray.200">
           <Text fontSize="sm" color="gray.700" fontWeight="semibold">Sort by:</Text>
           <NativeSelectRoot size="sm">
             <NativeSelectField
@@ -415,15 +463,17 @@ function ReceiptsTab() {
         {[1, 2, 3, 4, 5].map((item) => (
           <Box 
             key={item} 
-            bg="white" 
+            bg="gradient-to-r from-white to-brand.25" 
             p={6} 
             borderRadius="xl" 
-            shadow="lg"
+            shadow="xl"
             borderLeft="4px"
             borderLeftColor="brand.500"
+            border="1px"
+            borderColor="brand.100"
             _hover={{ 
               transform: 'translateX(4px)',
-              shadow: 'xl'
+              shadow: '2xl'
             }}
             transition="all 0.2s"
           >
@@ -738,12 +788,14 @@ function ReferralsTab() {
 
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
         <Box 
-          bg="white" 
+          bg="gradient-to-br from-white to-brand.25" 
           p={8} 
           borderRadius="xl" 
           shadow="xl"
           borderTop="4px"
           borderTopColor="brand.500"
+          border="1px"
+          borderColor="brand.100"
           _hover={{ 
             transform: 'translateY(-2px)',
             shadow: '2xl'
@@ -776,12 +828,14 @@ function ReferralsTab() {
         </Box>
 
         <Box 
-          bg="white" 
+          bg="gradient-to-br from-white to-premium.25" 
           p={8} 
           borderRadius="xl" 
           shadow="xl"
           borderTop="4px"
           borderTopColor="premium.500"
+          border="1px"
+          borderColor="premium.100"
           _hover={{ 
             transform: 'translateY(-2px)',
             shadow: '2xl'
@@ -887,8 +941,8 @@ export default function DashboardPage() {
           bgGradient="linear(to-b, white, brand.25)"
         >
           <VStack gap={2} align="stretch" px={4}>
-            {/* ParseMint Brand - Centered over sidebar */}
-            <Box mb={8} textAlign="center" px={2}>
+            {/* ParseMint Brand - Centered above Dashboard */}
+            <Box mb={6} textAlign="center" px={2}>
               <Heading
                 as="h1"
                 size="xl"
@@ -896,12 +950,12 @@ export default function DashboardPage() {
                 fontWeight="bold"
                 fontSize="2xl"
                 letterSpacing="tight"
-                mb={3}
+                mb={4}
               >
                 ParseMint
               </Heading>
-              <Box h="2px" bg="brand.500" w="60%" mx="auto" borderRadius="full" mb={4} />
-              <Heading as="h2" size="sm" color="gray.700" mb={1} fontWeight="semibold">
+              <Box h="2px" bg="brand.500" w="70%" mx="auto" borderRadius="full" mb={4} />
+              <Heading as="h2" size="md" color="gray.700" mb={2} fontWeight="bold">
                 Dashboard
               </Heading>
               <Text fontSize="sm" color="gray.600" fontWeight="medium">

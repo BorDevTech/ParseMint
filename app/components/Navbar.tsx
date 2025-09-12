@@ -29,27 +29,32 @@ export function Navbar() {
     >
       <Container maxW="container.xl">
         <Flex h={16} alignItems="center" justifyContent="space-between">
-          {/* Logo/Brand */}
-          <Link href="/">
-            <Heading
-              as="h1"
-              size="xl"
-              className="brand-gradient"
-              cursor="pointer"
-              fontWeight="bold"
-              fontSize="2xl"
-              letterSpacing="tight"
-              _hover={{ 
-                transform: 'scale(1.05)'
-              }}
-              transition="all 0.2s"
-            >
-              ParseMint
-            </Heading>
-          </Link>
+          {/* Logo/Brand - Only show on non-dashboard pages */}
+          {!isAuthenticated && (
+            <Link href="/">
+              <Heading
+                as="h1"
+                size="xl"
+                className="brand-gradient"
+                cursor="pointer"
+                fontWeight="bold"
+                fontSize="2xl"
+                letterSpacing="tight"
+                _hover={{ 
+                  transform: 'scale(1.05)'
+                }}
+                transition="all 0.2s"
+              >
+                ParseMint
+              </Heading>
+            </Link>
+          )}
+          
+          {/* Empty space for authenticated users to push navigation to the right */}
+          {isAuthenticated && <Box />}
 
           {/* Navigation */}
-          <HStack gap={4}>
+          <HStack gap={6}>
             <ThemeToggle />
             {loading ? (
               // Show loading placeholder to prevent flash
