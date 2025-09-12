@@ -10,13 +10,16 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
+import { ThemeToggle } from './ThemeToggle';
 
 export function Navbar() {
   const { isAuthenticated, logout } = useAuth();
+  const { theme } = useTheme();
 
   return (
     <Box 
-      bg="white" 
+      bg={theme === 'light' ? 'white' : 'gray.800'} 
       shadow="lg" 
       position="sticky" 
       top={0} 
@@ -31,12 +34,10 @@ export function Navbar() {
             <Heading
               as="h1"
               size="lg"
-              bgGradient="linear(to-r, brand.500, secondary.500)"
-              bgClip="text"
+              className="brand-gradient brand-gradient-hover text-2xl font-bold"
               cursor="pointer"
               fontWeight="bold"
               _hover={{ 
-                bgGradient: 'linear(to-r, brand.600, secondary.600)',
                 transform: 'scale(1.05)'
               }}
               transition="all 0.2s"
@@ -47,6 +48,7 @@ export function Navbar() {
 
           {/* Navigation */}
           <HStack gap={4}>
+            <ThemeToggle />
             {isAuthenticated ? (
               <>
                 <Link href="/dashboard">
