@@ -11,6 +11,8 @@ import {
   Icon,
   VStack,
   HStack,
+  NativeSelectRoot,
+  NativeSelectField,
 } from '@chakra-ui/react';
 import { 
   MdReceipt, 
@@ -249,11 +251,18 @@ function ReceiptsTab() {
         </Button>
         <HStack>
           <Text fontSize="sm" color="gray.600">Sort by:</Text>
-          <select style={{ padding: '4px 8px', borderRadius: '4px', border: '1px solid #E2E8F0' }}>
-            <option>Recent</option>
-            <option>Amount</option>
-            <option>Store</option>
-          </select>
+          <NativeSelectRoot size="sm">
+            <NativeSelectField
+              bg="white"
+              borderColor="gray.200"
+              _hover={{ borderColor: "gray.300" }}
+              _focus={{ borderColor: "teal.500", boxShadow: "0 0 0 1px var(--chakra-colors-teal-500)" }}
+            >
+              <option>Recent</option>
+              <option>Amount</option>
+              <option>Store</option>
+            </NativeSelectField>
+          </NativeSelectRoot>
         </HStack>
       </HStack>
 

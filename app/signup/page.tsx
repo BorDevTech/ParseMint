@@ -8,6 +8,8 @@ import {
   Container,
   Input,
   VStack,
+  NativeSelectRoot,
+  NativeSelectField,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -142,27 +144,24 @@ export default function SignUpPage() {
                   <Text fontWeight="medium" mb={2} color="gray.700">
                     How did you hear about us? <Text as="span" color="red.500">*</Text>
                   </Text>
-                  <select
-                    value={formData.hearAboutUs}
-                    onChange={(e) => handleInputChange('hearAboutUs', e.target.value)}
-                    required
-                    style={{
-                      width: '100%',
-                      padding: '8px 12px',
-                      backgroundColor: 'white',
-                      border: '1px solid #E2E8F0',
-                      borderRadius: '6px',
-                      fontSize: '16px',
-                    }}
-                  >
-                    <option value="">Select an option</option>
-                    <option value="search">Search Engine (Google, Bing, etc.)</option>
-                    <option value="social">Social Media</option>
-                    <option value="friend">Friend or Family</option>
-                    <option value="advertisement">Online Advertisement</option>
-                    <option value="news">News Article or Blog</option>
-                    <option value="other">Other</option>
-                  </select>
+                  <NativeSelectRoot>
+                    <NativeSelectField
+                      value={formData.hearAboutUs}
+                      onChange={(e) => handleInputChange('hearAboutUs', e.target.value)}
+                      bg="white"
+                      borderColor="gray.200"
+                      _hover={{ borderColor: "gray.300" }}
+                      _focus={{ borderColor: "teal.500", boxShadow: "0 0 0 1px var(--chakra-colors-teal-500)" }}
+                    >
+                      <option value="">Select an option</option>
+                      <option value="search">Search Engine (Google, Bing, etc.)</option>
+                      <option value="social">Social Media</option>
+                      <option value="friend">Friend or Family</option>
+                      <option value="advertisement">Online Advertisement</option>
+                      <option value="news">News Article or Blog</option>
+                      <option value="other">Other</option>
+                    </NativeSelectField>
+                  </NativeSelectRoot>
                 </Box>
 
                 <Button

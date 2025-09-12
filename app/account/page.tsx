@@ -10,6 +10,8 @@ import {
   VStack,
   HStack,
   IconButton,
+  NativeSelectRoot,
+  NativeSelectField,
 } from '@chakra-ui/react';
 import { FaArrowDown } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
@@ -311,44 +313,42 @@ export default function AccountPage() {
                   Color Theme
                 </Text>
                 <Box position="relative">
-                  <select
-                    value={preferences.colorTheme}
-                    onChange={handleThemeChange}
-                    onMouseLeave={handleThemeLeave}
-                    style={{
-                      width: '100%',
-                      padding: '8px 12px',
-                      backgroundColor: 'white',
-                      border: '1px solid #E2E8F0',
-                      borderRadius: '6px',
-                      fontSize: '16px',
-                    }}
-                  >
-                    <option 
-                      value="teal-blue"
-                      onMouseEnter={() => handleThemeHover('teal-blue')}
+                  <NativeSelectRoot>
+                    <NativeSelectField
+                      value={preferences.colorTheme}
+                      onChange={handleThemeChange}
+                      onMouseLeave={handleThemeLeave}
+                      bg="white"
+                      borderColor="gray.200"
+                      _hover={{ borderColor: "gray.300" }}
+                      _focus={{ borderColor: "teal.500", boxShadow: "0 0 0 1px var(--chakra-colors-teal-500)" }}
                     >
-                      Teal & Blue (Default)
-                    </option>
-                    <option 
-                      value="green-blue"
-                      onMouseEnter={() => handleThemeHover('green-blue')}
-                    >
-                      Lime Green & Blue
-                    </option>
-                    <option 
-                      value="blue-purple"
-                      onMouseEnter={() => handleThemeHover('blue-purple')}
-                    >
-                      Blue & Purple
-                    </option>
-                    <option 
-                      value="green-teal"
-                      onMouseEnter={() => handleThemeHover('green-teal')}
-                    >
-                      Green & Teal
-                    </option>
-                  </select>
+                      <option 
+                        value="teal-blue"
+                        onMouseEnter={() => handleThemeHover('teal-blue')}
+                      >
+                        Teal & Blue (Default)
+                      </option>
+                      <option 
+                        value="green-blue"
+                        onMouseEnter={() => handleThemeHover('green-blue')}
+                      >
+                        Lime Green & Blue
+                      </option>
+                      <option 
+                        value="blue-purple"
+                        onMouseEnter={() => handleThemeHover('blue-purple')}
+                      >
+                        Blue & Purple
+                      </option>
+                      <option 
+                        value="green-teal"
+                        onMouseEnter={() => handleThemeHover('green-teal')}
+                      >
+                        Green & Teal
+                      </option>
+                    </NativeSelectField>
+                  </NativeSelectRoot>
                   {previewTheme && (
                     <Box
                       position="absolute"
@@ -383,23 +383,21 @@ export default function AccountPage() {
                 <Text fontWeight="medium" mb={2} color="gray.700">
                   Auto-Logout After Inactivity
                 </Text>
-                <select
-                  value={sessionTimeout}
-                  onChange={(e) => setSessionTimeout(e.target.value as SessionTimeout)}
-                  style={{
-                    width: '100%',
-                    padding: '8px 12px',
-                    backgroundColor: 'white',
-                    border: '1px solid #E2E8F0',
-                    borderRadius: '6px',
-                    fontSize: '16px',
-                  }}
-                >
-                  <option value="3min">3 minutes</option>
-                  <option value="5min">5 minutes (Default)</option>
-                  <option value="10min">10 minutes</option>
-                  <option value="never">Never</option>
-                </select>
+                <NativeSelectRoot>
+                  <NativeSelectField
+                    value={sessionTimeout}
+                    onChange={(e) => setSessionTimeout(e.target.value as SessionTimeout)}
+                    bg="white"
+                    borderColor="gray.200"
+                    _hover={{ borderColor: "gray.300" }}
+                    _focus={{ borderColor: "teal.500", boxShadow: "0 0 0 1px var(--chakra-colors-teal-500)" }}
+                  >
+                    <option value="3min">3 minutes</option>
+                    <option value="5min">5 minutes (Default)</option>
+                    <option value="10min">10 minutes</option>
+                    <option value="never">Never</option>
+                  </NativeSelectField>
+                </NativeSelectRoot>
                 <Text fontSize="sm" color="gray.500" mt={1}>
                   Automatically log out after the specified period of inactivity. This includes tab switching and background activity.
                 </Text>
