@@ -25,6 +25,7 @@ export default function LoginPage() {
     password: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string>('');
   const { login } = useAuth();
   const router = useRouter();
 
@@ -38,13 +39,21 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError('');
 
-    // Simulate login process
-    setTimeout(() => {
-      login();
-      router.push('/dashboard');
+    try {
+      const success = await login(formData.email, formData.password);
+      if (success) {
+        router.push('/dashboard');
+      } else {
+        setError('Invalid email or password. Try test@parsemint.com / password123');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('Login failed. Please try again.');
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -88,6 +97,24 @@ export default function LoginPage() {
                 <Heading size="lg" textAlign="center" color="gray.800">
                   Login to your account
                 </Heading>
+                
+                <Text fontSize="sm" color="gray.600" textAlign="center">
+                  Test credentials: test@parsemint.com / password123
+                </Text>
+
+                {error && (
+                  <Box 
+                    bg="red.50" 
+                    border="1px" 
+                    borderColor="red.200" 
+                    borderRadius="md" 
+                    p={3}
+                  >
+                    <Text color="red.600" fontSize="sm" textAlign="center">
+                      {error}
+                    </Text>
+                  </Box>
+                )}
 
                 <Box>
                   <Text fontWeight="medium" mb={2} color="gray.700">
