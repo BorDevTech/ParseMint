@@ -18,194 +18,80 @@ import { useState, useEffect } from 'react';
 import { useAuth, SessionTimeout } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { useRouter } from 'next/navigation';
+import { UserResultData } from '../types/user-result';
+import ScrollTo from '../utilities/scrollto';
+import ThemePreview from '../utilities/themepreview';
 
-interface ProfileData {
-  fullName: string;
-  email: string;
-  phone: string;
-}
 
-interface PreferencesData {
-  colorTheme: string;
-  notifications: boolean;
-}
+// For profile editing, pick only the fields you need:
+type ProfileData = Pick<
+  UserResultData,
+  'firstName'
+  |
+  'lastName'
+  |
+  'email'
+  |
+  'phone'
+  |
+  'theme_selection'
+  |
+  'avatar_url'
+  |
+  'auto_logout_duration'
+>;
+
 
 export default function AccountPage() {
-  const { isAuthenticated, currentUser, updateUserData, loading, sessionTimeout, setSessionTimeout } = useAuth();
-  const { colorTheme, setColorTheme } = useTheme();
-  const router = useRouter();
+
+
   const [profileData, setProfileData] = useState<ProfileData>({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
+    auto_logout_duration: 5, // default value, adjust as needed
+    theme_selection: 'teal-blue', // default value, adjust as needed
   });
-  const [preferences, setPreferences] = useState<PreferencesData>({
-    colorTheme: 'teal-blue',
-    notifications: true,
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isPreferencesSubmitting, setIsPreferencesSubmitting] = useState(false);
-  const [isPasswordSubmitting, setIsPasswordSubmitting] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [previewTheme, setPreviewTheme] = useState<string | null>(null);
-  const [originalTheme, setOriginalTheme] = useState<string>('');
-
-  const showToast = (title: string, description: string, _status: 'success' | 'error') => {
-    // Simple alert for now, can be replaced with proper toast later
-    alert(`${title}: ${description}`);
-  };
-
-  // Load user data when component mounts or currentUser changes
-  useEffect(() => {
-    if (currentUser) {
-      setProfileData({
-        fullName: currentUser.fullName || '',
-        email: currentUser.email || '',
-        phone: currentUser.phone || '',
-      });
-    }
-  }, [currentUser]);
-
-  // Initialize preferences with current theme
-  useEffect(() => {
-    setPreferences(prev => ({
-      ...prev,
-      colorTheme: colorTheme,
-    }));
-    setOriginalTheme(colorTheme);
-  }, [colorTheme]);
-
-  useEffect(() => {
-    // Only redirect if not loading and not authenticated
-    if (!loading && !isAuthenticated) {
-      router.push('/login');
-    }
-  }, [isAuthenticated, loading, router]);
-
-  const handleProfileChange = (field: keyof ProfileData, value: string) => {
-    setProfileData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-
-  const handlePreferencesChange = (field: keyof PreferencesData, value: string | boolean) => {
-    setPreferences(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    // Update user data in context and session storage
-    updateUserData({
-      fullName: profileData.fullName,
-      email: profileData.email,
-      phone: profileData.phone,
-    });
-
-    // Simulate save process
-    setTimeout(() => {
-      setIsSubmitting(false);
-      showToast("Profile updated", "Your profile information has been saved successfully.", "success");
-    }, 1000);
   };
 
-  const handlePreferencesSubmit = async () => {
-    setIsPreferencesSubmitting(true);
-
-    // Apply the theme to the application through context
-    setColorTheme(preferences.colorTheme as 'teal-blue' | 'green-blue' | 'blue-purple' | 'green-teal');
-
-    setTimeout(() => {
-      setIsPreferencesSubmitting(false);
-      setOriginalTheme(preferences.colorTheme);
-      showToast("Preferences updated", "Your color theme and preferences have been saved.", "success");
-    }, 1000);
-  };
 
   const handlePasswordSubmit = async () => {
-    if (newPassword !== confirmPassword) {
-      showToast("Error", "New passwords do not match.", "error");
-      return;
-    }
+    // if (newPassword !== confirmPassword) {
+    //   showToast("Error", "New passwords do not match.", "error");
+    //   return;
+    // }
 
-    if (newPassword.length < 6) {
-      showToast("Error", "Password must be at least 6 characters long.", "error");
-      return;
-    }
-
-    setIsPasswordSubmitting(true);
-
-    // Simulate password update
-    setTimeout(() => {
-      setIsPasswordSubmitting(false);
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
-      showToast("Password updated", "Your password has been updated successfully.", "success");
-    }, 1000);
+    // if (newPassword.length < 6) {
+    //   showToast("Error", "Password must be at least 6 characters long.", "error");
+    //   return;
+    // } 
   };
 
-  const scrollToSave = () => {
-    const element = document.getElementById('save-buttons-section');
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const applyThemePreview = (theme: string) => {
-    // Apply theme to the root element
-    const root = document.documentElement;
-    
-    // Remove existing theme classes
-    root.classList.remove('theme-teal-blue', 'theme-green-blue', 'theme-blue-purple', 'theme-green-teal');
-    
-    // Add new theme class
-    root.classList.add(`theme-${theme}`);
-  };
-
-  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newTheme = e.target.value;
-    handlePreferencesChange('colorTheme', newTheme);
-  };
-
-  const handleThemeHover = (theme: string) => {
-    if (!previewTheme) {
-      setPreviewTheme(theme);
-      applyThemePreview(theme);
-    }
-  };
-
-  const handleThemeLeave = () => {
-    if (previewTheme) {
-      // Revert to current saved theme
-      applyThemePreview(originalTheme);
-      setPreviewTheme(null);
-    }
-  };
-
+  const loading = false;
+  const isAuthenticated = true;
+  const previewTheme = true;
   // Show loading state while authentication is being determined
   if (loading) {
     return (
-      <Box 
-        minH="100vh" 
-        bg="gray.50" 
-        display="flex" 
-        alignItems="center" 
+      <Box
+        minH="100vh"
+        bg="gray.50"
+        display="flex"
+        alignItems="center"
         justifyContent="center"
       >
         <VStack gap={4}>
-          <Box 
-            w="12" 
-            h="12" 
-            border="4px solid" 
-            borderColor="teal.200" 
-            borderTopColor="teal.500" 
-            borderRadius="full" 
+          <Box
+            w="12"
+            h="12"
+            border="4px solid"
+            borderColor="teal.200"
+            borderTopColor="teal.500"
+            borderRadius="full"
             animation="spin 1s linear infinite"
           />
           <Text color="gray.600">Loading...</Text>
@@ -220,7 +106,7 @@ export default function AccountPage() {
   }
 
   return (
-    <Box minH="100vh" bg="gray.50" position="relative">
+    <Box minH="100vh" bg={"blue.500"} position="relative">
       {/* Sticky Skip to Save Button */}
       <Box
         position="fixed"
@@ -236,7 +122,7 @@ export default function AccountPage() {
           size="lg"
           borderRadius="full"
           shadow="lg"
-          onClick={scrollToSave}
+          onClick={() => ScrollTo('save-buttons-section')}
         >
           <FaArrowDown />
         </IconButton>
@@ -269,7 +155,7 @@ export default function AccountPage() {
                   <Input
                     type="text"
                     value={profileData.fullName}
-                    onChange={(e) => handleProfileChange('fullName', e.target.value)}
+                    onChange={(e) => { null }}
                     bg="white"
                   />
                 </Box>
@@ -281,7 +167,7 @@ export default function AccountPage() {
                   <Input
                     type="email"
                     value={profileData.email}
-                    onChange={(e) => handleProfileChange('email', e.target.value)}
+                    onChange={(e) => { null }}
                     bg="white"
                   />
                 </Box>
@@ -293,7 +179,7 @@ export default function AccountPage() {
                   <Input
                     type="tel"
                     value={profileData.phone}
-                    onChange={(e) => handleProfileChange('phone', e.target.value)}
+                    onChange={(e) => { null }}
                     bg="white"
                   />
                 </Box>
@@ -323,27 +209,27 @@ export default function AccountPage() {
                       _hover={{ borderColor: "gray.300" }}
                       _focus={{ borderColor: "teal.500", boxShadow: "0 0 0 1px var(--chakra-colors-teal-500)" }}
                     >
-                      <option 
+                      <option
                         value="teal-blue"
-                        onMouseEnter={() => handleThemeHover('teal-blue')}
+                        onMouseEnter={() => { null }}
                       >
                         Teal & Blue (Default)
                       </option>
-                      <option 
+                      <option
                         value="green-blue"
-                        onMouseEnter={() => handleThemeHover('green-blue')}
+                        onMouseEnter={() => { null }}
                       >
                         Lime Green & Blue
                       </option>
-                      <option 
+                      <option
                         value="blue-purple"
-                        onMouseEnter={() => handleThemeHover('blue-purple')}
+                        onMouseEnter={() => { null }}
                       >
                         Blue & Purple
                       </option>
-                      <option 
+                      <option
                         value="green-teal"
-                        onMouseEnter={() => handleThemeHover('green-teal')}
+                        onMouseEnter={() => { null }}
                       >
                         Green & Teal
                       </option>
@@ -410,8 +296,7 @@ export default function AccountPage() {
                 <Input
                   type="password"
                   placeholder="Enter current password"
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  onChange={(e) => { null }}
                   bg="white"
                 />
               </Box>
@@ -424,7 +309,7 @@ export default function AccountPage() {
                   type="password"
                   placeholder="Enter new password"
                   value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
+                  onChange={(e) => { null }}
                   bg="white"
                 />
               </Box>
@@ -437,7 +322,7 @@ export default function AccountPage() {
                   type="password"
                   placeholder="Confirm new password"
                   value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onChange={(e) => { null }}
                   bg="white"
                 />
               </Box>
@@ -445,11 +330,11 @@ export default function AccountPage() {
           </Box>
 
           {/* Save Buttons Section */}
-          <Box 
-            id="save-buttons-section" 
-            bg="white" 
-            p={8} 
-            borderRadius="lg" 
+          <Box
+            id="save-buttons-section"
+            bg="white"
+            p={8}
+            borderRadius="lg"
             shadow="md"
             borderTop="4px solid"
             borderTopColor="teal.500"
@@ -458,7 +343,7 @@ export default function AccountPage() {
               <Heading size="md" color="gray.700" textAlign="center">
                 Save Changes
               </Heading>
-              
+
               <HStack justify="space-between" wrap="wrap" gap={4}>
                 <Button
                   colorScheme="teal"

@@ -6,14 +6,14 @@ import { list } from "@vercel/blob";
  * @returns True if the user exists, false otherwise.
  */
 export default async function UserCheck(userId: string) {
-    const blobKey = `users/${userId}.json`;
+    const blobKey = `Users/${userId}.json`;
     const token = process.env.BLOB_READ_WRITE_TOKEN;
     
     try {
         const historicBlobs = await list({ token: token });
         return historicBlobs.blobs.some((blob) => blob.pathname === blobKey);
     } catch (error) {
-        console.warn(`⚠️ Failed to list blobs for user ${userId}:`, error);
+        console.warn(`⚠️ Failed to list information for user ${userId}:`, error);
         return false;
     }
 }

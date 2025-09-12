@@ -13,48 +13,74 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import Link from 'next/link';
+import { hearAboutUsOption, UserSignupData } from '../types/user-signup';
+import UserCreate from '@/data/controls/users/userCreate';
+import { nanoid } from 'nanoid';
+import UserCheck from '@/data/controls/users/userCheck';
 
-interface FormData {
-  fullName: string;
-  email: string;
-  phone: string;
-  hearAboutUs: string;
-}
+
 
 export default function SignUpPage() {
-  const [formData, setFormData] = useState<FormData>({
-    fullName: '',
+  const [formData, setFormData] = useState<UserSignupData>({
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
-    hearAboutUs: '',
+    hearAboutUs: 'Select an option',
+    hearAboutUsOther: '',
+    account_created_at: '', // Will be set on submission
+    id: '', // Will be set on submission
+    referralCode: '',// Optional
   });
+
+
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
   const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
+    setFormData(prev => {
+      const updated = { ...prev, [field]: value };
+      if (field === 'firstName' || field === 'lastName') {
+        updated.fullName = `${field === 'firstName' ? value : updated.firstName} ${field === 'lastName' ? value : updated.lastName}`.trim();
+      }
+      return updated;
+    });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleUserSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setShowSuccess(true);
+    // Generate a unique ID for the user
+    const GenerateUserId = nanoid(8);  // Example: "v1stgxr8" 
+    //reform to uppercase and add PM- prefix
+    const userId = `PM-${GenerateUserId.toUpperCase()}`; // Example: "PM-V1STGXR8"
+    const existingUser = await UserCheck(userId);
+    // Check if user ID already exists (extremely unlikely with nanoid, but just in case)
+    if (existingUser) {
+      console.error("User ID already exists:", userId);
       setIsSubmitting(false);
-      // Reset form
-      setFormData({
-        fullName: '',
-        email: '',
-        phone: '',
-        hearAboutUs: '',
-      });
-    }, 1000);
+      return;
+    }
+    // Prepare user data with the generated ID
+    const userData: UserSignupData = {
+      ...formData,
+      id: userId,
+      account_created_at: new Date().toISOString(),
+    };
+
+    try {
+      await UserCreate(userData);
+      setShowSuccess(true);
+    } catch (error) {
+      console.error("Error signing up:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+
 
   return (
     <Box minH="100vh" bg="gray.50" py={8}>
@@ -89,25 +115,38 @@ export default function SignUpPage() {
 
           {/* Form Card */}
           <Box bg="white" p={8} borderRadius="lg" shadow="md">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleUserSignup}>
               <VStack gap={6} align="stretch">
                 <Heading size="lg" textAlign="center" color="gray.700">
                   Sign up for early access
                 </Heading>
-                
+
                 <Text color="gray.600" textAlign="center">
                   Be among the first to experience ParseMint and turn your receipts into rewards!
                 </Text>
 
                 <Box>
                   <Text fontWeight="medium" mb={2} color="gray.700">
-                    Full Name <Text as="span" color="red.500">*</Text>
+                    First Name <Text as="span" color="red.500">*</Text>
                   </Text>
                   <Input
                     type="text"
-                    value={formData.fullName}
-                    onChange={(e) => handleInputChange('fullName', e.target.value)}
-                    placeholder="Enter your full name"
+                    value={formData.firstName}
+                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                    placeholder="Enter your first name"
+                    bg="white"
+                    required
+                  />
+                </Box>
+                <Box>
+                  <Text fontWeight="medium" mb={2} color="gray.700">
+                    Last Name <Text as="span" color="red.500">*</Text>
+                  </Text>
+                  <Input
+                    type="text"
+                    value={formData.lastName}
+                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    placeholder="Enter your last name"
                     bg="white"
                     required
                   />
@@ -120,7 +159,7 @@ export default function SignUpPage() {
                   <Input
                     type="email"
                     value={formData.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="Enter your email address"
                     bg="white"
                     required
@@ -134,7 +173,7 @@ export default function SignUpPage() {
                   <Input
                     type="tel"
                     value={formData.phone}
-                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="Enter your phone number"
                     bg="white"
                   />
@@ -147,23 +186,46 @@ export default function SignUpPage() {
                   <NativeSelectRoot>
                     <NativeSelectField
                       value={formData.hearAboutUs}
-                      onChange={(e) => handleInputChange('hearAboutUs', e.target.value)}
-                      bg="white"
-                      borderColor="gray.200"
-                      _hover={{ borderColor: "gray.300" }}
-                      _focus={{ borderColor: "teal.500", boxShadow: "0 0 0 1px var(--chakra-colors-teal-500)" }}
+                      onChange={(e) => setFormData({ ...formData, hearAboutUs: e.target.value as hearAboutUsOption })}
+
                     >
-                      <option value="">Select an option</option>
-                      <option value="search">Search Engine (Google, Bing, etc.)</option>
-                      <option value="social">Social Media</option>
-                      <option value="friend">Friend or Family</option>
-                      <option value="advertisement">Online Advertisement</option>
-                      <option value="news">News Article or Blog</option>
-                      <option value="other">Other</option>
+                      <option value="Select an option" disabled>Select an option</option>
+                      <option value="Search Engine">Search Engine (Google, Bing, etc.)</option>
+                      <option value="Social Media">Social Media</option>
+                      <option value="Friend or Family">Friend or Family</option>
+                      <option value="Advertisement">Online Advertisement</option>
+                      <option value="News Article or Blog">News Article or Blog</option>
+                      <option value="Other">Other</option>
                     </NativeSelectField>
                   </NativeSelectRoot>
                 </Box>
+                {formData.hearAboutUs === "Other" && (<Box>
+                  <Text fontWeight="medium" mb={2} color="gray.700">
+                    What other ways?  (max 200 characters) <Text as="span" color="red.500">*</Text>
+                  </Text>
+                  <Input
+                    type="text"
+                    value={formData.hearAboutUsOther}
+                    onChange={(e) => setFormData({ ...formData, hearAboutUsOther: e.target.value })}
+                    placeholder="Enter other ways you heard about us"
+                    bg="white"
+                    max={200}
+                    required
+                  />
+                </Box>)}
 
+                <Box>
+                  <Text fontWeight="medium" mb={2} color="gray.700">
+                    Referral Code (Optional)
+                  </Text>
+                  <Input
+                    type="text"
+                    value={formData.referralCode}
+                    onChange={(e) => setFormData({ ...formData, referralCode: e.target.value })}
+                    placeholder="Enter your referral code"
+                    bg="white"
+                  />
+                </Box>
                 <Button
                   type="submit"
                   colorScheme="teal"

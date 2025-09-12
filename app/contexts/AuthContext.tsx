@@ -1,8 +1,8 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode, useEffect, useCallback, useRef } from 'react';
-import { User } from '../data/controls/users/userCreate';
-import UserFetchByEmail from '../data/controls/users/userFetchByEmail';
+import { User } from '../../data/controls/users/userCreate';
+import UserFetchByEmail from '../../data/controls/users/userFetchByEmail';
 
 export type SessionTimeout = 'never' | '3min' | '5min' | '10min';
 
