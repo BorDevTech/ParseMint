@@ -28,12 +28,13 @@ export default function RootLayout({
                 display="flex" 
                 flexDirection="column"
                 bgGradient="linear(to-br, brand.25, secondary.25, accent.25, premium.25)"
+                fontSize={{ base: "14px", sm: "16px" }}
               >
                 <Navbar />
                 <Box 
                   flex="1"
                   bgGradient="linear(to-br, white, brand.50, secondary.50)"
-                  minH="calc(100vh - 140px)"
+                  minH={{ base: "calc(100vh - 120px)", md: "calc(100vh - 140px)" }}
                 >
                   {children}
                 </Box>
