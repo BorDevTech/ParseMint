@@ -11,6 +11,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { MdReceipt, MdStars, MdAccountBalanceWallet } from 'react-icons/md';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -32,9 +33,11 @@ export default function Home() {
               Turn your everyday purchases into valuable rewards!
             </Text>
             <Flex direction={{ base: 'column', md: 'row' }} gap={4}>
-              <Button colorScheme="teal" size="lg">
-                Get Started
-              </Button>
+              <Link href="/signup">
+                <Button colorScheme="teal" size="lg">
+                  Get Started
+                </Button>
+              </Link>
               <Button variant="outline" size="lg">
                 Learn More
               </Button>
@@ -84,9 +87,11 @@ export default function Home() {
               <Text color="gray.600">
                 Join thousands of users who are already maximizing their purchase rewards.
               </Text>
-              <Button colorScheme="teal" size="lg">
-                Sign Up Now
-              </Button>
+              <Link href="/signup">
+                <Button colorScheme="teal" size="lg">
+                  Sign Up Now
+                </Button>
+              </Link>
             </Flex>
           </Box>
         </Flex>
