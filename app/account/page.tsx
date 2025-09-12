@@ -8,9 +8,13 @@ import {
   Container,
   Input,
   VStack,
+  HStack,
+  IconButton,
 } from '@chakra-ui/react';
+import { FaArrowDown } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { useAuth, SessionTimeout } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 import { useRouter } from 'next/navigation';
 
 interface ProfileData {
@@ -26,6 +30,7 @@ interface PreferencesData {
 
 export default function AccountPage() {
   const { isAuthenticated, currentUser, updateUserData, loading, sessionTimeout, setSessionTimeout } = useAuth();
+  const { colorTheme, setColorTheme } = useTheme();
   const router = useRouter();
   const [profileData, setProfileData] = useState<ProfileData>({
     fullName: '',
@@ -37,6 +42,18 @@ export default function AccountPage() {
     notifications: true,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPreferencesSubmitting, setIsPreferencesSubmitting] = useState(false);
+  const [isPasswordSubmitting, setIsPasswordSubmitting] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [previewTheme, setPreviewTheme] = useState<string | null>(null);
+  const [originalTheme, setOriginalTheme] = useState<string>('');
+
+  const showToast = (title: string, description: string, _status: 'success' | 'error') => {
+    // Simple alert for now, can be replaced with proper toast later
+    alert(`${title}: ${description}`);
+  };
 
   // Load user data when component mounts or currentUser changes
   useEffect(() => {
@@ -48,6 +65,15 @@ export default function AccountPage() {
       });
     }
   }, [currentUser]);
+
+  // Initialize preferences with current theme
+  useEffect(() => {
+    setPreferences(prev => ({
+      ...prev,
+      colorTheme: colorTheme,
+    }));
+    setOriginalTheme(colorTheme);
+  }, [colorTheme]);
 
   useEffect(() => {
     // Only redirect if not loading and not authenticated
@@ -84,8 +110,80 @@ export default function AccountPage() {
     // Simulate save process
     setTimeout(() => {
       setIsSubmitting(false);
-      // Show success message (could add toast here)
+      showToast("Profile updated", "Your profile information has been saved successfully.", "success");
     }, 1000);
+  };
+
+  const handlePreferencesSubmit = async () => {
+    setIsPreferencesSubmitting(true);
+
+    // Apply the theme to the application through context
+    setColorTheme(preferences.colorTheme as 'teal-blue' | 'green-blue' | 'blue-purple' | 'green-teal');
+
+    setTimeout(() => {
+      setIsPreferencesSubmitting(false);
+      setOriginalTheme(preferences.colorTheme);
+      showToast("Preferences updated", "Your color theme and preferences have been saved.", "success");
+    }, 1000);
+  };
+
+  const handlePasswordSubmit = async () => {
+    if (newPassword !== confirmPassword) {
+      showToast("Error", "New passwords do not match.", "error");
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      showToast("Error", "Password must be at least 6 characters long.", "error");
+      return;
+    }
+
+    setIsPasswordSubmitting(true);
+
+    // Simulate password update
+    setTimeout(() => {
+      setIsPasswordSubmitting(false);
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+      showToast("Password updated", "Your password has been updated successfully.", "success");
+    }, 1000);
+  };
+
+  const scrollToSave = () => {
+    const element = document.getElementById('save-buttons-section');
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const applyThemePreview = (theme: string) => {
+    // Apply theme to the root element
+    const root = document.documentElement;
+    
+    // Remove existing theme classes
+    root.classList.remove('theme-teal-blue', 'theme-green-blue', 'theme-blue-purple', 'theme-green-teal');
+    
+    // Add new theme class
+    root.classList.add(`theme-${theme}`);
+  };
+
+  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newTheme = e.target.value;
+    handlePreferencesChange('colorTheme', newTheme);
+  };
+
+  const handleThemeHover = (theme: string) => {
+    if (!previewTheme) {
+      setPreviewTheme(theme);
+      applyThemePreview(theme);
+    }
+  };
+
+  const handleThemeLeave = () => {
+    if (previewTheme) {
+      // Revert to current saved theme
+      applyThemePreview(originalTheme);
+      setPreviewTheme(null);
+    }
   };
 
   // Show loading state while authentication is being determined
@@ -120,7 +218,28 @@ export default function AccountPage() {
   }
 
   return (
-    <Box minH="100vh" bg="gray.50">
+    <Box minH="100vh" bg="gray.50" position="relative">
+      {/* Sticky Skip to Save Button */}
+      <Box
+        position="fixed"
+        right={4}
+        top="50%"
+        transform="translateY(-50%)"
+        zIndex={1000}
+        title="Skip to Save Buttons"
+      >
+        <IconButton
+          aria-label="Skip to save buttons"
+          colorScheme="teal"
+          size="lg"
+          borderRadius="full"
+          shadow="lg"
+          onClick={scrollToSave}
+        >
+          <FaArrowDown />
+        </IconButton>
+      </Box>
+
       <Container maxW="container.md" py={8}>
         <VStack gap={8} align="stretch">
           {/* Header */}
@@ -176,16 +295,6 @@ export default function AccountPage() {
                     bg="white"
                   />
                 </Box>
-
-                <Button
-                  type="submit"
-                  colorScheme="teal"
-                  size="lg"
-                  loading={isSubmitting}
-                  loadingText="Saving..."
-                >
-                  Save Profile
-                </Button>
               </VStack>
             </form>
           </Box>
@@ -201,40 +310,64 @@ export default function AccountPage() {
                 <Text fontWeight="medium" mb={2} color="gray.700">
                   Color Theme
                 </Text>
-                <select
-                  value={preferences.colorTheme}
-                  onChange={(e) => handlePreferencesChange('colorTheme', e.target.value)}
-                  style={{
-                    width: '100%',
-                    padding: '8px 12px',
-                    backgroundColor: 'white',
-                    border: '1px solid #E2E8F0',
-                    borderRadius: '6px',
-                    fontSize: '16px',
-                  }}
-                >
-                  <option value="teal-blue">Teal & Blue (Default)</option>
-                  <option value="green-blue">Lime Green & Blue</option>
-                  <option value="blue-purple">Blue & Purple</option>
-                  <option value="green-teal">Green & Teal</option>
-                </select>
+                <Box position="relative">
+                  <select
+                    value={preferences.colorTheme}
+                    onChange={handleThemeChange}
+                    onMouseLeave={handleThemeLeave}
+                    style={{
+                      width: '100%',
+                      padding: '8px 12px',
+                      backgroundColor: 'white',
+                      border: '1px solid #E2E8F0',
+                      borderRadius: '6px',
+                      fontSize: '16px',
+                    }}
+                  >
+                    <option 
+                      value="teal-blue"
+                      onMouseEnter={() => handleThemeHover('teal-blue')}
+                    >
+                      Teal & Blue (Default)
+                    </option>
+                    <option 
+                      value="green-blue"
+                      onMouseEnter={() => handleThemeHover('green-blue')}
+                    >
+                      Lime Green & Blue
+                    </option>
+                    <option 
+                      value="blue-purple"
+                      onMouseEnter={() => handleThemeHover('blue-purple')}
+                    >
+                      Blue & Purple
+                    </option>
+                    <option 
+                      value="green-teal"
+                      onMouseEnter={() => handleThemeHover('green-teal')}
+                    >
+                      Green & Teal
+                    </option>
+                  </select>
+                  {previewTheme && (
+                    <Box
+                      position="absolute"
+                      top="-2px"
+                      left="-2px"
+                      right="-2px"
+                      bottom="-2px"
+                      border="2px solid"
+                      borderColor="blue.400"
+                      borderRadius="md"
+                      pointerEvents="none"
+                      zIndex={1}
+                    />
+                  )}
+                </Box>
                 <Text fontSize="sm" color="gray.500" mt={1}>
-                  Choose your preferred color scheme for the interface.
+                  Choose your preferred color scheme for the interface. Hover over options to preview.
                 </Text>
               </Box>
-
-              <Button
-                colorScheme="teal"
-                size="lg"
-                loading={isSubmitting}
-                loadingText="Saving..."
-                onClick={() => {
-                  setIsSubmitting(true);
-                  setTimeout(() => setIsSubmitting(false), 1000);
-                }}
-              >
-                Save Preferences
-              </Button>
             </VStack>
           </Box>
 
@@ -279,6 +412,8 @@ export default function AccountPage() {
                 <Input
                   type="password"
                   placeholder="Enter current password"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
                   bg="white"
                 />
               </Box>
@@ -290,6 +425,8 @@ export default function AccountPage() {
                 <Input
                   type="password"
                   placeholder="Enter new password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
                   bg="white"
                 />
               </Box>
@@ -301,16 +438,67 @@ export default function AccountPage() {
                 <Input
                   type="password"
                   placeholder="Confirm new password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                   bg="white"
                 />
               </Box>
+            </VStack>
+          </Box>
 
-              <Button
-                colorScheme="teal"
-                size="lg"
-              >
-                Update Password
-              </Button>
+          {/* Save Buttons Section */}
+          <Box 
+            id="save-buttons-section" 
+            bg="white" 
+            p={8} 
+            borderRadius="lg" 
+            shadow="md"
+            borderTop="4px solid"
+            borderTopColor="teal.500"
+          >
+            <VStack gap={6} align="stretch">
+              <Heading size="md" color="gray.700" textAlign="center">
+                Save Changes
+              </Heading>
+              
+              <HStack justify="space-between" wrap="wrap" gap={4}>
+                <Button
+                  colorScheme="teal"
+                  size="lg"
+                  loading={isSubmitting}
+                  loadingText="Saving Profile..."
+                  onClick={handleSubmit}
+                  flex="1"
+                  minW="200px"
+                >
+                  Save Profile
+                </Button>
+
+                <Button
+                  colorScheme="blue"
+                  size="lg"
+                  loading={isPreferencesSubmitting}
+                  loadingText="Saving Preferences..."
+                  onClick={handlePreferencesSubmit}
+                  flex="1"
+                  minW="200px"
+                >
+                  Save Preferences
+                </Button>
+
+                <Button
+                  colorScheme="purple"
+                  size="lg"
+                  loading={isPasswordSubmitting}
+                  loadingText="Updating Password..."
+                  onClick={handlePasswordSubmit}
+                  flex="1"
+                  minW="200px"
+                  disabled={!currentPassword || !newPassword || !confirmPassword}
+                >
+                  Update Password
+                </Button>
+              </HStack>
             </VStack>
           </Box>
         </VStack>
