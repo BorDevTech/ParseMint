@@ -23,9 +23,10 @@ export function Navbar() {
             <Heading
               as="h1"
               size="lg"
-              bgGradient="linear(to-r, teal.400, blue.500)"
-              bgClip="text"
+              color="teal.500"
               cursor="pointer"
+              fontWeight="bold"
+              _hover={{ color: 'teal.600' }}
             >
               ParseMint
             </Heading>

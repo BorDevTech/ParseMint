@@ -66,7 +66,12 @@ export function Footer() {
           </VStack>
 
           {/* Right side - Navigation Links */}
-          <VStack align="flex-start" gap={3}>
+          <HStack 
+            align="flex-start" 
+            gap={6} 
+            wrap="wrap"
+            direction={{ base: 'column', md: 'row' }}
+          >
             <Link href="/about">
               <ChakraLink 
                 color="gray.300" 
@@ -107,7 +112,7 @@ export function Footer() {
                 Support
               </ChakraLink>
             </Link>
-          </VStack>
+          </HStack>
         </Flex>
       </Container>
     </Box>
