@@ -34,12 +34,10 @@ export function Navbar() {
             <Heading
               as="h1"
               size="lg"
-              bgGradient="linear(to-r, brand.500, secondary.500)"
-              bgClip="text"
+              className="brand-gradient brand-gradient-hover text-2xl font-bold"
               cursor="pointer"
               fontWeight="bold"
               _hover={{ 
-                bgGradient: 'linear(to-r, brand.600, secondary.600)',
                 transform: 'scale(1.05)'
               }}
               transition="all 0.2s"

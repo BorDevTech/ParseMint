@@ -26,3 +26,20 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Brand gradient classes for consistent styling */
+.brand-gradient {
+  background: linear-gradient(to right, #38b2ac, #0ea5e9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.brand-gradient-hover:hover {
+  background: linear-gradient(to right, #319795, #0284c7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}

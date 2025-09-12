@@ -32,10 +32,9 @@ export default function Home() {
           <Flex direction="column" gap={6} textAlign="center" align="center">
             <Heading
               as="h1"
-              size="2xl"
-              bgGradient="linear(to-r, brand.400, secondary.500)"
-              bgClip="text"
-              fontWeight="bold"
+              size="3xl"
+              className="brand-gradient text-6xl font-extrabold mb-4"
+              fontWeight="extrabold"
             >
               ParseMint
             </Heading>
