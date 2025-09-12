@@ -36,29 +36,37 @@ interface SidebarItemProps {
 }
 
 function SidebarItem({ icon, label, isActive, onClick }: SidebarItemProps) {
-  const bgColor = isActive ? 'teal.50' : 'transparent';
-  const textColor = isActive ? 'teal.700' : 'gray.600';
-  const borderColor = 'teal.500';
+  const bgColor = isActive ? 'brand.50' : 'transparent';
+  const textColor = isActive ? 'brand.700' : 'gray.600';
+  const borderColor = 'brand.500';
+  const iconColor = isActive ? 'brand.600' : 'gray.500';
 
   return (
     <Button
       justifyContent="flex-start"
       variant="ghost"
       w="full"
-      h="12"
+      h="14"
       bg={bgColor}
       color={textColor}
-      borderLeft={isActive ? '3px solid' : '3px solid transparent'}
+      borderLeft={isActive ? '4px solid' : '4px solid transparent'}
       borderLeftColor={isActive ? borderColor : 'transparent'}
-      borderRadius="0"
+      borderRadius="md"
+      mx={1}
+      my={0.5}
+      fontWeight={isActive ? "semibold" : "medium"}
+      fontSize="sm"
       _hover={{
-        bg: 'teal.50',
-        color: 'teal.700',
+        bg: 'brand.50',
+        color: 'brand.700',
+        transform: 'translateX(4px)',
+        shadow: 'sm',
       }}
+      transition="all 0.2s ease"
       onClick={onClick}
     >
-      <HStack gap={2} align="center">
-        <Icon as={icon} />
+      <HStack gap={3} align="center">
+        <Icon as={icon} boxSize={5} color={iconColor} />
         <Text>{label}</Text>
       </HStack>
     </Button>
@@ -70,62 +78,63 @@ function OverviewTab() {
   return (
     <VStack gap={8} align="stretch">
       {/* Header */}
-      <Box>
-        <Heading size="xl" color="gray.700" mb={2}>
+      <Box textAlign="center" mb={4}>
+        <Heading as="h1" size="2xl" color="gray.800" mb={3} fontWeight="bold">
           Dashboard Overview
         </Heading>
-        <Text color="gray.600" fontSize="lg">
+        <Text color="gray.600" fontSize="xl" fontWeight="medium">
           Welcome back! Here&apos;s your account overview.
         </Text>
+        <Box h="3px" bg="brand.500" w="120px" mx="auto" borderRadius="full" mt={4} />
       </Box>
 
       {/* Stats Cards */}
       <SimpleGrid columns={{ base: 1, md: 3 }} gap={6}>
-        <Box bg="white" p={6} borderRadius="lg" shadow="md">
+        <Box bg="white" p={6} borderRadius="xl" shadow="lg" borderTop="4px" borderTopColor="brand.500">
           <Flex align="center" gap={3} mb={4}>
-            <Icon as={MdReceipt} boxSize={8} color="teal.500" />
+            <Icon as={MdReceipt} boxSize={10} color="brand.500" />
             <Box>
-              <Text fontSize="sm" fontWeight="medium" color="gray.600">
+              <Text fontSize="sm" fontWeight="semibold" color="gray.600" textTransform="uppercase" letterSpacing="wide">
                 Receipts Uploaded
               </Text>
-              <Text fontSize="3xl" fontWeight="bold" color="teal.600">
+              <Text fontSize="4xl" fontWeight="bold" color="brand.600">
                 24
               </Text>
-              <Text fontSize="sm" color="gray.500">
+              <Text fontSize="sm" color="green.500" fontWeight="medium">
                 +3 this week
               </Text>
             </Box>
           </Flex>
         </Box>
 
-        <Box bg="white" p={6} borderRadius="lg" shadow="md">
+        <Box bg="white" p={6} borderRadius="xl" shadow="lg" borderTop="4px" borderTopColor="secondary.500">
           <Flex align="center" gap={3} mb={4}>
-            <Icon as={MdStars} boxSize={8} color="blue.500" />
+            <Icon as={MdStars} boxSize={10} color="secondary.500" />
             <Box>
-              <Text fontSize="sm" fontWeight="medium" color="gray.600">
+              <Text fontSize="sm" fontWeight="semibold" color="gray.600" textTransform="uppercase" letterSpacing="wide">
                 Points Earned
               </Text>
-              <Text fontSize="3xl" fontWeight="bold" color="blue.600">
+              <Text fontSize="4xl" fontWeight="bold" color="secondary.600">
                 1,247
               </Text>
-              <Text fontSize="sm" color="gray.500">
+              <Text fontSize="sm" color="green.500" fontWeight="medium">
                 +156 this week
               </Text>
             </Box>
           </Flex>
         </Box>
 
-        <Box bg="white" p={6} borderRadius="lg" shadow="md">
+        <Box bg="white" p={6} borderRadius="xl" shadow="lg" borderTop="4px" borderTopColor="accent.500">
           <Flex align="center" gap={3} mb={4}>
-            <Icon as={MdAccountBalanceWallet} boxSize={8} color="purple.500" />
+            <Icon as={MdAccountBalanceWallet} boxSize={10} color="accent.500" />
             <Box>
-              <Text fontSize="sm" fontWeight="medium" color="gray.600">
+              <Text fontSize="sm" fontWeight="semibold" color="gray.600" textTransform="uppercase" letterSpacing="wide">
                 Cash Value
               </Text>
-              <Text fontSize="3xl" fontWeight="bold" color="purple.600">
+              <Text fontSize="4xl" fontWeight="bold" color="accent.600">
                 $12.47
               </Text>
-              <Text fontSize="sm" color="gray.500">
+              <Text fontSize="sm" color="gray.500" fontWeight="medium">
                 Ready to redeem
               </Text>
             </Box>
@@ -135,27 +144,89 @@ function OverviewTab() {
 
       {/* Action Cards */}
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-        <Box bg="white" p={8} borderRadius="lg" shadow="md">
-          <Flex direction="column" gap={4} align="center" textAlign="center">
-            <Icon as={MdReceipt} boxSize={12} color="teal.500" />
-            <Heading size="md">Upload New Receipt</Heading>
-            <Text color="gray.600">
+        <Box 
+          bg="gradient-to-br from-brand.500 to-brand.600" 
+          p={8} 
+          borderRadius="xl" 
+          shadow="xl" 
+          color="white"
+          position="relative"
+          overflow="hidden"
+          _before={{
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            bg: 'white',
+            opacity: 0.1,
+            bgImage: 'radial-gradient(circle at 20% 80%, white 1px, transparent 1px)',
+            bgSize: '20px 20px',
+          }}
+        >
+          <Flex direction="column" gap={4} align="center" textAlign="center" position="relative" zIndex={1}>
+            <Icon as={MdReceipt} boxSize={14} color="white" />
+            <Heading as="h3" size="lg" fontWeight="bold">Upload New Receipt</Heading>
+            <Text fontSize="lg" opacity={0.9}>
               Snap a photo of your latest receipt to earn more points.
             </Text>
-            <Button colorScheme="teal" size="lg">
+            <Button 
+              colorScheme="whiteAlpha" 
+              bg="white" 
+              color="brand.600" 
+              size="lg"
+              fontWeight="bold"
+              _hover={{ 
+                transform: 'translateY(-2px)',
+                shadow: 'xl'
+              }}
+              transition="all 0.2s"
+            >
               Upload Receipt
             </Button>
           </Flex>
         </Box>
 
-        <Box bg="white" p={8} borderRadius="lg" shadow="md">
-          <Flex direction="column" gap={4} align="center" textAlign="center">
-            <Icon as={MdAccountBalanceWallet} boxSize={12} color="purple.500" />
-            <Heading size="md">Redeem Rewards</Heading>
-            <Text color="gray.600">
+        <Box 
+          bg="gradient-to-br from-secondary.500 to-secondary.600" 
+          p={8} 
+          borderRadius="xl" 
+          shadow="xl" 
+          color="white"
+          position="relative"
+          overflow="hidden"
+          _before={{
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            bg: 'white',
+            opacity: 0.1,
+            bgImage: 'radial-gradient(circle at 80% 20%, white 1px, transparent 1px)',
+            bgSize: '20px 20px',
+          }}
+        >
+          <Flex direction="column" gap={4} align="center" textAlign="center" position="relative" zIndex={1}>
+            <Icon as={MdAccountBalanceWallet} boxSize={14} color="white" />
+            <Heading as="h3" size="lg" fontWeight="bold">Redeem Rewards</Heading>
+            <Text fontSize="lg" opacity={0.9}>
               Convert your points into cash or gift cards.
             </Text>
-            <Button colorScheme="purple" size="lg">
+            <Button 
+              colorScheme="whiteAlpha" 
+              bg="white" 
+              color="secondary.600" 
+              size="lg"
+              fontWeight="bold"
+              _hover={{ 
+                transform: 'translateY(-2px)',
+                shadow: 'xl'
+              }}
+              transition="all 0.2s"
+            >
               View Rewards
             </Button>
           </Flex>
@@ -168,59 +239,123 @@ function OverviewTab() {
 function RedeemTab() {
   return (
     <VStack gap={8} align="stretch">
-      <Box>
-        <Heading size="xl" color="gray.700" mb={2}>
+      <Box textAlign="center" mb={4}>
+        <Heading as="h1" size="2xl" color="gray.800" mb={3} fontWeight="bold">
           Redeem Rewards
         </Heading>
-        <Text color="gray.600" fontSize="lg">
+        <Text color="gray.600" fontSize="xl" fontWeight="medium">
           Exchange your points for cash, gift cards, and exclusive rewards.
         </Text>
+        <Box h="3px" bg="secondary.500" w="140px" mx="auto" borderRadius="full" mt={4} />
       </Box>
 
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} gap={6}>
-        <Box bg="white" p={6} borderRadius="lg" shadow="md">
+        <Box 
+          bg="white" 
+          p={6} 
+          borderRadius="xl" 
+          shadow="xl" 
+          borderTop="4px" 
+          borderTopColor="green.500"
+          _hover={{ 
+            transform: 'translateY(-4px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
           <VStack gap={4}>
-            <Icon as={MdAccountBalanceWallet} boxSize={12} color="green.500" />
-            <Heading size="md">PayPal Cash</Heading>
-            <Text color="gray.600" textAlign="center">
+            <Icon as={MdAccountBalanceWallet} boxSize={14} color="green.500" />
+            <Heading as="h3" size="lg" fontWeight="bold" color="gray.800">PayPal Cash</Heading>
+            <Text color="gray.600" textAlign="center" fontSize="md">
               Direct cash transfer to your PayPal account
             </Text>
-            <Text fontSize="sm" color="gray.500">
+            <Text fontSize="sm" color="gray.500" fontWeight="medium">
               Minimum: 1,000 points = $10
             </Text>
-            <Button colorScheme="green" size="md" w="full">
+            <Button 
+              colorScheme="green" 
+              size="lg" 
+              w="full"
+              fontWeight="bold"
+              _hover={{ 
+                transform: 'translateY(-1px)',
+                shadow: 'lg'
+              }}
+            >
               Redeem Now
             </Button>
           </VStack>
         </Box>
 
-        <Box bg="white" p={6} borderRadius="lg" shadow="md">
+        <Box 
+          bg="white" 
+          p={6} 
+          borderRadius="xl" 
+          shadow="xl" 
+          borderTop="4px" 
+          borderTopColor="orange.500"
+          _hover={{ 
+            transform: 'translateY(-4px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
           <VStack gap={4}>
-            <Icon as={MdLocalOffer} boxSize={12} color="orange.500" />
-            <Heading size="md">Amazon Gift Card</Heading>
-            <Text color="gray.600" textAlign="center">
+            <Icon as={MdLocalOffer} boxSize={14} color="orange.500" />
+            <Heading as="h3" size="lg" fontWeight="bold" color="gray.800">Amazon Gift Card</Heading>
+            <Text color="gray.600" textAlign="center" fontSize="md">
               Get Amazon gift cards for online shopping
             </Text>
-            <Text fontSize="sm" color="gray.500">
+            <Text fontSize="sm" color="gray.500" fontWeight="medium">
               Available: $5, $10, $25, $50
             </Text>
-            <Button colorScheme="orange" size="md" w="full">
+            <Button 
+              colorScheme="orange" 
+              size="lg" 
+              w="full"
+              fontWeight="bold"
+              _hover={{ 
+                transform: 'translateY(-1px)',
+                shadow: 'lg'
+              }}
+            >
               Redeem Now
             </Button>
           </VStack>
         </Box>
 
-        <Box bg="white" p={6} borderRadius="lg" shadow="md">
+        <Box 
+          bg="white" 
+          p={6} 
+          borderRadius="xl" 
+          shadow="xl" 
+          borderTop="4px" 
+          borderTopColor="purple.500"
+          _hover={{ 
+            transform: 'translateY(-4px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
           <VStack gap={4}>
-            <Icon as={MdStars} boxSize={12} color="purple.500" />
-            <Heading size="md">Store Credit</Heading>
-            <Text color="gray.600" textAlign="center">
+            <Icon as={MdStars} boxSize={14} color="purple.500" />
+            <Heading as="h3" size="lg" fontWeight="bold" color="gray.800">Store Credit</Heading>
+            <Text color="gray.600" textAlign="center" fontSize="md">
               Use credit at participating retail partners
             </Text>
-            <Text fontSize="sm" color="gray.500">
+            <Text fontSize="sm" color="gray.500" fontWeight="medium">
               500 points = $5 credit
             </Text>
-            <Button colorScheme="purple" size="md" w="full">
+            <Button 
+              colorScheme="purple" 
+              size="lg" 
+              w="full"
+              fontWeight="bold"
+              _hover={{ 
+                transform: 'translateY(-1px)',
+                shadow: 'lg'
+              }}
+            >
               Redeem Now
             </Button>
           </VStack>
@@ -233,30 +368,40 @@ function RedeemTab() {
 function ReceiptsTab() {
   return (
     <VStack gap={8} align="stretch">
-      <Box>
-        <Heading size="xl" color="gray.700" mb={2}>
+      <Box textAlign="center" mb={4}>
+        <Heading as="h1" size="2xl" color="gray.800" mb={3} fontWeight="bold">
           My Receipts
         </Heading>
-        <Text color="gray.600" fontSize="lg">
+        <Text color="gray.600" fontSize="xl" fontWeight="medium">
           Track your uploaded receipts and manage your spending digitally.
         </Text>
+        <Box h="3px" bg="brand.500" w="100px" mx="auto" borderRadius="full" mt={4} />
       </Box>
 
-      <HStack justify="space-between" wrap="wrap">
-        <Button colorScheme="teal">
+      <HStack justify="space-between" wrap="wrap" bg="white" p={4} borderRadius="xl" shadow="md">
+        <Button 
+          colorScheme="brand" 
+          size="lg"
+          fontWeight="bold"
+          _hover={{ 
+            transform: 'translateY(-1px)',
+            shadow: 'lg'
+          }}
+        >
           <HStack gap={2}>
             <Icon as={MdReceipt} />
             <Text>Upload New Receipt</Text>
           </HStack>
         </Button>
-        <HStack>
-          <Text fontSize="sm" color="gray.600">Sort by:</Text>
+        <HStack bg="gray.50" p={3} borderRadius="lg">
+          <Text fontSize="sm" color="gray.700" fontWeight="semibold">Sort by:</Text>
           <NativeSelectRoot size="sm">
             <NativeSelectField
               bg="white"
               borderColor="gray.200"
-              _hover={{ borderColor: "gray.300" }}
-              _focus={{ borderColor: "teal.500", boxShadow: "0 0 0 1px var(--chakra-colors-teal-500)" }}
+              _hover={{ borderColor: "brand.400" }}
+              _focus={{ borderColor: "brand.500", boxShadow: "0 0 0 1px var(--chakra-colors-brand-500)" }}
+              fontWeight="medium"
             >
               <option>Recent</option>
               <option>Amount</option>
@@ -268,24 +413,37 @@ function ReceiptsTab() {
 
       <VStack gap={4} align="stretch">
         {[1, 2, 3, 4, 5].map((item) => (
-          <Box key={item} bg="white" p={6} borderRadius="lg" shadow="md">
+          <Box 
+            key={item} 
+            bg="white" 
+            p={6} 
+            borderRadius="xl" 
+            shadow="lg"
+            borderLeft="4px"
+            borderLeftColor="brand.500"
+            _hover={{ 
+              transform: 'translateX(4px)',
+              shadow: 'xl'
+            }}
+            transition="all 0.2s"
+          >
             <Flex justify="space-between" align="center">
               <HStack gap={4}>
-                <Icon as={MdReceipt} boxSize={8} color="teal.500" />
+                <Icon as={MdReceipt} boxSize={10} color="brand.500" />
                 <Box>
-                  <Text fontWeight="bold" color="gray.700">
+                  <Text fontWeight="bold" color="gray.800" fontSize="lg">
                     Target Store #{item}
                   </Text>
-                  <Text fontSize="sm" color="gray.500">
+                  <Text fontSize="sm" color="gray.500" fontWeight="medium">
                     {new Date(Date.now() - item * 24 * 60 * 60 * 1000).toLocaleDateString()}
                   </Text>
                 </Box>
               </HStack>
               <VStack align="end" gap={1}>
-                <Text fontWeight="bold" color="gray.700">
+                <Text fontWeight="bold" color="gray.800" fontSize="xl">
                   ${(Math.random() * 100 + 10).toFixed(2)}
                 </Text>
-                <Text fontSize="sm" color="green.600">
+                <Text fontSize="sm" color="green.600" fontWeight="bold">
                   +{Math.floor(Math.random() * 50 + 10)} points
                 </Text>
               </VStack>
@@ -300,63 +458,200 @@ function ReceiptsTab() {
 function PromotionsTab() {
   return (
     <VStack gap={8} align="stretch">
-      <Box>
-        <Heading size="xl" color="gray.700" mb={2}>
+      <Box textAlign="center" mb={4}>
+        <Heading as="h1" size="2xl" color="gray.800" mb={3} fontWeight="bold">
           Promotions & Offers
         </Heading>
-        <Text color="gray.600" fontSize="lg">
+        <Text color="gray.600" fontSize="xl" fontWeight="medium">
           Discover special offers and bonus point opportunities.
         </Text>
+        <Box h="3px" bg="accent.500" w="160px" mx="auto" borderRadius="full" mt={4} />
       </Box>
 
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-        <Box bg="gradient-to-r from-purple-500 to-pink-500" p={6} borderRadius="lg" shadow="md" color="white">
-          <VStack gap={4} align="start">
-            <Icon as={MdStars} boxSize={10} />
-            <Heading size="md">Double Points Weekend!</Heading>
-            <Text>
+        <Box 
+          bg="gradient-to-br from-purple.500 to-pink.500" 
+          p={8} 
+          borderRadius="xl" 
+          shadow="xl" 
+          color="white"
+          position="relative"
+          overflow="hidden"
+          _before={{
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            bg: 'white',
+            opacity: 0.1,
+            bgImage: 'radial-gradient(circle at 30% 70%, white 2px, transparent 2px)',
+            bgSize: '30px 30px',
+          }}
+          _hover={{ 
+            transform: 'translateY(-4px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
+          <VStack gap={4} align="start" position="relative" zIndex={1}>
+            <Icon as={MdStars} boxSize={12} />
+            <Heading as="h3" size="lg" fontWeight="bold">Double Points Weekend!</Heading>
+            <Text fontSize="lg" opacity={0.9}>
               Earn 2x points on all grocery receipts this weekend.
             </Text>
-            <Button bg="white" color="purple.500" size="md">
+            <Button 
+              bg="white" 
+              color="purple.500" 
+              size="lg"
+              fontWeight="bold"
+              _hover={{ 
+                transform: 'translateY(-1px)',
+                shadow: 'lg'
+              }}
+            >
               Learn More
             </Button>
           </VStack>
         </Box>
 
-        <Box bg="gradient-to-r from-green-500 to-teal-500" p={6} borderRadius="lg" shadow="md" color="white">
-          <VStack gap={4} align="start">
-            <Icon as={MdLocalOffer} boxSize={10} />
-            <Heading size="md">New Store Bonus</Heading>
-            <Text>
+        <Box 
+          bg="gradient-to-br from-green.500 to-teal.500" 
+          p={8} 
+          borderRadius="xl" 
+          shadow="xl" 
+          color="white"
+          position="relative"
+          overflow="hidden"
+          _before={{
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            bg: 'white',
+            opacity: 0.1,
+            bgImage: 'radial-gradient(circle at 70% 30%, white 2px, transparent 2px)',
+            bgSize: '25px 25px',
+          }}
+          _hover={{ 
+            transform: 'translateY(-4px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
+          <VStack gap={4} align="start" position="relative" zIndex={1}>
+            <Icon as={MdLocalOffer} boxSize={12} />
+            <Heading as="h3" size="lg" fontWeight="bold">New Store Bonus</Heading>
+            <Text fontSize="lg" opacity={0.9}>
               Get 500 bonus points when you upload your first receipt from a new store.
             </Text>
-            <Button bg="white" color="green.500" size="md">
+            <Button 
+              bg="white" 
+              color="green.500" 
+              size="lg"
+              fontWeight="bold"
+              _hover={{ 
+                transform: 'translateY(-1px)',
+                shadow: 'lg'
+              }}
+            >
               Get Started
             </Button>
           </VStack>
         </Box>
 
-        <Box bg="gradient-to-r from-blue-500 to-indigo-500" p={6} borderRadius="lg" shadow="md" color="white">
-          <VStack gap={4} align="start">
-            <Icon as={MdGroup} boxSize={10} />
-            <Heading size="md">Friend Referral</Heading>
-            <Text>
+        <Box 
+          bg="gradient-to-br from-blue.500 to-indigo.500" 
+          p={8} 
+          borderRadius="xl" 
+          shadow="xl" 
+          color="white"
+          position="relative"
+          overflow="hidden"
+          _before={{
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            bg: 'white',
+            opacity: 0.1,
+            bgImage: 'radial-gradient(circle at 80% 80%, white 2px, transparent 2px)',
+            bgSize: '28px 28px',
+          }}
+          _hover={{ 
+            transform: 'translateY(-4px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
+          <VStack gap={4} align="start" position="relative" zIndex={1}>
+            <Icon as={MdGroup} boxSize={12} />
+            <Heading as="h3" size="lg" fontWeight="bold">Friend Referral</Heading>
+            <Text fontSize="lg" opacity={0.9}>
               Invite friends and get 1,000 points for each successful referral.
             </Text>
-            <Button bg="white" color="blue.500" size="md">
+            <Button 
+              bg="white" 
+              color="blue.500" 
+              size="lg"
+              fontWeight="bold"
+              _hover={{ 
+                transform: 'translateY(-1px)',
+                shadow: 'lg'
+              }}
+            >
               Invite Friends
             </Button>
           </VStack>
         </Box>
 
-        <Box bg="gradient-to-r from-orange-500 to-red-500" p={6} borderRadius="lg" shadow="md" color="white">
-          <VStack gap={4} align="start">
-            <Icon as={MdReceipt} boxSize={10} />
-            <Heading size="md">Monthly Challenge</Heading>
-            <Text>
+        <Box 
+          bg="gradient-to-br from-orange.500 to-red.500" 
+          p={8} 
+          borderRadius="xl" 
+          shadow="xl" 
+          color="white"
+          position="relative"
+          overflow="hidden"
+          _before={{
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            bg: 'white',
+            opacity: 0.1,
+            bgImage: 'radial-gradient(circle at 20% 20%, white 2px, transparent 2px)',
+            bgSize: '32px 32px',
+          }}
+          _hover={{ 
+            transform: 'translateY(-4px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
+          <VStack gap={4} align="start" position="relative" zIndex={1}>
+            <Icon as={MdReceipt} boxSize={12} />
+            <Heading as="h3" size="lg" fontWeight="bold">Monthly Challenge</Heading>
+            <Text fontSize="lg" opacity={0.9}>
               Upload 20 receipts this month and earn a 2,000 point bonus.
             </Text>
-            <Button bg="white" color="orange.500" size="md">
+            <Button 
+              bg="white" 
+              color="orange.500" 
+              size="lg"
+              fontWeight="bold"
+              _hover={{ 
+                transform: 'translateY(-1px)',
+                shadow: 'lg'
+              }}
+            >
               Join Challenge
             </Button>
           </VStack>
@@ -369,22 +664,43 @@ function PromotionsTab() {
 function ReferralsTab() {
   return (
     <VStack gap={8} align="stretch">
-      <Box>
-        <Heading size="xl" color="gray.700" mb={2}>
+      <Box textAlign="center" mb={4}>
+        <Heading as="h1" size="2xl" color="gray.800" mb={3} fontWeight="bold">
           Referrals & Bonuses
         </Heading>
-        <Text color="gray.600" fontSize="lg">
+        <Text color="gray.600" fontSize="xl" fontWeight="medium">
           Invite friends and family to earn bonus rewards together.
         </Text>
+        <Box h="3px" bg="premium.500" w="150px" mx="auto" borderRadius="full" mt={4} />
       </Box>
 
-      <Box bg="white" p={8} borderRadius="lg" shadow="md">
-        <VStack gap={6}>
-          <Icon as={MdGroup} boxSize={16} color="teal.500" />
-          <Heading size="lg" textAlign="center">
+      <Box 
+        bg="gradient-to-br from-brand.500 to-secondary.500" 
+        p={10} 
+        borderRadius="xl" 
+        shadow="xl"
+        color="white"
+        position="relative"
+        overflow="hidden"
+        _before={{
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          bg: 'white',
+          opacity: 0.1,
+          bgImage: 'radial-gradient(circle at 40% 60%, white 3px, transparent 3px)',
+          bgSize: '40px 40px',
+        }}
+      >
+        <VStack gap={6} position="relative" zIndex={1}>
+          <Icon as={MdGroup} boxSize={20} color="white" />
+          <Heading as="h2" size="xl" textAlign="center" fontWeight="bold">
             Invite Friends & Earn Together
           </Heading>
-          <Text color="gray.600" textAlign="center" maxW="2xl">
+          <Text fontSize="lg" textAlign="center" maxW="2xl" opacity={0.9}>
             Share ParseMint with your friends and family. When they join and upload their first receipt, 
             you both get 1,000 bonus points!
           </Text>
@@ -395,13 +711,25 @@ function ReferralsTab() {
               placeholder="Enter friend's email"
               style={{
                 flex: 1,
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1px solid #E2E8F0',
+                padding: '16px',
+                borderRadius: '12px',
+                border: 'none',
                 fontSize: '16px',
+                fontWeight: '500',
+                outline: 'none',
               }}
             />
-            <Button colorScheme="teal" size="lg">
+            <Button 
+              bg="white" 
+              color="brand.600" 
+              size="lg"
+              fontWeight="bold"
+              px={8}
+              _hover={{ 
+                transform: 'translateY(-1px)',
+                shadow: 'lg'
+              }}
+            >
               Send Invite
             </Button>
           </HStack>
@@ -409,25 +737,37 @@ function ReferralsTab() {
       </Box>
 
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={6}>
-        <Box bg="white" p={6} borderRadius="lg" shadow="md">
-          <VStack gap={4}>
-            <Heading size="md" color="gray.700">
+        <Box 
+          bg="white" 
+          p={8} 
+          borderRadius="xl" 
+          shadow="xl"
+          borderTop="4px"
+          borderTopColor="brand.500"
+          _hover={{ 
+            transform: 'translateY(-2px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
+          <VStack gap={6}>
+            <Heading as="h3" size="lg" color="gray.800" fontWeight="bold">
               Your Referral Stats
             </Heading>
-            <SimpleGrid columns={2} gap={4} w="full">
+            <SimpleGrid columns={2} gap={6} w="full">
               <Box textAlign="center">
-                <Text fontSize="3xl" fontWeight="bold" color="teal.600">
+                <Text fontSize="5xl" fontWeight="bold" color="brand.600">
                   3
                 </Text>
-                <Text fontSize="sm" color="gray.600">
+                <Text fontSize="sm" color="gray.600" fontWeight="semibold" textTransform="uppercase" letterSpacing="wide">
                   Friends Invited
                 </Text>
               </Box>
               <Box textAlign="center">
-                <Text fontSize="3xl" fontWeight="bold" color="green.600">
+                <Text fontSize="5xl" fontWeight="bold" color="green.600">
                   2
                 </Text>
-                <Text fontSize="sm" color="gray.600">
+                <Text fontSize="sm" color="gray.600" fontWeight="semibold" textTransform="uppercase" letterSpacing="wide">
                   Successfully Joined
                 </Text>
               </Box>
@@ -435,15 +775,27 @@ function ReferralsTab() {
           </VStack>
         </Box>
 
-        <Box bg="white" p={6} borderRadius="lg" shadow="md">
-          <VStack gap={4}>
-            <Heading size="md" color="gray.700">
+        <Box 
+          bg="white" 
+          p={8} 
+          borderRadius="xl" 
+          shadow="xl"
+          borderTop="4px"
+          borderTopColor="premium.500"
+          _hover={{ 
+            transform: 'translateY(-2px)',
+            shadow: '2xl'
+          }}
+          transition="all 0.3s"
+        >
+          <VStack gap={6}>
+            <Heading as="h3" size="lg" color="gray.800" fontWeight="bold">
               Bonus Points Earned
             </Heading>
-            <Text fontSize="4xl" fontWeight="bold" color="purple.600">
+            <Text fontSize="6xl" fontWeight="bold" color="premium.600">
               2,000
             </Text>
-            <Text fontSize="sm" color="gray.600" textAlign="center">
+            <Text fontSize="sm" color="gray.600" textAlign="center" fontWeight="medium">
               Total points earned from referrals this month
             </Text>
           </VStack>
@@ -531,14 +883,28 @@ export default function DashboardPage() {
           borderRight="1px solid"
           borderRightColor="gray.200"
           py={6}
-          shadow="sm"
+          shadow="lg"
+          bgGradient="linear(to-b, white, brand.25)"
         >
           <VStack gap={2} align="stretch" px={4}>
-            <Box mb={6} px={2}>
-              <Heading size="md" color="gray.700" mb={2}>
+            {/* ParseMint Brand - Centered over sidebar */}
+            <Box mb={8} textAlign="center" px={2}>
+              <Heading
+                as="h1"
+                size="xl"
+                className="brand-gradient"
+                fontWeight="bold"
+                fontSize="2xl"
+                letterSpacing="tight"
+                mb={3}
+              >
+                ParseMint
+              </Heading>
+              <Box h="2px" bg="brand.500" w="60%" mx="auto" borderRadius="full" mb={4} />
+              <Heading as="h2" size="sm" color="gray.700" mb={1} fontWeight="semibold">
                 Dashboard
               </Heading>
-              <Text fontSize="sm" color="gray.500">
+              <Text fontSize="sm" color="gray.600" fontWeight="medium">
                 Welcome, {currentUser?.fullName || 'User'}
               </Text>
             </Box>
@@ -556,9 +922,11 @@ export default function DashboardPage() {
         </Box>
 
         {/* Main Content */}
-        <Box flex="1" p={8} overflowY="auto">
-          <Container maxW="container.xl">
-            {renderTabContent()}
+        <Box flex="1" p={8} overflowY="auto" bg="gray.25">
+          <Container maxW="container.xl" centerContent>
+            <Box w="full" maxW="container.lg">
+              {renderTabContent()}
+            </Box>
           </Container>
         </Box>
       </Flex>

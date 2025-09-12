@@ -33,10 +33,12 @@ export function Navbar() {
           <Link href="/">
             <Heading
               as="h1"
-              size="lg"
-              className="brand-gradient brand-gradient-hover text-2xl font-bold"
+              size="xl"
+              className="brand-gradient"
               cursor="pointer"
               fontWeight="bold"
+              fontSize="2xl"
+              letterSpacing="tight"
               _hover={{ 
                 transform: 'scale(1.05)'
               }}
