@@ -16,7 +16,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <Box minH="100vh" bg="gray.50">
-      <Container maxW="container.xl" py={16}>
+      <Container maxW="container.xl" py={8}>
         <Flex direction="column" gap={12}>
           {/* Hero Section */}
           <Flex direction="column" gap={6} textAlign="center" align="center">
