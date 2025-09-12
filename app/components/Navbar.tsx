@@ -10,13 +10,16 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
+import { ThemeToggle } from './ThemeToggle';
 
 export function Navbar() {
   const { isAuthenticated, logout } = useAuth();
+  const { theme } = useTheme();
 
   return (
     <Box 
-      bg="white" 
+      bg={theme === 'light' ? 'white' : 'gray.800'} 
       shadow="lg" 
       position="sticky" 
       top={0} 
@@ -47,6 +50,7 @@ export function Navbar() {
 
           {/* Navigation */}
           <HStack gap={4}>
+            <ThemeToggle />
             {isAuthenticated ? (
               <>
                 <Link href="/dashboard">

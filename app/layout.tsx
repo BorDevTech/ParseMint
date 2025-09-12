@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
 import { AuthProvider } from "./contexts/AuthContext";
+import { ThemeProvider } from "./contexts/ThemeContext";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Box } from "@chakra-ui/react";
@@ -20,15 +21,17 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <Providers>
-          <AuthProvider>
-            <Box minH="100vh" display="flex" flexDirection="column">
-              <Navbar />
-              <Box flex="1">
-                {children}
+          <ThemeProvider>
+            <AuthProvider>
+              <Box minH="100vh" display="flex" flexDirection="column">
+                <Navbar />
+                <Box flex="1">
+                  {children}
+                </Box>
+                <Footer />
               </Box>
-              <Footer />
-            </Box>
-          </AuthProvider>
+            </AuthProvider>
+          </ThemeProvider>
         </Providers>
       </body>
     </html>
