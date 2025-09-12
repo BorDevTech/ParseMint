@@ -48,7 +48,7 @@ export default function LoginPage() {
   };
 
   return (
-    <Box minH="100vh" bg="gray.50" py={8}>
+    <Box minH="100vh" bgGradient="linear(to-br, brand.50, secondary.50)" py={8}>
       <Container maxW="md">
         <VStack gap={6} align="stretch">
           {/* Header */}
@@ -57,10 +57,14 @@ export default function LoginPage() {
               <Heading
                 as="h1"
                 size="xl"
-                bgGradient="linear(to-r, teal.400, blue.500)"
+                bgGradient="linear(to-r, brand.500, secondary.500)"
                 bgClip="text"
                 mb={2}
                 cursor="pointer"
+                _hover={{ 
+                  bgGradient: 'linear(to-r, brand.600, secondary.600)'
+                }}
+                transition="all 0.2s"
               >
                 ParseMint
               </Heading>
@@ -71,10 +75,17 @@ export default function LoginPage() {
           </Box>
 
           {/* Login Form */}
-          <Box bg="white" p={8} borderRadius="lg" shadow="md">
+          <Box 
+            bg="white" 
+            p={8} 
+            borderRadius="xl" 
+            shadow="xl"
+            border="1px"
+            borderColor="brand.100"
+          >
             <form onSubmit={handleSubmit}>
               <VStack gap={6} align="stretch">
-                <Heading size="lg" textAlign="center" color="gray.700">
+                <Heading size="lg" textAlign="center" color="gray.800">
                   Login to your account
                 </Heading>
 
@@ -88,6 +99,11 @@ export default function LoginPage() {
                     onChange={(e) => handleInputChange('email', e.target.value)}
                     placeholder="Enter your email address"
                     bg="white"
+                    borderColor="gray.300"
+                    _focus={{ 
+                      borderColor: 'brand.400',
+                      boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)'
+                    }}
                     required
                   />
                 </Box>
@@ -102,16 +118,30 @@ export default function LoginPage() {
                     onChange={(e) => handleInputChange('password', e.target.value)}
                     placeholder="Enter your password"
                     bg="white"
+                    borderColor="gray.300"
+                    _focus={{ 
+                      borderColor: 'brand.400',
+                      boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)'
+                    }}
                     required
                   />
                 </Box>
 
                 <Button
                   type="submit"
-                  colorScheme="teal"
+                  bg="accent.500"
+                  color="white"
                   size="lg"
                   loading={isSubmitting}
                   loadingText="Logging in..."
+                  _hover={{ 
+                    bg: 'accent.600',
+                    transform: 'translateY(-2px)',
+                    shadow: 'lg'
+                  }}
+                  _active={{ transform: 'translateY(0)' }}
+                  transition="all 0.2s"
+                  fontWeight="semibold"
                 >
                   Login
                 </Button>
@@ -119,7 +149,16 @@ export default function LoginPage() {
                 <Text fontSize="sm" color="gray.500" textAlign="center">
                   Don&apos;t have an account?{' '}
                   <Link href="/signup">
-                    <Text as="span" color="teal.500" cursor="pointer" _hover={{ textDecoration: 'underline' }}>
+                    <Text 
+                      as="span" 
+                      color="brand.500" 
+                      cursor="pointer" 
+                      _hover={{ 
+                        textDecoration: 'underline',
+                        color: 'brand.600'
+                      }}
+                      fontWeight="medium"
+                    >
                       Sign up here
                     </Text>
                   </Link>
@@ -131,7 +170,14 @@ export default function LoginPage() {
           {/* Back to Home */}
           <Box textAlign="center">
             <Link href="/">
-              <Button variant="ghost" colorScheme="teal">
+              <Button 
+                variant="ghost" 
+                color="secondary.600"
+                _hover={{ 
+                  bg: 'secondary.50',
+                  color: 'secondary.700'
+                }}
+              >
                 ← Back to Home
               </Button>
             </Link>
