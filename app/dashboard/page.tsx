@@ -921,18 +921,16 @@ export default function DashboardPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
-    // Only redirect if not loading and not authenticated
     if (!loading && !isAuthenticated) {
       router.push('/login');
     }
   }, [isAuthenticated, loading, router]);
 
-  // Show loading state while authentication is being determined
   if (loading) {
     return (
       <Box 
         minH="100vh" 
-        bg="gray.50" 
+        bg="#b0c4d4" 
         display="flex" 
         alignItems="center" 
         justifyContent="center"
@@ -942,18 +940,17 @@ export default function DashboardPage() {
             w="12" 
             h="12" 
             border="4px solid" 
-            borderColor="teal.200" 
-            borderTopColor="teal.500" 
+            borderColor="#5dd3e9" 
+            borderTopColor="#0194fe" 
             borderRadius="full" 
             animation="spin 1s linear infinite"
           />
-          <Text color="gray.600">Loading...</Text>
+          <Text color="#012b7e">Loading...</Text>
         </VStack>
       </Box>
     );
   }
 
-  // Don't render if not authenticated (will redirect)
   if (!isAuthenticated) {
     return null;
   }
@@ -985,24 +982,23 @@ export default function DashboardPage() {
 
   const SidebarContent = ({ isMobile = false }) => (
     <VStack gap={2} align="stretch" px={{ base: 3, md: 4 }}>
-      {/* Dashboard Header */}
       <Box mb={{ base: 4, md: 6 }} textAlign="center" px={2}>
         <Heading 
           as="h1" 
           size={{ base: "lg", md: "xl" }}
-          color="white" 
+          color="#011149" 
           mb={3} 
           fontWeight="bold"
-          textShadow="0 2px 4px rgba(0,0,0,0.3)"
+          textShadow="0 2px 4px rgba(0,0,0,0.08)"
         >
           Dashboard
         </Heading>
         <Box h="3px" bg="white" w="80%" mx="auto" borderRadius="full" mb={4} opacity={0.8} />
         <Text fontSize={{ base: "sm", md: "md" }} color="whiteAlpha.900" fontWeight="medium">
           Welcome, {currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : 'User'}
+
         </Text>
       </Box>
-      
       {sidebarItems.map((item) => (
         <SidebarItem
           key={item.id}
@@ -1019,23 +1015,20 @@ export default function DashboardPage() {
   );
 
   return (
-    <Box minH="100vh" bgGradient="linear(to-br, brand.25, secondary.25, accent.25)">
+    <Box minH="100vh" bg="#b0c4d4">
       <Flex minH="calc(100vh - 80px)">
-        {/* Desktop Sidebar */}
         <Box
           w="280px"
-          bgGradient="linear(to-b, brand.500, secondary.500)"
+          bg="#5dd3e9"
           borderRight="1px solid"
-          borderRightColor="whiteAlpha.200"
+          borderRightColor="#c4d3e0"
           py={{ base: 4, md: 6 }}
           shadow="xl"
-          color="white"
+          color="#011149"
           display={{ base: "none", md: "block" }}
         >
           <SidebarContent />
         </Box>
-
-        {/* Mobile Sidebar Drawer */}
         {isSidebarOpen && (
           <Box
             position="fixed"
@@ -1043,20 +1036,20 @@ export default function DashboardPage() {
             left={0}
             h="100vh"
             w="280px"
-            bgGradient="linear(to-b, brand.500, secondary.500)"
-            color="white"
+            bg="#5dd3e9"
+            color="#011149"
             py={6}
             zIndex={1000}
             shadow="2xl"
           >
             <Flex justify="space-between" align="center" mb={4} px={4}>
-              <Heading size="md" color="white">Navigation</Heading>
+              <Heading size="md" color="#011149">Navigation</Heading>
               <IconButton
                 aria-label="Close sidebar"
                 onClick={() => setIsSidebarOpen(false)}
                 variant="ghost"
-                color="white"
-                _hover={{ bg: 'whiteAlpha.200' }}
+                color="#011149"
+                _hover={{ bg: '#c4d3e0' }}
               >
                 <MdClose />
               </IconButton>
@@ -1064,13 +1057,11 @@ export default function DashboardPage() {
             <SidebarContent isMobile={true} />
           </Box>
         )}
-
-        {/* Main Content */}
         <Box 
           flex="1" 
           p={{ base: 4, md: 8 }} 
           overflowY="auto" 
-          bgGradient="linear(to-br, white, brand.50, secondary.50)"
+          bg="#e0eaf2"
           position="relative"
         >
           <IconButton
@@ -1081,15 +1072,14 @@ export default function DashboardPage() {
             top={{ base: 20, md: 24 }}
             left={4}
             zIndex={100}
-            bg="brand.500"
+            bg="#0194fe"
             color="white"
             shadow="lg"
-            _hover={{ bg: 'brand.600' }}
+            _hover={{ bg: '#012b7e' }}
             size="lg"
           >
             <MdMenu />
           </IconButton>
-
           <Container maxW="container.xl" centerContent>
             <Box w="full" maxW="container.lg" mt={{ base: 12, md: 0 }}>
               {renderTabContent()}

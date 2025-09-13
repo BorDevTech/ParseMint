@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -6,6 +7,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Box } from "@chakra-ui/react";
+import { Ubuntu } from 'next/font/google';
+const ubuntu = Ubuntu({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-ubuntu' });
 
 export const metadata: Metadata = {
   title: "ParseMint",
@@ -19,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+  <body className={ubuntu.variable + " antialiased"}>
         <Providers>
           <ThemeProvider>
             <AuthProvider>

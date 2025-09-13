@@ -18,13 +18,10 @@ export default function Home() {
   const { theme } = useTheme();
 
   return (
-    <Box 
-      minH="100vh" 
-      bgGradient={
-        theme === 'light' 
-          ? "linear(to-br, blue.50, teal.50)" 
-          : "linear(to-br, gray.900, gray.800)"
-      }
+    <Box
+      minH="100vh"
+      bg={theme === 'light' ? '#90d8e5' : '#0f2f57'}
+      color={theme === 'light' ? '#011149' : '#e3f1ff'}
     >
       <Container maxW="container.xl" py={{ base: 6, md: 8 }}>
         <Flex direction="column" gap={{ base: 8, md: 12 }}>
@@ -33,15 +30,34 @@ export default function Home() {
             <Heading
               as="h1"
               size={{ base: "2xl", sm: "3xl", md: "3xl" }}
-              className="brand-gradient text-6xl font-extrabold mb-4"
+              className="text-6xl font-extrabold mb-4"
               fontWeight="extrabold"
               fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
+              style={theme === 'light'
+                ? {
+                    background: 'linear-gradient(90deg, #3ed6c5 0%, #00c6fb 100%)',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    color: 'transparent',
+                    WebkitTextFillColor: 'transparent',
+                    WebkitTextStroke: '2px rgba(0,0,0,0.3)',
+                    fontFamily: 'Ubuntu, sans-serif'
+                  }
+                : {
+                    background: 'linear-gradient(90deg, #6bbaff 0%, #4caafc 30%, #598dba 60%, #6bbaff 90%, #4caafc 100%)',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    color: 'transparent',
+                    WebkitTextFillColor: 'transparent',
+                    fontFamily: 'Ubuntu, sans-serif'
+                  }
+              }
             >
               ParseMint
             </Heading>
             <Text 
               fontSize={{ base: "md", sm: "lg", md: "xl" }}
-              color={theme === 'light' ? 'gray.600' : 'gray.300'} 
+              color={theme === 'light' ? '#011149' : '#b0c4d4'}
               maxW="2xl" 
               lineHeight="1.6"
               px={{ base: 4, md: 0 }}
@@ -51,11 +67,12 @@ export default function Home() {
             </Text>
             <Flex direction={{ base: 'column', md: 'row' }} gap={4} w={{ base: "full", sm: "auto" }} px={{ base: 4, md: 0 }}>
               <Link href="/signup">
-                <Button 
-                  colorScheme="brand" 
+                <Button
+                  colorScheme="brand"
                   size={{ base: "md", md: "lg" }}
-                  bg="accent.500"
-                  _hover={{ bg: 'accent.600', transform: 'translateY(-2px)' }}
+                  bg={theme === 'light' ? '#e1ffe9' : 'accent.500'}
+                  color={theme === 'light' ? '#011149' : 'gray.800'}
+                  _hover={{ bg: theme === 'light' ? '#c2fdd9' : 'accent.600', transform: 'translateY(-2px)' }}
                   shadow="lg"
                   _active={{ transform: 'translateY(0)' }}
                   transition="all 0.2s"
@@ -68,7 +85,7 @@ export default function Home() {
                 variant="outline" 
                 size={{ base: "md", md: "lg" }}
                 borderColor="secondary.400"
-                color={theme === 'light' ? 'secondary.600' : 'secondary.300'}
+                color={theme === 'light' ? '#011149' : 'secondary.300'}
                 _hover={{ 
                   bg: theme === 'light' ? 'secondary.50' : 'secondary.900', 
                   borderColor: 'secondary.500',
@@ -85,7 +102,7 @@ export default function Home() {
           {/* Features Section */}
           <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 6, md: 8 }}>
             <Box 
-              bg={theme === 'light' ? 'white' : 'gray.700'} 
+              bg={theme === 'light' ? '#e1ffe9' : '#1a3f73'} 
               p={{ base: 6, md: 8 }} 
               borderRadius="xl" 
               shadow="xl" 
@@ -111,11 +128,11 @@ export default function Home() {
                 </Box>
                 <Heading 
                   size={{ base: "sm", md: "md" }}
-                  color={theme === 'light' ? 'gray.800' : 'gray.100'}
+                  color={theme === 'light' ? '#011149' : 'gray.100'}
                 >
                   Upload Receipts
                 </Heading>
-                <Text color={theme === 'light' ? 'gray.600' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
+                <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
                   Simply snap a photo of your receipt and upload it to our platform.
                   Our advanced parsing technology extracts all the details.
                 </Text>
@@ -123,7 +140,7 @@ export default function Home() {
             </Box>
 
             <Box 
-              bg={theme === 'light' ? 'white' : 'gray.700'} 
+              bg={theme === 'light' ? '#e1ffe9' : '#1a3f73'} 
               p={{ base: 6, md: 8 }} 
               borderRadius="xl" 
               shadow="xl" 
@@ -149,11 +166,11 @@ export default function Home() {
                 </Box>
                 <Heading 
                   size={{ base: "sm", md: "md" }}
-                  color={theme === 'light' ? 'gray.800' : 'gray.100'}
+                  color={theme === 'light' ? '#011149' : 'gray.100'}
                 >
                   Earn Points
                 </Heading>
-                <Text color={theme === 'light' ? 'gray.600' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
+                <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
                   Every purchase earns you valuable points based on the amount spent
                   and participating merchants.
                 </Text>
@@ -161,7 +178,7 @@ export default function Home() {
             </Box>
 
             <Box 
-              bg={theme === 'light' ? 'white' : 'gray.700'} 
+              bg={theme === 'light' ? '#e1ffe9' : '#1a3f73'} 
               p={{ base: 6, md: 8 }} 
               borderRadius="xl" 
               shadow="xl" 
@@ -188,11 +205,11 @@ export default function Home() {
                 </Box>
                 <Heading 
                   size={{ base: "sm", md: "md" }}
-                  color={theme === 'light' ? 'gray.800' : 'gray.100'}
+                  color={theme === 'light' ? '#011149' : 'gray.100'}
                 >
                   Redeem Rewards
                 </Heading>
-                <Text color={theme === 'light' ? 'gray.600' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
+                <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
                   Convert your points into cash, gift cards, or exclusive deals
                   from our partner network.
                 </Text>
@@ -205,9 +222,11 @@ export default function Home() {
             textAlign="center" 
             py={{ base: 8, md: 12 }}
             px={{ base: 6, md: 8 }}
-            bgGradient="linear(to-r, brand.500, secondary.500)"
+            bgGradient={theme === 'light'
+              ? 'linear(to-r, brand.500, secondary.500)'
+              : 'linear(to-r, #6bbaff, #4caafc, #598dba, #1a3f73, #0f2f57)'}
             borderRadius="2xl"
-            color="white"
+            color={theme === 'light' ? '#011149' : '#e3f1ff'}
             shadow="2xl"
           >
             <Flex direction="column" gap={{ base: 4, md: 6 }} align="center">
@@ -216,13 +235,13 @@ export default function Home() {
                 Join thousands of users who are already maximizing their purchase rewards.
               </Text>
               <Link href="/signup">
-                <Button 
-                  bg="highlight.500"
-                  color="gray.800"
+                <Button
+                  bg={theme === 'light' ? '#e1ffe9' : '#4caafc'}
+                  color={theme === 'light' ? '#011149' : '#0f2f57'}
                   size={{ base: "md", md: "lg" }}
                   fontWeight="bold"
-                  _hover={{ 
-                    bg: 'highlight.400',
+                  _hover={{
+                    bg: theme === 'light' ? '#c2fdd9' : '#6bbaff',
                     transform: 'translateY(-2px)',
                     shadow: 'xl'
                   }}

@@ -22,6 +22,7 @@ import UserCheck from '@/data/controls/users/userCheck';
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState<UserSignupData>({
+    fullname: '', // Will be set on submission
     firstName: '',
     lastName: '',
     email: '',
@@ -39,34 +40,41 @@ export default function SignUpPage() {
   const [showSuccess, setShowSuccess] = useState(false);
 
 
+  // Utility function to generate a unique user ID 
+  // Ensures it doesn't already exist (extremely unlikely with nanoid, but just in case) 
+  async function UUIDGen(checkID: (id: string) => Promise<boolean>): Promise<string> {
+    let userId: string;
+    let exists = true;
+    do {
+      userId = `PM-${nanoid(8).toUpperCase()}`; // Example: "PM-V1STGXR8"
+      exists = await checkID(userId);
+    } while (exists);
+    return userId;
+  }
 
-  const handleUserSignup = async (e: React.FormEvent) => {
+
+
+  const handleUserSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    // Generate a unique ID for the user
-    const GenerateUserId = nanoid(8);  // Example: "v1stgxr8" 
-    //reform to uppercase and add PM- prefix
-    const userId = `PM-${GenerateUserId.toUpperCase()}`; // Example: "PM-V1STGXR8"
-    const existingUser = await UserCheck(userId);
-    // Check if user ID already exists (extremely unlikely with nanoid, but just in case)
-    if (existingUser) {
-      console.error("User ID already exists:", userId);
-      setIsSubmitting(false);
-      return;
-    }
+    const userId = await UUIDGen(UserCheck)
+
+
     // Prepare user data with the generated ID
     const userData: UserSignupData = {
       ...formData,
+      fullname: `${formData.firstName} ${formData.lastName}`,
       id: userId,
       account_created_at: new Date().toISOString(),
     };
-
+    if (userId) {
+      console.log("Form Data Submitted:", userData);
+    }
     try {
       await UserCreate(userData);
       setShowSuccess(true);
     } catch (error) {
-      console.error("Error signing up:", error);
+      console.error("Error during signup process: ", error);
     } finally {
       setIsSubmitting(false);
     }
