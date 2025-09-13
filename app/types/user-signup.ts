@@ -3,6 +3,7 @@ export type hearAboutUsOption = "" | "Select an option" | "Search Engine" | "Soc
 
 export interface UserSignupData {
     // Name fields 
+    fullname?: string; // Full name, will be set on submission
     firstName: string;
     lastName: string;
     //Email fields
