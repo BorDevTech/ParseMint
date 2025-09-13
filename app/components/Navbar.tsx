@@ -30,8 +30,8 @@ export function Navbar() {
         right={0}
         h="100vh"
         w="280px"
-        bg={theme === 'light' 
-          ? "linear-gradient(to-br, var(--chakra-colors-brand-500), var(--chakra-colors-secondary-500))" 
+        bg={theme === 'light'
+          ? "linear-gradient(to-br, var(--chakra-colors-brand-500), var(--chakra-colors-secondary-500))"
           : "linear-gradient(to-br, var(--chakra-colors-gray-800), var(--chakra-colors-gray-900))"
         }
         color="white"
@@ -43,22 +43,23 @@ export function Navbar() {
           <Heading size="lg" color="white">Menu</Heading>
           <IconButton
             aria-label="Close menu"
-            icon={<CloseIcon />} 
             onClick={() => setIsMenuOpen(false)}
             variant="ghost"
             color="white"
             size="lg"
             _hover={{ bg: 'whiteAlpha.200' }}
-          />
+          >
+            <CloseIcon />
+          </IconButton>
         </Flex>
-  <VStack spacing={4} align="stretch">
+        <VStack gap={4} align="stretch">
           <ThemeToggle />
           {loading ? (
             <Box h="120px" bg="whiteAlpha.200" borderRadius="md" />
           ) : isAuthenticated ? (
             <>
               <Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>
-                <Button 
+                <Button
                   variant="solid"
                   bg="whiteAlpha.200"
                   color="white"
@@ -70,7 +71,7 @@ export function Navbar() {
                 </Button>
               </Link>
               <Link href="/account" onClick={() => setIsMenuOpen(false)}>
-                <Button 
+                <Button
                   variant="solid"
                   bg="whiteAlpha.200"
                   color="white"
@@ -81,7 +82,7 @@ export function Navbar() {
                   Profile Settings
                 </Button>
               </Link>
-              <Button 
+              <Button
                 onClick={() => { logout(); setIsMenuOpen(false); }}
                 bg="red.500"
                 color="white"
@@ -95,7 +96,7 @@ export function Navbar() {
           ) : (
             <>
               <Link href="/login" onClick={() => setIsMenuOpen(false)}>
-                <Button 
+                <Button
                   variant="solid"
                   bg="whiteAlpha.200"
                   color="white"
@@ -107,7 +108,7 @@ export function Navbar() {
                 </Button>
               </Link>
               <Link href="/signup" onClick={() => setIsMenuOpen(false)}>
-                <Button 
+                <Button
                   bg="white"
                   color="brand.600"
                   w="full"
@@ -125,14 +126,14 @@ export function Navbar() {
   );
 
   return (
-    <Box 
-      bgGradient={theme === 'light' 
-        ? "linear(to-r, brand.500, secondary.500, accent.500)" 
+    <Box
+      bgGradient={theme === 'light'
+        ? "linear(to-r, brand.500, secondary.500, accent.500)"
         : "linear(to-r, gray.800, gray.900, black)"
       }
-      shadow="xl" 
-      position="sticky" 
-      top={0} 
+      shadow="xl"
+      position="sticky"
+      top={0}
       zIndex={10}
       borderBottom="3px"
       borderColor="white"
@@ -141,18 +142,18 @@ export function Navbar() {
         <Flex h={{ base: 16, md: 20 }} alignItems="center" justify="space-between" gap={{ base: 2, md: 8 }}>
           {/* Left spacer - hidden on mobile */}
           <Box flex="1" display={{ base: "none", md: "block" }} />
-          
+
           {/* Center - ParseMint Brand */}
-          <Box 
-            textAlign="center" 
+          <Box
+            textAlign="center"
             bg={theme === 'light' ? '#e1ffe9' : 'white'}
-            px={{ base: 4, md: 8 }} 
-            py={{ base: 2, md: 3 }} 
+            px={{ base: 4, md: 8 }}
+            py={{ base: 2, md: 3 }}
             borderRadius="full"
             shadow="lg"
             border="2px"
             borderColor="white"
-            _hover={{ 
+            _hover={{
               transform: 'scale(1.05)',
               shadow: 'xl'
             }}
@@ -183,14 +184,14 @@ export function Navbar() {
               ) : isAuthenticated ? (
                 <>
                   <Link href="/dashboard">
-                    <Button 
+                    <Button
                       variant="solid"
                       bg="whiteAlpha.200"
                       color="white"
                       borderWidth="2px"
                       borderColor="whiteAlpha.300"
                       size={{ base: "sm", md: "md" }}
-                      _hover={{ 
+                      _hover={{
                         bg: 'whiteAlpha.300',
                         borderColor: 'white',
                         transform: 'translateY(-1px)'
@@ -202,14 +203,14 @@ export function Navbar() {
                     </Button>
                   </Link>
                   <Link href="/account">
-                    <Button 
+                    <Button
                       variant="solid"
                       bg="whiteAlpha.200"
                       color="white"
                       borderWidth="2px"
                       borderColor="whiteAlpha.300"
                       size={{ base: "sm", md: "md" }}
-                      _hover={{ 
+                      _hover={{
                         bg: 'whiteAlpha.300',
                         borderColor: 'white',
                         transform: 'translateY(-1px)'
@@ -220,14 +221,14 @@ export function Navbar() {
                       Profile Settings
                     </Button>
                   </Link>
-                  <Button 
-                    onClick={logout} 
+                  <Button
+                    onClick={logout}
                     bg="red.500"
                     color="white"
                     borderWidth="2px"
                     borderColor="red.400"
                     size={{ base: "sm", md: "md" }}
-                    _hover={{ 
+                    _hover={{
                       bg: 'red.600',
                       borderColor: 'red.300',
                       transform: 'translateY(-1px)'
@@ -242,14 +243,14 @@ export function Navbar() {
               ) : (
                 <>
                   <Link href="/login">
-                    <Button 
+                    <Button
                       variant="solid"
                       bg="whiteAlpha.800"
                       color="#011149"
                       borderWidth="2px"
                       borderColor="whiteAlpha.300"
                       size={{ base: "sm", md: "md" }}
-                      _hover={{ 
+                      _hover={{
                         bg: 'white',
                         borderColor: 'white',
                         transform: 'translateY(-1px)'
@@ -261,13 +262,13 @@ export function Navbar() {
                     </Button>
                   </Link>
                   <Link href="/signup">
-                    <Button 
+                    <Button
                       bg="white"
                       color="#011149"
                       borderWidth="2px"
                       borderColor="white"
                       size={{ base: "sm", md: "md" }}
-                      _hover={{ 
+                      _hover={{
                         bg: 'gray.100',
                         transform: 'translateY(-1px)',
                         shadow: 'md'
