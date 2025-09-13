@@ -995,7 +995,7 @@ export default function DashboardPage() {
         </Heading>
         <Box h="3px" bg="#0194fe" w="80%" mx="auto" borderRadius="full" mb={4} opacity={0.8} />
         <Text fontSize={{ base: "sm", md: "md" }} color="#012b7e" fontWeight="medium">
-          Welcome, {currentUser?.fullName || 'User'}
+          Welcome, {currentUser?.fullname || 'User'}
         </Text>
       </Box>
       {sidebarItems.map((item) => (
