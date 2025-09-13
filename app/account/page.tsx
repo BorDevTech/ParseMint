@@ -154,7 +154,7 @@ export default function AccountPage() {
                   </Text>
                   <Input
                     type="text"
-                    value={profileData.fullName}
+                    value={profileData.firstName}
                     onChange={(e) => { null }}
                     bg="white"
                   />
@@ -201,9 +201,16 @@ export default function AccountPage() {
                 <Box position="relative">
                   <NativeSelectRoot>
                     <NativeSelectField
-                      value={preferences.colorTheme}
-                      onChange={handleThemeChange}
-                      onMouseLeave={handleThemeLeave}
+                      value={""
+                        // preferences.colorTheme 
+                      }
+                      onChange={() => { }
+                        // handleThemeChange
+
+                      }
+                      onMouseLeave={() => { }
+                        // handleThemeLeave
+                      }
                       bg="white"
                       borderColor="gray.200"
                       _hover={{ borderColor: "gray.300" }}
@@ -271,8 +278,12 @@ export default function AccountPage() {
                 </Text>
                 <NativeSelectRoot>
                   <NativeSelectField
-                    value={sessionTimeout}
-                    onChange={(e) => setSessionTimeout(e.target.value as SessionTimeout)}
+                    value={""
+                      // sessionTimeout
+                    }
+                    onChange={() => { }
+                      // (e) => setSessionTimeout(e.target.value as SessionTimeout)
+                    }
                     bg="white"
                     borderColor="gray.200"
                     _hover={{ borderColor: "gray.300" }}
@@ -308,7 +319,9 @@ export default function AccountPage() {
                 <Input
                   type="password"
                   placeholder="Enter new password"
-                  value={newPassword}
+                  value={""
+                    // newPassword
+                  }
                   onChange={(e) => { null }}
                   bg="white"
                 />
@@ -321,7 +334,9 @@ export default function AccountPage() {
                 <Input
                   type="password"
                   placeholder="Confirm new password"
-                  value={confirmPassword}
+                  value={""
+                    // confirmPassword
+                  }
                   onChange={(e) => { null }}
                   bg="white"
                 />
@@ -348,7 +363,9 @@ export default function AccountPage() {
                 <Button
                   colorScheme="teal"
                   size="lg"
-                  loading={isSubmitting}
+                  loading={false
+                    // isSubmitting
+                  }
                   loadingText="Saving Profile..."
                   onClick={handleSubmit}
                   flex="1"
@@ -360,9 +377,13 @@ export default function AccountPage() {
                 <Button
                   colorScheme="blue"
                   size="lg"
-                  loading={isPreferencesSubmitting}
+                  loading={false
+                    // isPreferencesSubmitting
+                  }
                   loadingText="Saving Preferences..."
-                  onClick={handlePreferencesSubmit}
+                  onClick={() => { }
+                    // handlePreferencesSubmit
+                  }
                   flex="1"
                   minW="200px"
                 >
@@ -372,12 +393,16 @@ export default function AccountPage() {
                 <Button
                   colorScheme="purple"
                   size="lg"
-                  loading={isPasswordSubmitting}
+                  loading={false
+                    // isPasswordSubmitting
+                  }
                   loadingText="Updating Password..."
-                  onClick={handlePasswordSubmit}
+                  onClick={() => { }
+                    // handlePasswordSubmit
+                  }
                   flex="1"
                   minW="200px"
-                  disabled={!currentPassword || !newPassword || !confirmPassword}
+                // disabled={""!currentPassword || !newPassword || !confirmPassword}
                 >
                   Update Password
                 </Button>
