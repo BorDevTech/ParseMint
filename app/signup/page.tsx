@@ -38,15 +38,7 @@ export default function SignUpPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => {
-      const updated = { ...prev, [field]: value };
-      if (field === 'firstName' || field === 'lastName') {
-        updated.fullName = `${field === 'firstName' ? value : updated.firstName} ${field === 'lastName' ? value : updated.lastName}`.trim();
-      }
-      return updated;
-    });
-  };
+
 
   const handleUserSignup = async (e: React.FormEvent) => {
     e.preventDefault();
