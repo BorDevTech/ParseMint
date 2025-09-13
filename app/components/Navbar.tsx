@@ -43,16 +43,15 @@ export function Navbar() {
           <Heading size="lg" color="white">Menu</Heading>
           <IconButton
             aria-label="Close menu"
+            icon={<CloseIcon />} 
             onClick={() => setIsMenuOpen(false)}
             variant="ghost"
             color="white"
+            size="lg"
             _hover={{ bg: 'whiteAlpha.200' }}
-          >
-            <CloseIcon />
-          </IconButton>
+          />
         </Flex>
-        
-        <VStack gap={4} align="stretch">
+  <VStack spacing={4} align="stretch">
           <ThemeToggle />
           {loading ? (
             <Box h="120px" bg="whiteAlpha.200" borderRadius="md" />
@@ -146,7 +145,7 @@ export function Navbar() {
           {/* Center - ParseMint Brand */}
           <Box 
             textAlign="center" 
-            bg="white" 
+            bg={theme === 'light' ? '#e1ffe9' : 'white'}
             px={{ base: 4, md: 8 }} 
             py={{ base: 2, md: 3 }} 
             borderRadius="full"
@@ -245,13 +244,13 @@ export function Navbar() {
                   <Link href="/login">
                     <Button 
                       variant="solid"
-                      bg="whiteAlpha.200"
-                      color="white"
+                      bg="whiteAlpha.800"
+                      color="#011149"
                       borderWidth="2px"
                       borderColor="whiteAlpha.300"
                       size={{ base: "sm", md: "md" }}
                       _hover={{ 
-                        bg: 'whiteAlpha.300',
+                        bg: 'white',
                         borderColor: 'white',
                         transform: 'translateY(-1px)'
                       }}
@@ -264,7 +263,7 @@ export function Navbar() {
                   <Link href="/signup">
                     <Button 
                       bg="white"
-                      color="brand.600"
+                      color="#011149"
                       borderWidth="2px"
                       borderColor="white"
                       size={{ base: "sm", md: "md" }}
