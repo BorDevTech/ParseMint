@@ -6,7 +6,7 @@ import { list } from "@vercel/blob";
  * @returns True if the user exists, false otherwise.
  */
 export default async function UserCheck(userId: string) {
-    const blobKey = `Users/${userId}.json`;
+    const blobKey = `/Users/${userId}.json`;
     const token = process.env.BLOB_READ_WRITE_TOKEN;
     
     try {

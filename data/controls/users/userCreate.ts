@@ -12,7 +12,7 @@ import { UserSignupData } from "@/app/types/user-signup";
  * @returns The created blob's URL.
  */
 export default async function UserCreate(user: UserSignupData): Promise<string> {
-  const blobKey = `Users/${user.id}.json`;
+  const blobKey = `/Users/${user.id}.json`;
   const token = process.env.BLOB_READ_WRITE_TOKEN;
   if (!token) throw new Error("Missing Blob token, failed to Create User");
 
