@@ -999,7 +999,7 @@ export default function DashboardPage() {
         </Heading>
         <Box h="3px" bg="white" w="80%" mx="auto" borderRadius="full" mb={4} opacity={0.8} />
         <Text fontSize={{ base: "sm", md: "md" }} color="whiteAlpha.900" fontWeight="medium">
-          Welcome, {currentUser?.fullName || 'User'}
+          Welcome, {currentUser ? `${currentUser.firstName} ${currentUser.lastName}` : 'User'}
         </Text>
       </Box>
       

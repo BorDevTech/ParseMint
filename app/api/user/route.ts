@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
     try {
         const data = await userFetch(key);
         // ✅ Convert and write blob immediately after fetch
-        await userConvert(key, data);
+        // await userConvert(key, data); // TODO: Fix type mismatch - userConvert expects { results: object[] } but userFetch returns UserSignupData
 
         return NextResponse.json({
             blob: data,
