@@ -1,12 +1,12 @@
 import { list } from "@vercel/blob";
-import { User } from "./userCreate";
+import { UserSignupData } from "@/app/types/user-signup";
 
 /**
  * Fetches a user by email from Vercel Blob storage.
  * @param email - The email address to search for.
  * @returns The user data if found.
  */
-export default async function UserFetchByEmail(email: string): Promise<User | null> {
+export default async function UserFetchByEmail(email: string): Promise<UserSignupData | null> {
     const token = process.env.BLOB_READ_WRITE_TOKEN;
     
     try {
@@ -28,7 +28,7 @@ export default async function UserFetchByEmail(email: string): Promise<User | nu
                 });
                 
                 if (response.ok) {
-                    const userData: User = await response.json();
+                    const userData: UserSignupData = await response.json();
                     if (userData.email === email) {
                         console.log(`✅ Found user by email: ${email}`);
                         return userData;

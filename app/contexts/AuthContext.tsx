@@ -3,7 +3,6 @@
 import { createContext, useContext, useState, ReactNode, useEffect, useCallback, useRef } from 'react';
 // Update the import path to match the actual location of user-signup.ts
 import type { UserSignupData } from '../types/user-signup';
-import UserFetchByEmail from '../../data/controls/users/userFetchByEmail';
 
 export type SessionTimeout = 'never' | '3min' | '5min' | '10min';
 
@@ -249,18 +248,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
 
       // Try to fetch user from blob storage (when BLOB_READ_WRITE_TOKEN is available)
-      try {
-        const user = await UserFetchByEmail(email);
-        if (user && user.password === password) {
-          setCurrentUser(user);
-          setIsAuthenticated(true);
-          saveToSession(true, user);
-          setLoading(false);
-          return true;
-        }
-      } catch (blobError) {
-        console.log('Blob storage not available, using test users only', blobError);
-      }
+      // TODO: Implement proper authentication for blob storage users
+      // Currently UserSignupData doesn't include password field for security reasons
+      // try {
+      //   const user = await UserFetchByEmail(email);
+      //   if (user && user.password === password) {
+      //     setCurrentUser(user);
+      //     setIsAuthenticated(true);
+      //     saveToSession(true, user);
+      //     setLoading(false);
+      //     return true;
+      //   }
+      // } catch (blobError) {
+      //   console.log('Blob storage not available, using test users only', blobError);
+      // }
 
       setLoading(false);
       return false;

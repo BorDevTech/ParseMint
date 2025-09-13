@@ -1,12 +1,12 @@
 import { put } from "@vercel/blob";
-import { User } from "./userCreate";
+import { UserSignupData } from "@/app/types/user-signup";
 
 /**
  * Updates an existing user in Vercel Blob storage.
  * @param user - The updated user data.
  * @returns The updated blob's URL.
  */
-export default async function UserUpdate(user: User) {
+export default async function UserUpdate(user: UserSignupData) {
     const blobKey = `users/${user.id}.json`;
     const token = process.env.BLOB_READ_WRITE_TOKEN;
     if (!token) throw new Error("Missing Blob token, failed to Update User");
