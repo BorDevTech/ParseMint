@@ -1,18 +1,19 @@
 'use client';
 
 import { createContext, useContext, useState, ReactNode, useEffect, useCallback, useRef } from 'react';
-import { User } from '../../data/controls/users/userCreate';
+// Update the import path to match the actual location of user-signup.ts
+import type { UserSignupData } from '../types/user-signup';
 import UserFetchByEmail from '../../data/controls/users/userFetchByEmail';
 
 export type SessionTimeout = 'never' | '3min' | '5min' | '10min';
 
 interface AuthContextType {
   isAuthenticated: boolean;
-  currentUser: User | null;
+  currentUser: UserSignupData | null;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
   loading: boolean;
-  updateUserData: (userData: Partial<User>) => void;
+  updateUserData: (userData: Partial<UserSignupData>) => void;
   sessionTimeout: SessionTimeout;
   setSessionTimeout: (timeout: SessionTimeout) => void;
 }
@@ -29,10 +30,10 @@ const SESSION_KEYS = {
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [currentUser, setCurrentUser] = useState<UserSignupData | null>(null);
   const [loading, setLoading] = useState(true);
   const [sessionTimeout, setSessionTimeoutState] = useState<SessionTimeout>('5min');
-  
+
   // Activity tracking refs
   const activityTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastActivityRef = useRef<number>(Date.now());
@@ -41,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const getTimeoutDuration = (timeout: SessionTimeout): number => {
     switch (timeout) {
       case '3min': return 3 * 60 * 1000;
-      case '5min': return 5 * 60 * 1000; 
+      case '5min': return 5 * 60 * 1000;
       case '10min': return 10 * 60 * 1000;
       case 'never': return 0;
       default: return 5 * 60 * 1000;
@@ -59,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Save to session storage whenever auth state changes
-  const saveToSession = useCallback((authenticated: boolean, user: User | null) => {
+  const saveToSession = useCallback((authenticated: boolean, user: UserSignupData | null) => {
     try {
       if (authenticated && user) {
         sessionStorage.setItem(SESSION_KEYS.IS_AUTHENTICATED, 'true');
@@ -107,7 +108,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (!isAuthenticated || sessionTimeout === 'never') return;
 
     const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
-    
+
     const handleActivity = () => {
       trackActivity();
       resetActivityTimeout();
@@ -150,12 +151,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const lastActivity = sessionStorage.getItem(SESSION_KEYS.LAST_ACTIVITY);
       const storedTimeout = sessionStorage.getItem(SESSION_KEYS.SESSION_TIMEOUT) as SessionTimeout;
-      
+
       if (lastActivity && storedTimeout && storedTimeout !== 'never') {
         const lastActivityTime = parseInt(lastActivity);
         const timeoutDuration = getTimeoutDuration(storedTimeout);
         const timeSinceLastActivity = Date.now() - lastActivityTime;
-        
+
         if (timeSinceLastActivity > timeoutDuration) {
           console.log('Session expired due to inactivity');
           return false; // Session expired
@@ -175,7 +176,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const storedAuth = sessionStorage.getItem(SESSION_KEYS.IS_AUTHENTICATED);
         const storedUser = sessionStorage.getItem(SESSION_KEYS.CURRENT_USER);
         const storedTimeout = sessionStorage.getItem(SESSION_KEYS.SESSION_TIMEOUT) as SessionTimeout;
-        
+
         if (storedAuth === 'true' && storedUser) {
           // Check if session has expired
           if (checkSessionExpiry()) {
@@ -207,27 +208,37 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       // For now, we'll use simple client-side authentication
       // In production, this should be done server-side with proper security
-      
+
       // Check for test users first (fallback for development)
-      const testUsers = [
+      type TestUser = UserSignupData & { password: string };
+
+      const testUsers: TestUser[] = [
         {
           id: "test-user-1",
+          firstName: "Test",
+          lastName: "User",
           email: "test@parsemint.com",
-          password: "password123",
-          fullName: "Test User",
           phone: "+1 (555) 123-4567",
-          createdAt: new Date().toISOString(),
+          hearAboutUs: "Friend or Family",
+          account_created_at: new Date().toISOString(),
+          hearAboutUsOther: "",
+          referralCode: "",
+          password: "test123",
         },
         {
-          id: "test-user-2", 
+          id: "test-user-2",
+          firstName: "Demo",
+          lastName: "User",
           email: "demo@parsemint.com",
-          password: "demo123",
-          fullName: "Demo User",
           phone: "+1 (555) 987-6543",
-          createdAt: new Date().toISOString(),
+          hearAboutUs: "Social Media",
+          account_created_at: new Date().toISOString(),
+          hearAboutUsOther: "",
+          referralCode: "",
+          password: "demo123",
         }
       ];
-      
+
       const testUser = testUsers.find(user => user.email === email && user.password === password);
       if (testUser) {
         setCurrentUser(testUser);
@@ -236,7 +247,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setLoading(false);
         return true;
       }
-      
+
       // Try to fetch user from blob storage (when BLOB_READ_WRITE_TOKEN is available)
       try {
         const user = await UserFetchByEmail(email);
@@ -250,7 +261,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } catch (blobError) {
         console.log('Blob storage not available, using test users only', blobError);
       }
-      
+
       setLoading(false);
       return false;
     } catch (loginError) {
@@ -260,7 +271,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const updateUserData = useCallback((userData: Partial<User>) => {
+  const updateUserData = useCallback((userData: Partial<UserSignupData>) => {
     if (currentUser) {
       const updatedUser = { ...currentUser, ...userData };
       setCurrentUser(updatedUser);
@@ -282,12 +293,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [isAuthenticated, resetActivityTimeout]);
 
   return (
-    <AuthContext.Provider value={{ 
-      isAuthenticated, 
-      currentUser, 
-      login, 
-      logout, 
-      loading, 
+    <AuthContext.Provider value={{
+      isAuthenticated,
+      currentUser,
+      login,
+      logout,
+      loading,
       updateUserData,
       sessionTimeout,
       setSessionTimeout
