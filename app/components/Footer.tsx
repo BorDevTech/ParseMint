@@ -18,29 +18,31 @@ export function Footer() {
     <Box 
       bgGradient="linear(to-r, gray.800, gray.900)" 
       color="white" 
-      py={12} 
-      mt="auto"
+      h="100%"
       borderTop="3px"
       borderColor="brand.400"
+      display="flex"
+      alignItems="center"
     >
-      <Container maxW="container.xl">
+      <Container maxW="container.xl" h="100%">
         <Flex 
           direction={{ base: 'column', md: 'row' }} 
           justify="space-between" 
-          align="flex-start"
-          gap={8}
+          align="center"
+          gap={{ base: 2, md: 4 }}
+          h="100%"
         >
           {/* Left side - Company Info */}
-          <VStack align="flex-start" gap={4}>
+          <VStack align={{ base: "center", md: "flex-start" }} gap={1} spacing={0}>
             <Text 
-              fontSize="xl" 
+              fontSize={{ base: "md", md: "lg" }}
               fontWeight="bold"
               bgGradient="linear(to-r, brand.300, secondary.300)"
               bgClip="text"
             >
               ParseMint™
             </Text>
-            <Text color="gray.300" fontSize="md">
+            <Text color="gray.300" fontSize={{ base: "xs", md: "sm" }}>
               Florida, US
             </Text>
             <ChakraLink 
@@ -50,68 +52,67 @@ export function Footer() {
                 color: 'brand.200',
                 textDecoration: 'underline'
               }}
-              fontSize="md"
+              fontSize={{ base: "xs", md: "sm" }}
               transition="all 0.2s"
             >
               parsemint@bordevtech.com
             </ChakraLink>
-            
-            {/* Social Media Icons */}
-            <HStack gap={4} pt={3}>
-              <ChakraLink 
-                href="#" 
-                p={2}
-                borderRadius="md"
-                bg="gray.700"
-                _hover={{ 
-                  bg: 'brand.600',
-                  transform: 'translateY(-2px)',
-                  shadow: 'lg'
-                }}
-                transition="all 0.3s"
-                aria-label="TikTok"
-              >
-                <Icon as={FaTiktok} boxSize={5} />
-              </ChakraLink>
-              <ChakraLink 
-                href="#" 
-                p={2}
-                borderRadius="md"
-                bg="gray.700"
-                _hover={{ 
-                  bg: 'accent.600',
-                  transform: 'translateY(-2px)',
-                  shadow: 'lg'
-                }}
-                transition="all 0.3s"
-                aria-label="Instagram"
-              >
-                <Icon as={FaInstagram} boxSize={5} />
-              </ChakraLink>
-              <ChakraLink 
-                href="#" 
-                p={2}
-                borderRadius="md"
-                bg="gray.700"
-                _hover={{ 
-                  bg: 'secondary.600',
-                  transform: 'translateY(-2px)',
-                  shadow: 'lg'
-                }}
-                transition="all 0.3s"
-                aria-label="Facebook"
-              >
-                <Icon as={FaFacebook} boxSize={5} />
-              </ChakraLink>
-            </HStack>
           </VStack>
+
+          {/* Center - Social Media Icons */}
+          <HStack gap={3} display={{ base: "flex", md: "flex" }}>
+            <ChakraLink 
+              href="#" 
+              p={1}
+              borderRadius="md"
+              bg="gray.700"
+              _hover={{ 
+                bg: 'brand.600',
+                transform: 'translateY(-1px)',
+                shadow: 'md'
+              }}
+              transition="all 0.3s"
+              aria-label="TikTok"
+            >
+              <Icon as={FaTiktok} boxSize={4} />
+            </ChakraLink>
+            <ChakraLink 
+              href="#" 
+              p={1}
+              borderRadius="md"
+              bg="gray.700"
+              _hover={{ 
+                bg: 'accent.600',
+                transform: 'translateY(-1px)',
+                shadow: 'md'
+              }}
+              transition="all 0.3s"
+              aria-label="Instagram"
+            >
+              <Icon as={FaInstagram} boxSize={4} />
+            </ChakraLink>
+            <ChakraLink 
+              href="#" 
+              p={1}
+              borderRadius="md"
+              bg="gray.700"
+              _hover={{ 
+                bg: 'secondary.600',
+                transform: 'translateY(-1px)',
+                shadow: 'md'
+              }}
+              transition="all 0.3s"
+              aria-label="Facebook"
+            >
+              <Icon as={FaFacebook} boxSize={4} />
+            </ChakraLink>
+          </HStack>
 
           {/* Right side - Navigation Links */}
           <HStack 
-            align="flex-start" 
-            gap={8} 
+            gap={{ base: 2, md: 4 }}
             wrap="wrap"
-            direction={{ base: 'column', md: 'row' }}
+            justify={{ base: "center", md: "flex-end" }}
           >
             <ChakraLink 
               as={Link}
@@ -121,23 +122,10 @@ export function Footer() {
                 color: 'brand.300',
                 textDecoration: 'underline'
               }}
-              fontSize="md"
+              fontSize={{ base: "xs", md: "sm" }}
               transition="all 0.2s"
             >
               About
-            </ChakraLink>
-            <ChakraLink 
-              as={Link}
-              href="/careers"
-              color="gray.300" 
-              _hover={{ 
-                color: 'secondary.300',
-                textDecoration: 'underline'
-              }}
-              fontSize="md"
-              transition="all 0.2s"
-            >
-              Careers
             </ChakraLink>
             <ChakraLink 
               as={Link}
@@ -147,23 +135,10 @@ export function Footer() {
                 color: 'accent.300',
                 textDecoration: 'underline'
               }}
-              fontSize="md"
+              fontSize={{ base: "xs", md: "sm" }}
               transition="all 0.2s"
             >
-              Privacy Policy
-            </ChakraLink>
-            <ChakraLink 
-              as={Link}
-              href="/terms"
-              color="gray.300" 
-              _hover={{ 
-                color: 'highlight.300',
-                textDecoration: 'underline'
-              }}
-              fontSize="md"
-              transition="all 0.2s"
-            >
-              Terms of Service
+              Privacy
             </ChakraLink>
             <ChakraLink 
               as={Link}
@@ -173,7 +148,7 @@ export function Footer() {
                 color: 'premium.300',
                 textDecoration: 'underline'
               }}
-              fontSize="md"
+              fontSize={{ base: "xs", md: "sm" }}
               transition="all 0.2s"
             >
               Support

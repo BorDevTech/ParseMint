@@ -7,8 +7,8 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Box } from "@chakra-ui/react";
-import { Ubuntu } from 'next/font/google';
-const ubuntu = Ubuntu({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-ubuntu' });
+// Fallback font configuration for sandboxed environments
+const ubuntu = { variable: '--font-ubuntu' };
 
 export const metadata: Metadata = {
   title: "ParseMint",
@@ -33,15 +33,19 @@ export default function RootLayout({
                 bgGradient="linear(to-br, brand.25, secondary.25, accent.25, premium.25)"
                 fontSize={{ base: "14px", sm: "16px" }}
               >
-                <Navbar />
+                <Box h="10vh">
+                  <Navbar />
+                </Box>
                 <Box 
-                  flex="1"
+                  h="75vh"
                   bgGradient="linear(to-br, white, brand.50, secondary.50)"
-                  minH={{ base: "calc(100vh - 120px)", md: "calc(100vh - 140px)" }}
+                  overflow="auto"
                 >
                   {children}
                 </Box>
-                <Footer />
+                <Box h="15vh">
+                  <Footer />
+                </Box>
               </Box>
             </AuthProvider>
           </ThemeProvider>

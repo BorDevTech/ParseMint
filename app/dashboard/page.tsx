@@ -15,6 +15,7 @@ import {
   NativeSelectField,
   IconButton,
 } from '@chakra-ui/react';
+import { Card } from '@chakra-ui/react';
 import { 
   MdReceipt, 
   MdStars, 
@@ -93,9 +94,8 @@ function OverviewTab() {
 
       {/* Stats Cards */}
       <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} gap={{ base: 4, md: 6 }}>
-        <Box 
+        <Card.Root 
           bgGradient="linear(to-br, brand.400, brand.600)" 
-          p={{ base: 4, md: 6 }} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
@@ -110,25 +110,26 @@ function OverviewTab() {
           }}
           transition="all 0.3s"
         >
-          <Flex align="center" gap={3} mb={4}>
-            <Icon as={MdReceipt} boxSize={{ base: 8, md: 10 }} color="white" />
-            <Box>
-              <Text fontSize={{ base: "xs", md: "sm" }} fontWeight="semibold" color="whiteAlpha.800" textTransform="uppercase" letterSpacing="wide">
-                Receipts Uploaded
-              </Text>
-              <Text fontSize={{ base: "3xl", md: "4xl" }} fontWeight="bold" color="white">
-                24
-              </Text>
-              <Text fontSize={{ base: "xs", md: "sm" }} color="green.200" fontWeight="medium">
-                +3 this week
-              </Text>
-            </Box>
-          </Flex>
-        </Box>
+          <Card.Body p={{ base: 4, md: 6 }}>
+            <Flex align="center" gap={3} mb={4}>
+              <Icon as={MdReceipt} boxSize={{ base: 8, md: 10 }} color="white" />
+              <Box>
+                <Text fontSize={{ base: "xs", md: "sm" }} fontWeight="semibold" color="whiteAlpha.800" textTransform="uppercase" letterSpacing="wide">
+                  Receipts Uploaded
+                </Text>
+                <Text fontSize={{ base: "3xl", md: "4xl" }} fontWeight="bold" color="white">
+                  24
+                </Text>
+                <Text fontSize={{ base: "xs", md: "sm" }} color="green.200" fontWeight="medium">
+                  +3 this week
+                </Text>
+              </Box>
+            </Flex>
+          </Card.Body>
+        </Card.Root>
 
-        <Box 
+        <Card.Root 
           bgGradient="linear(to-br, secondary.400, secondary.600)" 
-          p={{ base: 4, md: 6 }} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
@@ -143,25 +144,26 @@ function OverviewTab() {
           }}
           transition="all 0.3s"
         >
-          <Flex align="center" gap={3} mb={4}>
-            <Icon as={MdStars} boxSize={{ base: 8, md: 10 }} color="white" />
-            <Box>
-              <Text fontSize={{ base: "xs", md: "sm" }} fontWeight="semibold" color="whiteAlpha.800" textTransform="uppercase" letterSpacing="wide">
-                Points Earned
-              </Text>
-              <Text fontSize={{ base: "3xl", md: "4xl" }} fontWeight="bold" color="white">
-                1,247
-              </Text>
-              <Text fontSize={{ base: "xs", md: "sm" }} color="green.200" fontWeight="medium">
-                +156 this week
-              </Text>
-            </Box>
-          </Flex>
-        </Box>
+          <Card.Body p={{ base: 4, md: 6 }}>
+            <Flex align="center" gap={3} mb={4}>
+              <Icon as={MdStars} boxSize={{ base: 8, md: 10 }} color="white" />
+              <Box>
+                <Text fontSize={{ base: "xs", md: "sm" }} fontWeight="semibold" color="whiteAlpha.800" textTransform="uppercase" letterSpacing="wide">
+                  Points Earned
+                </Text>
+                <Text fontSize={{ base: "3xl", md: "4xl" }} fontWeight="bold" color="white">
+                  1,247
+                </Text>
+                <Text fontSize={{ base: "xs", md: "sm" }} color="green.200" fontWeight="medium">
+                  +156 this week
+                </Text>
+              </Box>
+            </Flex>
+          </Card.Body>
+        </Card.Root>
 
-        <Box 
+        <Card.Root 
           bgGradient="linear(to-br, accent.400, accent.600)" 
-          p={{ base: 4, md: 6 }} 
           borderRadius="xl" 
           shadow="xl" 
           borderTop="4px" 
@@ -177,28 +179,29 @@ function OverviewTab() {
           transition="all 0.3s"
           gridColumn={{ base: "1", sm: "1 / -1", md: "auto" }}
         >
-          <Flex align="center" gap={3} mb={4}>
-            <Icon as={MdAccountBalanceWallet} boxSize={{ base: 8, md: 10 }} color="white" />
-            <Box>
-              <Text fontSize={{ base: "xs", md: "sm" }} fontWeight="semibold" color="whiteAlpha.800" textTransform="uppercase" letterSpacing="wide">
-                Cash Value
-              </Text>
-              <Text fontSize={{ base: "3xl", md: "4xl" }} fontWeight="bold" color="white">
-                $12.47
-              </Text>
-              <Text fontSize={{ base: "xs", md: "sm" }} color="green.200" fontWeight="medium">
-                Ready to redeem
-              </Text>
-            </Box>
-          </Flex>
-        </Box>
+          <Card.Body p={{ base: 4, md: 6 }}>
+            <Flex align="center" gap={3} mb={4}>
+              <Icon as={MdAccountBalanceWallet} boxSize={{ base: 8, md: 10 }} color="white" />
+              <Box>
+                <Text fontSize={{ base: "xs", md: "sm" }} fontWeight="semibold" color="whiteAlpha.800" textTransform="uppercase" letterSpacing="wide">
+                  Cash Value
+                </Text>
+                <Text fontSize={{ base: "3xl", md: "4xl" }} fontWeight="bold" color="white">
+                  $12.47
+                </Text>
+                <Text fontSize={{ base: "xs", md: "sm" }} color="green.200" fontWeight="medium">
+                  Ready to redeem
+                </Text>
+              </Box>
+            </Flex>
+          </Card.Body>
+        </Card.Root>
       </SimpleGrid>
 
       {/* Action Cards */}
       <SimpleGrid columns={{ base: 1, md: 2 }} gap={{ base: 4, md: 6 }}>
-        <Box 
+        <Card.Root 
           bg="gradient-to-br from-brand.500 to-brand.600" 
-          p={{ base: 6, md: 8 }} 
           borderRadius="xl" 
           shadow="xl" 
           color="white"
@@ -217,32 +220,33 @@ function OverviewTab() {
             bgSize: '20px 20px',
           }}
         >
-          <Flex direction="column" gap={4} align="center" textAlign="center" position="relative" zIndex={1}>
-            <Icon as={MdReceipt} boxSize={{ base: 10, md: 14 }} color="white" />
-            <Heading as="h3" size={{ base: "md", md: "lg" }} fontWeight="bold">Upload New Receipt</Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} opacity={0.9}>
-              Snap a photo of your latest receipt to earn more points.
-            </Text>
-            <Button 
-              colorScheme="whiteAlpha" 
-              bg="white" 
-              color="brand.600" 
-              size={{ base: "md", md: "lg" }}
-              fontWeight="bold"
-              _hover={{ 
-                transform: 'translateY(-2px)',
-                shadow: 'xl'
-              }}
-              transition="all 0.2s"
-            >
-              Upload Receipt
-            </Button>
-          </Flex>
-        </Box>
+          <Card.Body p={{ base: 6, md: 8 }}>
+            <Flex direction="column" gap={4} align="center" textAlign="center" position="relative" zIndex={1}>
+              <Icon as={MdReceipt} boxSize={{ base: 10, md: 14 }} color="white" />
+              <Heading as="h3" size={{ base: "md", md: "lg" }} fontWeight="bold">Upload New Receipt</Heading>
+              <Text fontSize={{ base: "md", md: "lg" }} opacity={0.9}>
+                Snap a photo of your latest receipt to earn more points.
+              </Text>
+              <Button 
+                colorScheme="whiteAlpha" 
+                bg="white" 
+                color="brand.600" 
+                size={{ base: "md", md: "lg" }}
+                fontWeight="bold"
+                _hover={{ 
+                  transform: 'translateY(-2px)',
+                  shadow: 'xl'
+                }}
+                transition="all 0.2s"
+              >
+                Upload Receipt
+              </Button>
+            </Flex>
+          </Card.Body>
+        </Card.Root>
 
-        <Box 
+        <Card.Root 
           bg="gradient-to-br from-secondary.500 to-secondary.600" 
-          p={{ base: 6, md: 8 }} 
           borderRadius="xl" 
           shadow="xl" 
           color="white"
@@ -261,28 +265,30 @@ function OverviewTab() {
             bgSize: '20px 20px',
           }}
         >
-          <Flex direction="column" gap={4} align="center" textAlign="center" position="relative" zIndex={1}>
-            <Icon as={MdAccountBalanceWallet} boxSize={{ base: 10, md: 14 }} color="white" />
-            <Heading as="h3" size={{ base: "md", md: "lg" }} fontWeight="bold">Redeem Rewards</Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} opacity={0.9}>
-              Convert your points into cash or gift cards.
-            </Text>
-            <Button 
-              colorScheme="whiteAlpha" 
-              bg="white" 
-              color="secondary.600" 
-              size={{ base: "md", md: "lg" }}
-              fontWeight="bold"
-              _hover={{ 
-                transform: 'translateY(-2px)',
-                shadow: 'xl'
-              }}
-              transition="all 0.2s"
-            >
-              View Rewards
-            </Button>
-          </Flex>
-        </Box>
+          <Card.Body p={{ base: 6, md: 8 }}>
+            <Flex direction="column" gap={4} align="center" textAlign="center" position="relative" zIndex={1}>
+              <Icon as={MdAccountBalanceWallet} boxSize={{ base: 10, md: 14 }} color="white" />
+              <Heading as="h3" size={{ base: "md", md: "lg" }} fontWeight="bold">Redeem Rewards</Heading>
+              <Text fontSize={{ base: "md", md: "lg" }} opacity={0.9}>
+                Convert your points into cash or gift cards.
+              </Text>
+              <Button 
+                colorScheme="whiteAlpha" 
+                bg="white" 
+                color="secondary.600" 
+                size={{ base: "md", md: "lg" }}
+                fontWeight="bold"
+                _hover={{ 
+                  transform: 'translateY(-2px)',
+                  shadow: 'xl'
+                }}
+                transition="all 0.2s"
+              >
+                View Rewards
+              </Button>
+            </Flex>
+          </Card.Body>
+        </Card.Root>
       </SimpleGrid>
     </VStack>
   );

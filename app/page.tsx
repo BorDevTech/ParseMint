@@ -10,6 +10,7 @@ import {
   SimpleGrid,
   Flex,
 } from '@chakra-ui/react';
+import { Card } from '@chakra-ui/react';
 import { MdReceipt, MdStars, MdAccountBalanceWallet } from 'react-icons/md';
 import { useTheme } from './contexts/ThemeContext';
 import Link from 'next/link';
@@ -101,12 +102,10 @@ export default function Home() {
 
           {/* Features Section */}
           <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 6, md: 8 }}>
-            <Box 
+            <Card.Root 
               bg={theme === 'light' ? '#e1ffe9' : '#1a3f73'} 
-              p={{ base: 6, md: 8 }} 
               borderRadius="xl" 
               shadow="xl" 
-              h="full"
               border="1px"
               borderColor={theme === 'light' ? 'brand.100' : 'brand.600'}
               _hover={{ 
@@ -116,35 +115,35 @@ export default function Home() {
               }}
               transition="all 0.3s"
             >
-              <Flex direction="column" gap={4} align="center" textAlign="center">
-                <Box
-                  p={3}
-                  borderRadius="full"
-                  bg={theme === 'light' ? 'brand.100' : 'brand.900'}
-                  border="2px"
-                  borderColor="brand.300"
-                >
-                  <Icon as={MdReceipt} boxSize={{ base: 6, md: 8 }} color="brand.600" />
-                </Box>
-                <Heading 
-                  size={{ base: "sm", md: "md" }}
-                  color={theme === 'light' ? '#011149' : 'gray.100'}
-                >
-                  Upload Receipts
-                </Heading>
-                <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
-                  Simply snap a photo of your receipt and upload it to our platform.
-                  Our advanced parsing technology extracts all the details.
-                </Text>
-              </Flex>
-            </Box>
+              <Card.Body p={{ base: 6, md: 8 }}>
+                <Flex direction="column" gap={4} align="center" textAlign="center">
+                  <Box
+                    p={3}
+                    borderRadius="full"
+                    bg={theme === 'light' ? 'brand.100' : 'brand.900'}
+                    border="2px"
+                    borderColor="brand.300"
+                  >
+                    <Icon as={MdReceipt} boxSize={{ base: 6, md: 8 }} color="brand.600" />
+                  </Box>
+                  <Heading 
+                    size={{ base: "sm", md: "md" }}
+                    color={theme === 'light' ? '#011149' : 'gray.100'}
+                  >
+                    Upload Receipts
+                  </Heading>
+                  <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
+                    Simply snap a photo of your receipt and upload it to our platform.
+                    Our advanced parsing technology extracts all the details.
+                  </Text>
+                </Flex>
+              </Card.Body>
+            </Card.Root>
 
-            <Box 
+            <Card.Root 
               bg={theme === 'light' ? '#e1ffe9' : '#1a3f73'} 
-              p={{ base: 6, md: 8 }} 
               borderRadius="xl" 
               shadow="xl" 
-              h="full"
               border="1px"
               borderColor={theme === 'light' ? 'secondary.100' : 'secondary.600'}
               _hover={{ 
@@ -154,35 +153,35 @@ export default function Home() {
               }}
               transition="all 0.3s"
             >
-              <Flex direction="column" gap={4} align="center" textAlign="center">
-                <Box
-                  p={3}
-                  borderRadius="full"
-                  bg={theme === 'light' ? 'secondary.100' : 'secondary.900'}
-                  border="2px"
-                  borderColor="secondary.300"
-                >
-                  <Icon as={MdStars} boxSize={{ base: 6, md: 8 }} color="secondary.600" />
-                </Box>
-                <Heading 
-                  size={{ base: "sm", md: "md" }}
-                  color={theme === 'light' ? '#011149' : 'gray.100'}
-                >
-                  Earn Points
-                </Heading>
-                <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
-                  Every purchase earns you valuable points based on the amount spent
-                  and participating merchants.
-                </Text>
-              </Flex>
-            </Box>
+              <Card.Body p={{ base: 6, md: 8 }}>
+                <Flex direction="column" gap={4} align="center" textAlign="center">
+                  <Box
+                    p={3}
+                    borderRadius="full"
+                    bg={theme === 'light' ? 'secondary.100' : 'secondary.900'}
+                    border="2px"
+                    borderColor="secondary.300"
+                  >
+                    <Icon as={MdStars} boxSize={{ base: 6, md: 8 }} color="secondary.600" />
+                  </Box>
+                  <Heading 
+                    size={{ base: "sm", md: "md" }}
+                    color={theme === 'light' ? '#011149' : 'gray.100'}
+                  >
+                    Earn Points
+                  </Heading>
+                  <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
+                    Every purchase earns you valuable points based on the amount spent
+                    and participating merchants.
+                  </Text>
+                </Flex>
+              </Card.Body>
+            </Card.Root>
 
-            <Box 
+            <Card.Root 
               bg={theme === 'light' ? '#e1ffe9' : '#1a3f73'} 
-              p={{ base: 6, md: 8 }} 
               borderRadius="xl" 
               shadow="xl" 
-              h="full"
               border="1px"
               borderColor={theme === 'light' ? 'premium.100' : 'premium.600'}
               _hover={{ 
@@ -193,35 +192,34 @@ export default function Home() {
               transition="all 0.3s"
               gridColumn={{ base: "1", sm: "1 / -1", md: "auto" }}
             >
-              <Flex direction="column" gap={4} align="center" textAlign="center">
-                <Box
-                  p={3}
-                  borderRadius="full"
-                  bg={theme === 'light' ? 'premium.100' : 'premium.900'}
-                  border="2px"
-                  borderColor="premium.300"
-                >
-                  <Icon as={MdAccountBalanceWallet} boxSize={{ base: 6, md: 8 }} color="premium.600" />
-                </Box>
-                <Heading 
-                  size={{ base: "sm", md: "md" }}
-                  color={theme === 'light' ? '#011149' : 'gray.100'}
-                >
-                  Redeem Rewards
-                </Heading>
-                <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
-                  Convert your points into cash, gift cards, or exclusive deals
-                  from our partner network.
-                </Text>
-              </Flex>
-            </Box>
+              <Card.Body p={{ base: 6, md: 8 }}>
+                <Flex direction="column" gap={4} align="center" textAlign="center">
+                  <Box
+                    p={3}
+                    borderRadius="full"
+                    bg={theme === 'light' ? 'premium.100' : 'premium.900'}
+                    border="2px"
+                    borderColor="premium.300"
+                  >
+                    <Icon as={MdAccountBalanceWallet} boxSize={{ base: 6, md: 8 }} color="premium.600" />
+                  </Box>
+                  <Heading 
+                    size={{ base: "sm", md: "md" }}
+                    color={theme === 'light' ? '#011149' : 'gray.100'}
+                  >
+                    Redeem Rewards
+                  </Heading>
+                  <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
+                    Convert your points into cash, gift cards, or exclusive deals
+                    from our partner network.
+                  </Text>
+                </Flex>
+              </Card.Body>
+            </Card.Root>
           </SimpleGrid>
 
           {/* CTA Section */}
-          <Box 
-            textAlign="center" 
-            py={{ base: 8, md: 12 }}
-            px={{ base: 6, md: 8 }}
+          <Card.Root 
             bgGradient={theme === 'light'
               ? 'linear(to-r, brand.500, secondary.500)'
               : 'linear(to-r, #6bbaff, #4caafc, #598dba, #1a3f73, #0f2f57)'}
@@ -229,32 +227,34 @@ export default function Home() {
             color={theme === 'light' ? '#011149' : '#e3f1ff'}
             shadow="2xl"
           >
-            <Flex direction="column" gap={{ base: 4, md: 6 }} align="center">
-              <Heading size={{ base: "lg", md: "xl" }} fontWeight="bold">Ready to start earning?</Heading>
-              <Text fontSize={{ base: "md", md: "lg" }} opacity={0.9} maxW="2xl">
-                Join thousands of users who are already maximizing their purchase rewards.
-              </Text>
-              <Link href="/signup">
-                <Button
-                  bg={theme === 'light' ? '#e1ffe9' : '#4caafc'}
-                  color={theme === 'light' ? '#011149' : '#0f2f57'}
-                  size={{ base: "md", md: "lg" }}
-                  fontWeight="bold"
-                  _hover={{
-                    bg: theme === 'light' ? '#c2fdd9' : '#6bbaff',
-                    transform: 'translateY(-2px)',
-                    shadow: 'xl'
-                  }}
-                  _active={{ transform: 'translateY(0)' }}
-                  transition="all 0.2s"
-                  px={{ base: 6, md: 8 }}
-                  w={{ base: "full", sm: "auto" }}
-                >
-                  Sign Up Now
-                </Button>
-              </Link>
-            </Flex>
-          </Box>
+            <Card.Body textAlign="center" py={{ base: 8, md: 12 }} px={{ base: 6, md: 8 }}>
+              <Flex direction="column" gap={{ base: 4, md: 6 }} align="center">
+                <Heading size={{ base: "lg", md: "xl" }} fontWeight="bold">Ready to start earning?</Heading>
+                <Text fontSize={{ base: "md", md: "lg" }} opacity={0.9} maxW="2xl">
+                  Join thousands of users who are already maximizing their purchase rewards.
+                </Text>
+                <Link href="/signup">
+                  <Button
+                    bg={theme === 'light' ? '#e1ffe9' : '#4caafc'}
+                    color={theme === 'light' ? '#011149' : '#0f2f57'}
+                    size={{ base: "md", md: "lg" }}
+                    fontWeight="bold"
+                    _hover={{
+                      bg: theme === 'light' ? '#c2fdd9' : '#6bbaff',
+                      transform: 'translateY(-2px)',
+                      shadow: 'xl'
+                    }}
+                    _active={{ transform: 'translateY(0)' }}
+                    transition="all 0.2s"
+                    px={{ base: 6, md: 8 }}
+                    w={{ base: "full", sm: "auto" }}
+                  >
+                    Sign Up Now
+                  </Button>
+                </Link>
+              </Flex>
+            </Card.Body>
+          </Card.Root>
         </Flex>
       </Container>
     </Box>

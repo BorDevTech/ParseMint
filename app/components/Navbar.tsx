@@ -137,9 +137,12 @@ export function Navbar() {
       zIndex={10}
       borderBottom="3px"
       borderColor="white"
+      h="100%"
+      display="flex"
+      alignItems="center"
     >
-      <Container maxW="container.xl">
-        <Flex h={{ base: 16, md: 20 }} alignItems="center" justify="space-between" gap={{ base: 2, md: 8 }}>
+      <Container maxW="container.xl" h="100%">
+        <Flex h="100%" alignItems="center" justify="space-between" gap={{ base: 2, md: 8 }}>
           {/* Left spacer - hidden on mobile */}
           <Box flex="1" display={{ base: "none", md: "block" }} />
 
@@ -147,8 +150,8 @@ export function Navbar() {
           <Box
             textAlign="center"
             bg={theme === 'light' ? '#e1ffe9' : 'white'}
-            px={{ base: 4, md: 8 }}
-            py={{ base: 2, md: 3 }}
+            px={{ base: 3, md: 6 }}
+            py={{ base: 1, md: 2 }}
             borderRadius="full"
             shadow="lg"
             border="2px"
@@ -162,11 +165,11 @@ export function Navbar() {
             <Link href="/">
               <Heading
                 as="h1"
-                size={{ base: "md", md: "xl" }}
+                size={{ base: "sm", md: "lg" }}
                 className="brand-gradient"
                 cursor="pointer"
                 fontWeight="bold"
-                fontSize={{ base: "lg", md: "2xl" }}
+                fontSize={{ base: "md", md: "xl" }}
                 letterSpacing="tight"
               >
                 ParseMint
