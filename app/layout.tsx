@@ -6,7 +6,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import { Box } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
 // Fallback font configuration for sandboxed environments
 const ubuntu = { variable: '--font-ubuntu' };
 
@@ -26,29 +26,28 @@ export default function RootLayout({
         <Providers>
           <ThemeProvider>
             <AuthProvider>
-              <Box 
+              <Grid 
                 h="100vh" 
-                display="grid"
-                gridTemplateRows="10vh 80vh 10vh"
-                gridTemplateAreas={`"navbar" "main" "footer"`}
+                templateRows="5vh 85vh 10vh"
+                templateAreas={`"navbar" "main" "footer"`}
                 bgGradient="linear(to-br, brand.25, secondary.25, accent.25, premium.25)"
                 fontSize={{ base: "14px", sm: "16px" }}
                 overflow="hidden"
               >
-                <Box gridArea="navbar">
+                <GridItem area="navbar">
                   <Navbar />
-                </Box>
-                <Box 
-                  gridArea="main"
+                </GridItem>
+                <GridItem 
+                  area="main"
                   bgGradient="linear(to-br, white, brand.50, secondary.50)"
                   overflow="auto"
                 >
                   {children}
-                </Box>
-                <Box gridArea="footer">
+                </GridItem>
+                <GridItem area="footer">
                   <Footer />
-                </Box>
-              </Box>
+                </GridItem>
+              </Grid>
             </AuthProvider>
           </ThemeProvider>
         </Providers>

@@ -135,14 +135,14 @@ export function Navbar() {
       position="sticky"
       top={0}
       zIndex={10}
-      borderBottom="3px"
+      borderBottom="2px"
       borderColor="white"
       h="100%"
       display="flex"
       alignItems="center"
     >
       <Container maxW="container.xl" h="100%">
-        <Flex h="100%" alignItems="center" justify="space-between" gap={{ base: 2, md: 8 }}>
+        <Flex h="100%" alignItems="center" justify="space-between" gap={{ base: 1, md: 4 }}>
           {/* Left spacer - hidden on mobile */}
           <Box flex="1" display={{ base: "none", md: "block" }} />
 
@@ -150,11 +150,11 @@ export function Navbar() {
           <Box
             textAlign="center"
             bg={theme === 'light' ? '#e1ffe9' : 'white'}
-            px={{ base: 3, md: 6 }}
-            py={{ base: 1, md: 2 }}
+            px={{ base: 2, md: 4 }}
+            py={{ base: 0.5, md: 1 }}
             borderRadius="full"
             shadow="lg"
-            border="2px"
+            border="1px"
             borderColor="white"
             _hover={{
               transform: 'scale(1.05)',
@@ -165,11 +165,11 @@ export function Navbar() {
             <Link href="/">
               <Heading
                 as="h1"
-                size={{ base: "sm", md: "lg" }}
+                size={{ base: "xs", md: "sm" }}
                 className="brand-gradient"
                 cursor="pointer"
                 fontWeight="bold"
-                fontSize={{ base: "md", md: "xl" }}
+                fontSize={{ base: "sm", md: "lg" }}
                 letterSpacing="tight"
               >
                 ParseMint
@@ -180,10 +180,10 @@ export function Navbar() {
           {/* Right - Navigation */}
           <Flex flex="1" justify="flex-end">
             {/* Desktop Navigation */}
-            <HStack gap={{ base: 2, md: 4 }} display={{ base: "none", md: "flex" }}>
+            <HStack gap={{ base: 1, md: 2 }} display={{ base: "none", md: "flex" }}>
               <ThemeToggle />
               {loading ? (
-                <Box w="200px" h="10" bg="whiteAlpha.300" borderRadius="md" />
+                <Box w="180px" h="8" bg="whiteAlpha.300" borderRadius="md" />
               ) : isAuthenticated ? (
                 <>
                   <Link href="/dashboard">
@@ -191,9 +191,9 @@ export function Navbar() {
                       variant="solid"
                       bg="whiteAlpha.200"
                       color="white"
-                      borderWidth="2px"
+                      borderWidth="1px"
                       borderColor="whiteAlpha.300"
-                      size={{ base: "sm", md: "md" }}
+                      size="sm"
                       _hover={{
                         bg: 'whiteAlpha.300',
                         borderColor: 'white',
@@ -210,9 +210,9 @@ export function Navbar() {
                       variant="solid"
                       bg="whiteAlpha.200"
                       color="white"
-                      borderWidth="2px"
+                      borderWidth="1px"
                       borderColor="whiteAlpha.300"
-                      size={{ base: "sm", md: "md" }}
+                      size="sm"
                       _hover={{
                         bg: 'whiteAlpha.300',
                         borderColor: 'white',
@@ -221,16 +221,16 @@ export function Navbar() {
                       fontWeight="semibold"
                       transition="all 0.2s"
                     >
-                      Profile Settings
+                      Profile
                     </Button>
                   </Link>
                   <Button
                     onClick={logout}
                     bg="red.500"
                     color="white"
-                    borderWidth="2px"
+                    borderWidth="1px"
                     borderColor="red.400"
-                    size={{ base: "sm", md: "md" }}
+                    size="sm"
                     _hover={{
                       bg: 'red.600',
                       borderColor: 'red.300',
@@ -250,9 +250,9 @@ export function Navbar() {
                       variant="solid"
                       bg="whiteAlpha.800"
                       color="#011149"
-                      borderWidth="2px"
+                      borderWidth="1px"
                       borderColor="whiteAlpha.300"
-                      size={{ base: "sm", md: "md" }}
+                      size="sm"
                       _hover={{
                         bg: 'white',
                         borderColor: 'white',
@@ -268,9 +268,9 @@ export function Navbar() {
                     <Button
                       bg="white"
                       color="#011149"
-                      borderWidth="2px"
+                      borderWidth="1px"
                       borderColor="white"
-                      size={{ base: "sm", md: "md" }}
+                      size="sm"
                       _hover={{
                         bg: 'gray.100',
                         transform: 'translateY(-1px)',
@@ -293,7 +293,7 @@ export function Navbar() {
               display={{ base: "flex", md: "none" }}
               variant="ghost"
               color="white"
-              size="lg"
+              size="sm"
               _hover={{ bg: 'whiteAlpha.200' }}
             >
               <HamburgerIcon />

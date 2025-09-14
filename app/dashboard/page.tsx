@@ -14,6 +14,8 @@ import {
   NativeSelectRoot,
   NativeSelectField,
   IconButton,
+  Grid,
+  GridItem,
 } from '@chakra-ui/react';
 import { Card } from '@chakra-ui/react';
 import { 
@@ -1021,78 +1023,76 @@ export default function DashboardPage() {
   );
 
   return (
-    <Box minH="100vh" bg="#b0c4d4">
-      <Flex minH="calc(100vh - 80px)">
+    <Grid h="100%" templateColumns={{ base: "1fr", md: "280px 1fr" }} bg="#b0c4d4">
+      <GridItem 
+        bg="#5dd3e9"
+        borderRight="1px solid"
+        borderRightColor="#c4d3e0"
+        py={{ base: 4, md: 6 }}
+        shadow="xl"
+        color="#011149"
+        display={{ base: "none", md: "block" }}
+      >
+        <SidebarContent />
+      </GridItem>
+      
+      {isSidebarOpen && (
         <Box
+          position="fixed"
+          top={0}
+          left={0}
+          h="100vh"
           w="280px"
           bg="#5dd3e9"
-          borderRight="1px solid"
-          borderRightColor="#c4d3e0"
-          py={{ base: 4, md: 6 }}
-          shadow="xl"
           color="#011149"
-          display={{ base: "none", md: "block" }}
+          py={6}
+          zIndex={1000}
+          shadow="2xl"
         >
-          <SidebarContent />
+          <Flex justify="space-between" align="center" mb={4} px={4}>
+            <Heading size="md" color="#011149">Navigation</Heading>
+            <IconButton
+              aria-label="Close sidebar"
+              onClick={() => setIsSidebarOpen(false)}
+              variant="ghost"
+              color="#011149"
+              _hover={{ bg: '#c4d3e0' }}
+            >
+              <MdClose />
+            </IconButton>
+          </Flex>
+          <SidebarContent isMobile={true} />
         </Box>
-        {isSidebarOpen && (
-          <Box
-            position="fixed"
-            top={0}
-            left={0}
-            h="100vh"
-            w="280px"
-            bg="#5dd3e9"
-            color="#011149"
-            py={6}
-            zIndex={1000}
-            shadow="2xl"
-          >
-            <Flex justify="space-between" align="center" mb={4} px={4}>
-              <Heading size="md" color="#011149">Navigation</Heading>
-              <IconButton
-                aria-label="Close sidebar"
-                onClick={() => setIsSidebarOpen(false)}
-                variant="ghost"
-                color="#011149"
-                _hover={{ bg: '#c4d3e0' }}
-              >
-                <MdClose />
-              </IconButton>
-            </Flex>
-            <SidebarContent isMobile={true} />
+      )}
+      
+      <GridItem 
+        p={{ base: 4, md: 6 }} 
+        overflowY="auto" 
+        bg="#e0eaf2"
+        position="relative"
+      >
+        <IconButton
+          aria-label="Open sidebar"
+          onClick={() => setIsSidebarOpen(true)}
+          display={{ base: "flex", md: "none" }}
+          position="fixed"
+          top={{ base: 20, md: 24 }}
+          left={4}
+          zIndex={100}
+          bg="#0194fe"
+          color="white"
+          shadow="lg"
+          _hover={{ bg: '#012b7e' }}
+          size="lg"
+        >
+          <MdMenu />
+        </IconButton>
+        <Container maxW="container.xl" centerContent>
+          <Box w="full" maxW="container.lg" mt={{ base: 12, md: 0 }}>
+            {renderTabContent()}
           </Box>
-        )}
-        <Box 
-          flex="1" 
-          p={{ base: 4, md: 8 }} 
-          overflowY="auto" 
-          bg="#e0eaf2"
-          position="relative"
-        >
-          <IconButton
-            aria-label="Open sidebar"
-            onClick={() => setIsSidebarOpen(true)}
-            display={{ base: "flex", md: "none" }}
-            position="fixed"
-            top={{ base: 20, md: 24 }}
-            left={4}
-            zIndex={100}
-            bg="#0194fe"
-            color="white"
-            shadow="lg"
-            _hover={{ bg: '#012b7e' }}
-            size="lg"
-          >
-            <MdMenu />
-          </IconButton>
-          <Container maxW="container.xl" centerContent>
-            <Box w="full" maxW="container.lg" mt={{ base: 12, md: 0 }}>
-              {renderTabContent()}
-            </Box>
-          </Container>
-        </Box>
-      </Flex>
-    </Box>
+        </Container>
+      </GridItem>
+    </Grid>
   );
 }
