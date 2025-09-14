@@ -106,7 +106,7 @@ export default function AccountPage() {
   }
 
   return (
-    <Box minH="100vh" bg={"blue.500"} position="relative">
+    <Box minH="100vh" className="main-background" position="relative">
       {/* Sticky Skip to Save Button */}
       <Box
         position="fixed"
@@ -118,7 +118,9 @@ export default function AccountPage() {
       >
         <IconButton
           aria-label="Skip to save buttons"
-          colorScheme="teal"
+          bg="primary.600"
+          color="white"
+          _hover={{ bg: "primary.700" }}
           size="lg"
           borderRadius="full"
           shadow="lg"
@@ -132,24 +134,24 @@ export default function AccountPage() {
         <VStack gap={8} align="stretch">
           {/* Header */}
           <Box>
-            <Heading size="xl" color="gray.700" mb={2}>
+            <Heading size="xl" color="secondary.900" mb={2}>
               Account Settings
             </Heading>
-            <Text color="gray.600" fontSize="lg">
+            <Text color="secondary.600" fontSize="lg">
               Manage your profile and preferences.
             </Text>
           </Box>
 
           {/* Profile Section */}
-          <Box bg="white" p={8} borderRadius="lg" shadow="md">
+          <Box className="card-background" p={8} borderRadius="lg" shadow="md">
             <form onSubmit={handleSubmit}>
               <VStack gap={6} align="stretch">
-                <Heading size="md" color="gray.700">
+                <Heading size="md" color="secondary.900">
                   Profile Information
                 </Heading>
 
                 <Box>
-                  <Text fontWeight="medium" mb={2} color="gray.700">
+                  <Text fontWeight="medium" mb={2} color="secondary.900">
                     Full Name
                   </Text>
                   <Input
@@ -161,7 +163,7 @@ export default function AccountPage() {
                 </Box>
 
                 <Box>
-                  <Text fontWeight="medium" mb={2} color="gray.700">
+                  <Text fontWeight="medium" mb={2} color="secondary.900">
                     Email Address
                   </Text>
                   <Input
@@ -173,7 +175,7 @@ export default function AccountPage() {
                 </Box>
 
                 <Box>
-                  <Text fontWeight="medium" mb={2} color="gray.700">
+                  <Text fontWeight="medium" mb={2} color="secondary.900">
                     Phone Number
                   </Text>
                   <Input
@@ -188,14 +190,14 @@ export default function AccountPage() {
           </Box>
 
           {/* Preferences Section */}
-          <Box bg="white" p={8} borderRadius="lg" shadow="md">
+          <Box className="card-background" p={8} borderRadius="lg" shadow="md">
             <VStack gap={6} align="stretch">
-              <Heading size="md" color="gray.700">
+              <Heading size="md" color="secondary.900">
                 Color Theme & Preferences
               </Heading>
 
               <Box>
-                <Text fontWeight="medium" mb={2} color="gray.700">
+                <Text fontWeight="medium" mb={2} color="secondary.900">
                   Color Theme
                 </Text>
                 <Box position="relative">
@@ -212,9 +214,9 @@ export default function AccountPage() {
                         // handleThemeLeave
                       }
                       bg="white"
-                      borderColor="gray.200"
-                      _hover={{ borderColor: "gray.300" }}
-                      _focus={{ borderColor: "teal.500", boxShadow: "0 0 0 1px var(--chakra-colors-teal-500)" }}
+                      borderColor="secondary.200"
+                      _hover={{ borderColor: "secondary.300" }}
+                      _focus={{ borderColor: "primary.500", boxShadow: "0 0 0 1px var(--primary-500)" }}
                     >
                       <option
                         value="teal-blue"
@@ -250,14 +252,14 @@ export default function AccountPage() {
                       right="-2px"
                       bottom="-2px"
                       border="2px solid"
-                      borderColor="blue.400"
+                      borderColor="primary.400"
                       borderRadius="md"
                       pointerEvents="none"
                       zIndex={1}
                     />
                   )}
                 </Box>
-                <Text fontSize="sm" color="gray.500" mt={1}>
+                <Text fontSize="sm" color="secondary.500" mt={1}>
                   Choose your preferred color scheme for the interface. Hover over options to preview.
                 </Text>
               </Box>
@@ -265,15 +267,15 @@ export default function AccountPage() {
           </Box>
 
           {/* Security Section */}
-          <Box bg="white" p={8} borderRadius="lg" shadow="md">
+          <Box className="card-background" p={8} borderRadius="lg" shadow="md">
             <VStack gap={6} align="stretch">
-              <Heading size="md" color="gray.700">
+              <Heading size="md" color="secondary.900">
                 Security Settings
               </Heading>
 
               {/* Session Timeout Settings */}
               <Box>
-                <Text fontWeight="medium" mb={2} color="gray.700">
+                <Text fontWeight="medium" mb={2} color="secondary.900">
                   Auto-Logout After Inactivity
                 </Text>
                 <NativeSelectRoot>
@@ -285,9 +287,9 @@ export default function AccountPage() {
                       // (e) => setSessionTimeout(e.target.value as SessionTimeout)
                     }
                     bg="white"
-                    borderColor="gray.200"
-                    _hover={{ borderColor: "gray.300" }}
-                    _focus={{ borderColor: "teal.500", boxShadow: "0 0 0 1px var(--chakra-colors-teal-500)" }}
+                    borderColor="secondary.200"
+                    _hover={{ borderColor: "secondary.300" }}
+                    _focus={{ borderColor: "primary.500", boxShadow: "0 0 0 1px var(--primary-500)" }}
                   >
                     <option value="3min">3 minutes</option>
                     <option value="5min">5 minutes (Default)</option>
@@ -295,13 +297,13 @@ export default function AccountPage() {
                     <option value="never">Never</option>
                   </NativeSelectField>
                 </NativeSelectRoot>
-                <Text fontSize="sm" color="gray.500" mt={1}>
+                <Text fontSize="sm" color="secondary.500" mt={1}>
                   Automatically log out after the specified period of inactivity. This includes tab switching and background activity.
                 </Text>
               </Box>
 
               <Box>
-                <Text fontWeight="medium" mb={2} color="gray.700">
+                <Text fontWeight="medium" mb={2} color="secondary.900">
                   Current Password
                 </Text>
                 <Input
@@ -313,7 +315,7 @@ export default function AccountPage() {
               </Box>
 
               <Box>
-                <Text fontWeight="medium" mb={2} color="gray.700">
+                <Text fontWeight="medium" mb={2} color="secondary.900">
                   New Password
                 </Text>
                 <Input
@@ -328,7 +330,7 @@ export default function AccountPage() {
               </Box>
 
               <Box>
-                <Text fontWeight="medium" mb={2} color="gray.700">
+                <Text fontWeight="medium" mb={2} color="secondary.900">
                   Confirm New Password
                 </Text>
                 <Input
@@ -347,21 +349,21 @@ export default function AccountPage() {
           {/* Save Buttons Section */}
           <Box
             id="save-buttons-section"
-            bg="white"
+            className="card-background"
             p={8}
             borderRadius="lg"
             shadow="md"
             borderTop="4px solid"
-            borderTopColor="teal.500"
+            borderTopColor="primary.500"
           >
             <VStack gap={6} align="stretch">
-              <Heading size="md" color="gray.700" textAlign="center">
+              <Heading size="md" color="secondary.900" textAlign="center">
                 Save Changes
               </Heading>
 
               <HStack justify="space-between" wrap="wrap" gap={4}>
                 <Button
-                  colorScheme="teal"
+                  className="primary-button"
                   size="lg"
                   loading={false
                     // isSubmitting
@@ -375,7 +377,7 @@ export default function AccountPage() {
                 </Button>
 
                 <Button
-                  colorScheme="blue"
+                  className="primary-button"
                   size="lg"
                   loading={false
                     // isPreferencesSubmitting
@@ -391,7 +393,7 @@ export default function AccountPage() {
                 </Button>
 
                 <Button
-                  colorScheme="purple"
+                  className="accent-button"
                   size="lg"
                   loading={false
                     // isPasswordSubmitting
