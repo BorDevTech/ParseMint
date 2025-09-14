@@ -18,8 +18,9 @@ export function Footer() {
       bgGradient="linear(to-r, gray.800, gray.900)" 
       color="white" 
       h="100%"
-      borderTop="2px"
-      borderColor="brand.400"
+      borderTop="3px"
+      borderColor="brand.500"
+      shadow="lg"
       display="flex"
       alignItems="center"
     >

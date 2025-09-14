@@ -81,7 +81,7 @@ export default function LoginPage() {
                   ParseMint
                 </Heading>
               </Link>
-              <Text color="gray.600" fontSize="sm">
+              <Text color="gray.600" fontSize="md">
                 Welcome back!
               </Text>
             </Box>
@@ -100,11 +100,11 @@ export default function LoginPage() {
             >
               <form onSubmit={handleSubmit}>
                 <VStack gap={3} align="stretch">
-                  <Heading size="sm" textAlign="center" color="gray.800">
+                  <Heading size="md" textAlign="center" color="gray.800">
                     Login to your account
                   </Heading>
                   
-                  <Text fontSize="xs" color="gray.600" textAlign="center">
+                  <Text fontSize="sm" color="gray.600" textAlign="center">
                     Test credentials: test@parsemint.com / password123
                   </Text>
 
@@ -123,7 +123,7 @@ export default function LoginPage() {
                   )}
 
                   <Box>
-                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="xs">
+                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
                       Email Address <Text as="span" color="red.500">*</Text>
                     </Text>
                     <Input
@@ -143,7 +143,7 @@ export default function LoginPage() {
                   </Box>
 
                   <Box>
-                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="xs">
+                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
                       Password <Text as="span" color="red.500">*</Text>
                     </Text>
                     <Input
@@ -181,7 +181,7 @@ export default function LoginPage() {
                     Login
                   </Button>
 
-                  <Text fontSize="xs" color="gray.500" textAlign="center">
+                  <Text fontSize="sm" color="gray.500" textAlign="center">
                     Don&apos;t have an account?{' '}
                     <Link href="/signup">
                       <Text 

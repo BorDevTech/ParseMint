@@ -10,7 +10,8 @@ import {
   VStack,
   IconButton,
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import { MdClose } from 'react-icons/md';
 import Link from 'next/link';
 import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
@@ -49,7 +50,7 @@ export function Navbar() {
             size="lg"
             _hover={{ bg: 'whiteAlpha.200' }}
           >
-            <CloseIcon />
+            <MdClose />
           </IconButton>
         </Flex>
         <VStack gap={4} align="stretch">
@@ -296,7 +297,7 @@ export function Navbar() {
               size="sm"
               _hover={{ bg: 'whiteAlpha.200' }}
             >
-              <HamburgerIcon />
+              <GiHamburgerMenu />
             </IconButton>
           </Flex>
         </Flex>

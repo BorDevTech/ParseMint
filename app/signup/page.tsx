@@ -104,7 +104,7 @@ export default function SignUpPage() {
                   ParseMint
                 </Heading>
               </Link>
-              <Text color="gray.600" fontSize="sm">
+              <Text color="gray.600" fontSize="md">
                 Join the Early Access Program
               </Text>
             </Box>
@@ -121,18 +121,18 @@ export default function SignUpPage() {
             <Box bg="white" p={4} borderRadius="lg" shadow="md" w="100%">
               <form onSubmit={handleUserSignup}>
                 <VStack gap={3} align="stretch">
-                  <Heading size="sm" textAlign="center" color="gray.700">
+                  <Heading size="md" textAlign="center" color="gray.700">
                     Sign up for early access
                   </Heading>
 
-                  <Text color="gray.600" textAlign="center" fontSize="xs">
+                  <Text color="gray.600" textAlign="center" fontSize="sm">
                     Be among the first to experience ParseMint and turn your receipts into rewards!
                   </Text>
 
                   {/* First and Last Name on same line */}
                   <HStack gap={3}>
                     <Box flex="1">
-                      <Text fontWeight="medium" mb={1} color="gray.700" fontSize="xs">
+                      <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
                         First Name <Text as="span" color="red.500">*</Text>
                       </Text>
                       <Input
@@ -146,7 +146,7 @@ export default function SignUpPage() {
                       />
                     </Box>
                     <Box flex="1">
-                      <Text fontWeight="medium" mb={1} color="gray.700" fontSize="xs">
+                      <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
                         Last Name <Text as="span" color="red.500">*</Text>
                       </Text>
                       <Input
@@ -162,7 +162,7 @@ export default function SignUpPage() {
                   </HStack>
 
                   <Box>
-                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="xs">
+                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
                       Email Address <Text as="span" color="red.500">*</Text>
                     </Text>
                     <Input
@@ -177,7 +177,7 @@ export default function SignUpPage() {
                   </Box>
 
                   <Box>
-                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="xs">
+                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
                       Phone Number (Optional)
                     </Text>
                     <Input
@@ -191,7 +191,7 @@ export default function SignUpPage() {
                   </Box>
 
                   <Box>
-                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="xs">
+                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
                       How did you hear about us? <Text as="span" color="red.500">*</Text>
                     </Text>
                     <NativeSelectRoot size="sm">

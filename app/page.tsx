@@ -61,7 +61,7 @@ export default function Home() {
                 ParseMint
               </Heading>
               <Text 
-                fontSize={{ base: "sm", sm: "md", md: "lg" }}
+                fontSize={{ base: "md", sm: "lg", md: "lg" }}
                 color={theme === 'light' ? '#011149' : '#b0c4d4'}
                 maxW="2xl" 
                 lineHeight="1.6"
@@ -122,21 +122,25 @@ export default function Home() {
                 <Card.Body p={{ base: 4, md: 6 }}>
                   <Flex direction="column" gap={3} align="center" textAlign="center">
                     <Box
-                      p={2}
+                      p={3}
                       borderRadius="full"
                       bg={theme === 'light' ? 'brand.100' : 'brand.900'}
                       border="2px"
                       borderColor="brand.300"
+                      boxSize={12}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
                     >
-                      <Icon as={MdReceipt} boxSize={{ base: 5, md: 6 }} color="brand.600" />
+                      <Icon as={MdReceipt} boxSize={{ base: 6, md: 7 }} color="brand.600" />
                     </Box>
                     <Heading 
-                      size={{ base: "xs", md: "sm" }}
+                      size={{ base: "sm", md: "md" }}
                       color={theme === 'light' ? '#011149' : 'gray.100'}
                     >
                       Upload Receipts
                     </Heading>
-                    <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "xs", md: "sm" }}>
+                    <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
                       Simply snap a photo of your receipt and upload it to our platform.
                       Our advanced parsing technology extracts all the details.
                     </Text>
@@ -160,21 +164,25 @@ export default function Home() {
                 <Card.Body p={{ base: 4, md: 6 }}>
                   <Flex direction="column" gap={3} align="center" textAlign="center">
                     <Box
-                      p={2}
+                      p={3}
                       borderRadius="full"
                       bg={theme === 'light' ? 'secondary.100' : 'secondary.900'}
                       border="2px"
                       borderColor="secondary.300"
+                      boxSize={12}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
                     >
-                      <Icon as={MdStars} boxSize={{ base: 5, md: 6 }} color="secondary.600" />
+                      <Icon as={MdStars} boxSize={{ base: 6, md: 7 }} color="secondary.600" />
                     </Box>
                     <Heading 
-                      size={{ base: "xs", md: "sm" }}
+                      size={{ base: "sm", md: "md" }}
                       color={theme === 'light' ? '#011149' : 'gray.100'}
                     >
                       Earn Points
                     </Heading>
-                    <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "xs", md: "sm" }}>
+                    <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
                       Every purchase earns you valuable points based on the amount spent
                       and participating merchants.
                     </Text>
@@ -199,21 +207,25 @@ export default function Home() {
                 <Card.Body p={{ base: 4, md: 6 }}>
                   <Flex direction="column" gap={3} align="center" textAlign="center">
                     <Box
-                      p={2}
+                      p={3}
                       borderRadius="full"
                       bg={theme === 'light' ? 'premium.100' : 'premium.900'}
                       border="2px"
                       borderColor="premium.300"
+                      boxSize={12}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
                     >
-                      <Icon as={MdAccountBalanceWallet} boxSize={{ base: 5, md: 6 }} color="premium.600" />
+                      <Icon as={MdAccountBalanceWallet} boxSize={{ base: 6, md: 7 }} color="premium.600" />
                     </Box>
                     <Heading 
-                      size={{ base: "xs", md: "sm" }}
+                      size={{ base: "sm", md: "md" }}
                       color={theme === 'light' ? '#011149' : 'gray.100'}
                     >
                       Redeem Rewards
                     </Heading>
-                    <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "xs", md: "sm" }}>
+                    <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
                       Convert your points into cash, gift cards, or exclusive deals
                       from our partner network.
                     </Text>
@@ -233,8 +245,8 @@ export default function Home() {
             >
               <Card.Body textAlign="center" py={{ base: 6, md: 8 }} px={{ base: 4, md: 6 }}>
                 <Flex direction="column" gap={{ base: 3, md: 4 }} align="center">
-                  <Heading size={{ base: "md", md: "lg" }} fontWeight="bold">Ready to start earning?</Heading>
-                  <Text fontSize={{ base: "sm", md: "md" }} opacity={0.9} maxW="2xl">
+                  <Heading size={{ base: "lg", md: "xl" }} fontWeight="bold">Ready to start earning?</Heading>
+                  <Text fontSize={{ base: "md", md: "lg" }} opacity={0.9} maxW="2xl">
                     Join thousands of users who are already maximizing their purchase rewards.
                   </Text>
                   <Link href="/signup">

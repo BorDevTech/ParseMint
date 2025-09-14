@@ -31,7 +31,7 @@ export default function RootLayout({
                 templateRows="5vh 85vh 10vh"
                 templateAreas={`"navbar" "main" "footer"`}
                 bgGradient="linear(to-br, brand.25, secondary.25, accent.25, premium.25)"
-                fontSize={{ base: "14px", sm: "16px" }}
+                fontSize={{ base: "16px", sm: "16px", md: "16px" }}
                 overflow="hidden"
               >
                 <GridItem area="navbar">
