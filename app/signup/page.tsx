@@ -86,7 +86,7 @@ export default function SignUpPage() {
 
 
   return (
-    <Grid h="100%" templateRows="1fr auto" bg="gray.50" overflow="auto">
+    <Grid h="100%" templateRows="1fr auto" className="main-background" overflow="auto">
       <GridItem>
         <Container maxW="2xl" py={4} display="flex" alignItems="center" justifyContent="center">
           <VStack gap={3} align="stretch" w="100%" maxW="xl">
@@ -96,15 +96,14 @@ export default function SignUpPage() {
                 <Heading
                   as="h1"
                   size="md"
-                  bgGradient="linear(to-r, teal.400, blue.500)"
-                  bgClip="text"
+                  color="primary.700"
                   mb={1}
                   cursor="pointer"
                 >
                   ParseMint
                 </Heading>
               </Link>
-              <Text color="gray.600" fontSize="md">
+              <Text color="secondary.600" fontSize="md">
                 Join the Early Access Program
               </Text>
             </Box>
@@ -118,21 +117,21 @@ export default function SignUpPage() {
             )}
 
             {/* Form Card */}
-            <Box bg="white" p={4} borderRadius="lg" shadow="md" w="100%">
+            <Box className="card-background" p={4} borderRadius="lg" w="100%">
               <form onSubmit={handleUserSignup}>
                 <VStack gap={3} align="stretch">
-                  <Heading size="md" textAlign="center" color="gray.700">
+                  <Heading size="md" textAlign="center" color="secondary.800">
                     Sign up for early access
                   </Heading>
 
-                  <Text color="gray.600" textAlign="center" fontSize="sm">
+                  <Text color="secondary.600" textAlign="center" fontSize="sm">
                     Be among the first to experience ParseMint and turn your receipts into rewards!
                   </Text>
 
                   {/* First and Last Name on same line */}
                   <HStack gap={3}>
                     <Box flex="1">
-                      <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
+                      <Text fontWeight="medium" mb={1} color="secondary.700" fontSize="sm">
                         First Name <Text as="span" color="red.500">*</Text>
                       </Text>
                       <Input
@@ -141,12 +140,17 @@ export default function SignUpPage() {
                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                         placeholder="Enter your first name"
                         bg="white"
+                        borderColor="secondary.300"
                         size="sm"
+                        _focus={{ 
+                          borderColor: 'primary.400',
+                          boxShadow: '0 0 0 1px var(--primary-400)'
+                        }}
                         required
                       />
                     </Box>
                     <Box flex="1">
-                      <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
+                      <Text fontWeight="medium" mb={1} color="secondary.700" fontSize="sm">
                         Last Name <Text as="span" color="red.500">*</Text>
                       </Text>
                       <Input
@@ -155,14 +159,19 @@ export default function SignUpPage() {
                         onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                         placeholder="Enter your last name"
                         bg="white"
+                        borderColor="secondary.300"
                         size="sm"
+                        _focus={{ 
+                          borderColor: 'primary.400',
+                          boxShadow: '0 0 0 1px var(--primary-400)'
+                        }}
                         required
                       />
                     </Box>
                   </HStack>
 
                   <Box>
-                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
+                    <Text fontWeight="medium" mb={1} color="secondary.700" fontSize="sm">
                       Email Address <Text as="span" color="red.500">*</Text>
                     </Text>
                     <Input
@@ -240,7 +249,7 @@ export default function SignUpPage() {
                   </Box>
                   <Button
                     type="submit"
-                    colorScheme="teal"
+                    className="primary-button"
                     size="sm"
                     loading={isSubmitting}
                     loadingText="Signing up..."
@@ -248,7 +257,7 @@ export default function SignUpPage() {
                     Sign Up for Early Access
                   </Button>
 
-                  <Text fontSize="xs" color="gray.500" textAlign="center">
+                  <Text fontSize="xs" color="secondary.500" textAlign="center">
                     By signing up, you agree to receive updates about ParseMint.
                     We respect your privacy and won&apos;t spam you.
                   </Text>
@@ -259,7 +268,7 @@ export default function SignUpPage() {
             {/* Back to Home */}
             <Box textAlign="center">
               <Link href="/">
-                <Button variant="ghost" colorScheme="teal" size="xs">
+                <Button className="secondary-button" size="xs">
                   ← Back to Home
                 </Button>
               </Link>

@@ -2,59 +2,49 @@
 
 import { createSystem, defaultConfig } from '@chakra-ui/react';
 
-// Enhanced color palette using standard Chakra UI color extensions
+// Clean, professional theme with high contrast and accessibility
 const customConfig = {
   theme: {
     tokens: {
       colors: {
-        // Custom blue palette (brand)
-        brand: {
-          50: { value: '#c4d3e0' },
-          100: { value: '#5dd3e9' },
-          200: { value: '#0194fe' },
-          300: { value: '#012b7e' },
-          400: { value: '#011149' },
+        // Primary brand colors - professional blue/teal palette
+        primary: {
+          50: { value: '#f0f9ff' },
+          100: { value: '#e0f2fe' },
+          200: { value: '#bae6fd' },
+          300: { value: '#7dd3fc' },
+          400: { value: '#38bdf8' },
+          500: { value: '#0ea5e9' },
+          600: { value: '#0284c7' },
+          700: { value: '#0369a1' },
+          800: { value: '#075985' },
+          900: { value: '#0c4a6e' },
         },
-        // Accent palette (deep blue)
-        accent: {
-          50: { value: '#c4d3e0' },
-          100: { value: '#5dd3e9' },
-          200: { value: '#0194fe' },
-          300: { value: '#012b7e' },
-          400: { value: '#011149' },
-        },
-        // Secondary palette (light blue)
+        // Secondary colors - complementary gray/slate
         secondary: {
-          50: { value: '#c4d3e0' },
-          100: { value: '#5dd3e9' },
-          200: { value: '#0194fe' },
-          300: { value: '#012b7e' },
-          400: { value: '#011149' },
+          50: { value: '#f8fafc' },
+          100: { value: '#f1f5f9' },
+          200: { value: '#e2e8f0' },
+          300: { value: '#cbd5e1' },
+          400: { value: '#94a3b8' },
+          500: { value: '#64748b' },
+          600: { value: '#475569' },
+          700: { value: '#334155' },
+          800: { value: '#1e293b' },
+          900: { value: '#0f172a' },
         },
-        // Keep highlight and premium as fallback for now
-        highlight: {
-          50: { value: '#fefce8' },
-          100: { value: '#fef9c3' },
-          200: { value: '#fef08a' },
-          300: { value: '#fde047' },
-          400: { value: '#facc15' },
-          500: { value: '#eab308' },
-          600: { value: '#ca8a04' },
-          700: { value: '#a16207' },
-          800: { value: '#854d0e' },
-          900: { value: '#713f12' },
-        },
-        premium: {
-          50: { value: '#faf5ff' },
-          100: { value: '#f3e8ff' },
-          200: { value: '#e9d5ff' },
-          300: { value: '#d8b4fe' },
-          400: { value: '#c084fc' },
-          500: { value: '#a855f7' },
-          600: { value: '#9333ea' },
-          700: { value: '#7c3aed' },
-          800: { value: '#6b21a8' },
-          900: { value: '#581c87' },
+        // Accent colors - for highlights and CTAs
+        accent: {
+          50: { value: '#f0fdf4' },
+          100: { value: '#dcfce7' },
+          200: { value: '#bbf7d0' },
+          300: { value: '#86efac' },
+          400: { value: '#4ade80' },
+          500: { value: '#22c55e' },
+          600: { value: '#16a34a' },
+          700: { value: '#15803d' },
+          800: { value: '#166534' },
+          900: { value: '#14532d' },
         },
       },
     },

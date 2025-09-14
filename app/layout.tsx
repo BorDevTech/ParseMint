@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Grid, GridItem } from "@chakra-ui/react";
+
 // Fallback font configuration for sandboxed environments
 const ubuntu = { variable: '--font-ubuntu' };
 
@@ -22,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-  <body className={ubuntu.variable + " antialiased"}>
+      <body className={ubuntu.variable + " antialiased"}>
         <Providers>
           <ThemeProvider>
             <AuthProvider>
@@ -30,7 +31,7 @@ export default function RootLayout({
                 h="100vh" 
                 templateRows="5vh 85vh 10vh"
                 templateAreas={`"navbar" "main" "footer"`}
-                bgGradient="linear(to-br, brand.25, secondary.25, accent.25, premium.25)"
+                className="main-background"
                 fontSize={{ base: "16px", sm: "16px", md: "16px" }}
                 overflow="hidden"
               >
@@ -39,7 +40,7 @@ export default function RootLayout({
                 </GridItem>
                 <GridItem 
                   area="main"
-                  bgGradient="linear(to-br, white, brand.50, secondary.50)"
+                  className="main-background"
                   overflow="auto"
                 >
                   {children}

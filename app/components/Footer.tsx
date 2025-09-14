@@ -15,11 +15,9 @@ import { FaTiktok, FaInstagram, FaFacebook } from 'react-icons/fa';
 export function Footer() {
   return (
     <Box 
-      bgGradient="linear(to-r, gray.800, gray.900)" 
-      color="white" 
+      className="navbar-footer-theme"
       h="100%"
-      borderTop="3px"
-      borderColor="brand.500"
+      borderTop="2px"
       shadow="lg"
       display="flex"
       alignItems="center"
@@ -37,16 +35,15 @@ export function Footer() {
             <Text 
               fontSize="sm"
               fontWeight="bold"
-              bgGradient="linear(to-r, brand.300, secondary.300)"
-              bgClip="text"
+              color="primary.300"
             >
               ParseMint™
             </Text>
             <ChakraLink 
               href="mailto:parsemint@bordevtech.com" 
-              color="brand.300"
+              color="primary.200"
               _hover={{ 
-                color: 'brand.200',
+                color: 'primary.100',
                 textDecoration: 'underline'
               }}
               fontSize="xs"
@@ -63,9 +60,9 @@ export function Footer() {
               href="#" 
               p={1}
               borderRadius="md"
-              bg="gray.700"
+              bg="whiteAlpha.200"
               _hover={{ 
-                bg: 'brand.600',
+                bg: 'primary.600',
                 transform: 'translateY(-1px)',
                 shadow: 'md'
               }}
@@ -78,7 +75,7 @@ export function Footer() {
               href="#" 
               p={1}
               borderRadius="md"
-              bg="gray.700"
+              bg="whiteAlpha.200"
               _hover={{ 
                 bg: 'accent.600',
                 transform: 'translateY(-1px)',
@@ -93,7 +90,7 @@ export function Footer() {
               href="#" 
               p={1}
               borderRadius="md"
-              bg="gray.700"
+              bg="whiteAlpha.200"
               _hover={{ 
                 bg: 'secondary.600',
                 transform: 'translateY(-1px)',
@@ -111,9 +108,9 @@ export function Footer() {
             <ChakraLink 
               as={Link}
               href="/about"
-              color="gray.300" 
+              color="gray.200" 
               _hover={{ 
-                color: 'brand.300',
+                color: 'primary.200',
                 textDecoration: 'underline'
               }}
               fontSize="xs"
@@ -124,9 +121,9 @@ export function Footer() {
             <ChakraLink 
               as={Link}
               href="/privacy"
-              color="gray.300" 
+              color="gray.200" 
               _hover={{ 
-                color: 'accent.300',
+                color: 'accent.200',
                 textDecoration: 'underline'
               }}
               fontSize="xs"
@@ -137,9 +134,9 @@ export function Footer() {
             <ChakraLink 
               as={Link}
               href="/support"
-              color="gray.300" 
+              color="gray.200" 
               _hover={{ 
-                color: 'premium.300',
+                color: 'primary.200',
                 textDecoration: 'underline'
               }}
               fontSize="xs"

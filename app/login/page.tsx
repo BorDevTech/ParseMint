@@ -59,7 +59,7 @@ export default function LoginPage() {
   };
 
   return (
-    <Grid h="100%" templateRows="1fr auto" bgGradient="linear(to-br, brand.50, secondary.50)" overflow="auto">
+    <Grid h="100%" templateRows="1fr auto" className="main-background" overflow="auto">
       <GridItem>
         <Container maxW="lg" py={4} display="flex" alignItems="center" justifyContent="center">
           <VStack gap={3} align="stretch" w="100%">
@@ -69,31 +69,27 @@ export default function LoginPage() {
                 <Heading
                   as="h1"
                   size="md"
-                  bgGradient="linear(to-r, brand.500, secondary.500)"
-                  bgClip="text"
+                  color="primary.700"
                   mb={1}
                   cursor="pointer"
                   _hover={{ 
-                    bgGradient: 'linear(to-r, brand.600, secondary.600)'
+                    color: 'primary.800'
                   }}
                   transition="all 0.2s"
                 >
                   ParseMint
                 </Heading>
               </Link>
-              <Text color="gray.600" fontSize="md">
+              <Text color="secondary.600" fontSize="md">
                 Welcome back!
               </Text>
             </Box>
 
             {/* Login Form */}
             <Box 
-              bg="white" 
+              className="card-background"
               p={4} 
               borderRadius="xl" 
-              shadow="xl"
-              border="1px"
-              borderColor="brand.100"
               w="100%"
               maxW="sm"
               mx="auto"
@@ -123,7 +119,7 @@ export default function LoginPage() {
                   )}
 
                   <Box>
-                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
+                    <Text fontWeight="medium" mb={1} color="secondary.700" fontSize="sm">
                       Email Address <Text as="span" color="red.500">*</Text>
                     </Text>
                     <Input
@@ -132,18 +128,18 @@ export default function LoginPage() {
                       onChange={(e) => handleInputChange('email', e.target.value)}
                       placeholder="Enter your email address"
                       bg="white"
-                      borderColor="gray.300"
+                      borderColor="secondary.300"
                       size="sm"
                       _focus={{ 
-                        borderColor: 'brand.400',
-                        boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)'
+                        borderColor: 'primary.400',
+                        boxShadow: '0 0 0 1px var(--primary-400)'
                       }}
                       required
                     />
                   </Box>
 
                   <Box>
-                    <Text fontWeight="medium" mb={1} color="gray.700" fontSize="sm">
+                    <Text fontWeight="medium" mb={1} color="secondary.700" fontSize="sm">
                       Password <Text as="span" color="red.500">*</Text>
                     </Text>
                     <Input
@@ -152,11 +148,11 @@ export default function LoginPage() {
                       onChange={(e) => handleInputChange('password', e.target.value)}
                       placeholder="Enter your password"
                       bg="white"
-                      borderColor="gray.300"
+                      borderColor="secondary.300"
                       size="sm"
                       _focus={{ 
-                        borderColor: 'brand.400',
-                        boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)'
+                        borderColor: 'primary.400',
+                        boxShadow: '0 0 0 1px var(--primary-400)'
                       }}
                       required
                     />
@@ -164,18 +160,10 @@ export default function LoginPage() {
 
                   <Button
                     type="submit"
-                    bg="accent.500"
-                    color="white"
+                    className="primary-button"
                     size="sm"
                     loading={isSubmitting}
                     loadingText="Logging in..."
-                    _hover={{ 
-                      bg: 'accent.600',
-                      transform: 'translateY(-2px)',
-                      shadow: 'lg'
-                    }}
-                    _active={{ transform: 'translateY(0)' }}
-                    transition="all 0.2s"
                     fontWeight="semibold"
                   >
                     Login

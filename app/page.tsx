@@ -24,8 +24,7 @@ export default function Home() {
     <Grid 
       h="100%" 
       templateRows="1fr auto" 
-      bg={theme === 'light' ? '#90d8e5' : '#0f2f57'}
-      color={theme === 'light' ? '#011149' : '#e3f1ff'}
+      className="main-background"
     >
       <GridItem>
         <Container maxW="container.xl" py={{ base: 4, md: 6 }}>
@@ -34,35 +33,16 @@ export default function Home() {
             <Flex direction="column" gap={{ base: 3, md: 4 }} textAlign="center" align="center">
               <Heading
                 as="h1"
-                size={{ base: "2xl", sm: "3xl", md: "3xl" }}
-                className="text-6xl font-extrabold mb-4"
-                fontWeight="extrabold"
+                size={{ base: "2xl", sm: "3xl", md: "4xl" }}
+                fontWeight="bold"
                 fontSize={{ base: "2xl", sm: "3xl", md: "5xl" }}
-                style={theme === 'light'
-                  ? {
-                      background: 'linear-gradient(90deg, #3ed6c5 0%, #00c6fb 100%)',
-                      WebkitBackgroundClip: 'text',
-                      backgroundClip: 'text',
-                      color: 'transparent',
-                      WebkitTextFillColor: 'transparent',
-                      WebkitTextStroke: '2px rgba(0,0,0,0.3)',
-                      fontFamily: 'Ubuntu, sans-serif'
-                    }
-                  : {
-                      background: 'linear-gradient(90deg, #6bbaff 0%, #4caafc 30%, #598dba 60%, #6bbaff 90%, #4caafc 100%)',
-                      WebkitBackgroundClip: 'text',
-                      backgroundClip: 'text',
-                      color: 'transparent',
-                      WebkitTextFillColor: 'transparent',
-                      fontFamily: 'Ubuntu, sans-serif'
-                    }
-                }
+                color="primary.700"
               >
                 ParseMint
               </Heading>
               <Text 
                 fontSize={{ base: "md", sm: "lg", md: "lg" }}
-                color={theme === 'light' ? '#011149' : '#b0c4d4'}
+                color="secondary.700"
                 maxW="2xl" 
                 lineHeight="1.6"
                 px={{ base: 4, md: 0 }}
@@ -73,30 +53,17 @@ export default function Home() {
               <Flex direction={{ base: 'column', md: 'row' }} gap={3} w={{ base: "full", sm: "auto" }} px={{ base: 4, md: 0 }}>
                 <Link href="/signup">
                   <Button
-                    colorScheme="brand"
+                    className="primary-button"
                     size={{ base: "sm", md: "md" }}
-                    bg={theme === 'light' ? '#e1ffe9' : 'accent.500'}
-                    color={theme === 'light' ? '#011149' : 'gray.800'}
-                    _hover={{ bg: theme === 'light' ? '#c2fdd9' : 'accent.600', transform: 'translateY(-2px)' }}
                     shadow="lg"
-                    _active={{ transform: 'translateY(0)' }}
-                    transition="all 0.2s"
                     w={{ base: "full", md: "auto" }}
                   >
                     Get Started
                   </Button>
                 </Link>
                 <Button 
-                  variant="outline" 
+                  className="secondary-button"
                   size={{ base: "sm", md: "md" }}
-                  borderColor="secondary.400"
-                  color={theme === 'light' ? '#011149' : 'secondary.300'}
-                  _hover={{ 
-                    bg: theme === 'light' ? 'secondary.50' : 'secondary.900', 
-                    borderColor: 'secondary.500',
-                    transform: 'translateY(-2px)' 
-                  }}
-                  transition="all 0.2s"
                   w={{ base: "full", md: "auto" }}
                 >
                   Learn More
@@ -107,15 +74,12 @@ export default function Home() {
             {/* Features Section */}
             <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: 4, md: 6 }}>
               <Card.Root 
-                bg={theme === 'light' ? '#e1ffe9' : '#1a3f73'} 
+                className="card-background"
                 borderRadius="xl" 
-                shadow="xl" 
-                border="1px"
-                borderColor={theme === 'light' ? 'brand.100' : 'brand.600'}
                 _hover={{ 
                   transform: 'translateY(-4px)',
-                  shadow: '2xl',
-                  borderColor: 'brand.300'
+                  shadow: 'xl',
+                  borderColor: 'primary.300'
                 }}
                 transition="all 0.3s"
               >
@@ -124,23 +88,23 @@ export default function Home() {
                     <Box
                       p={3}
                       borderRadius="full"
-                      bg={theme === 'light' ? 'brand.100' : 'brand.900'}
+                      bg="primary.100"
                       border="2px"
-                      borderColor="brand.300"
+                      borderColor="primary.300"
                       boxSize={12}
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                     >
-                      <Icon as={MdReceipt} boxSize={{ base: 6, md: 7 }} color="brand.600" />
+                      <Icon as={MdReceipt} boxSize={{ base: 6, md: 7 }} color="primary.600" />
                     </Box>
                     <Heading 
                       size={{ base: "sm", md: "md" }}
-                      color={theme === 'light' ? '#011149' : 'gray.100'}
+                      color="secondary.800"
                     >
                       Upload Receipts
                     </Heading>
-                    <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
+                    <Text color="secondary.600" fontSize={{ base: "sm", md: "md" }}>
                       Simply snap a photo of your receipt and upload it to our platform.
                       Our advanced parsing technology extracts all the details.
                     </Text>
@@ -149,15 +113,12 @@ export default function Home() {
               </Card.Root>
 
               <Card.Root 
-                bg={theme === 'light' ? '#e1ffe9' : '#1a3f73'} 
+                className="card-background"
                 borderRadius="xl" 
-                shadow="xl" 
-                border="1px"
-                borderColor={theme === 'light' ? 'secondary.100' : 'secondary.600'}
                 _hover={{ 
                   transform: 'translateY(-4px)',
-                  shadow: '2xl',
-                  borderColor: 'secondary.300'
+                  shadow: 'xl',
+                  borderColor: 'accent.300'
                 }}
                 transition="all 0.3s"
               >
@@ -166,23 +127,23 @@ export default function Home() {
                     <Box
                       p={3}
                       borderRadius="full"
-                      bg={theme === 'light' ? 'secondary.100' : 'secondary.900'}
+                      bg="accent.100"
                       border="2px"
-                      borderColor="secondary.300"
+                      borderColor="accent.300"
                       boxSize={12}
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                     >
-                      <Icon as={MdStars} boxSize={{ base: 6, md: 7 }} color="secondary.600" />
+                      <Icon as={MdStars} boxSize={{ base: 6, md: 7 }} color="accent.600" />
                     </Box>
                     <Heading 
                       size={{ base: "sm", md: "md" }}
-                      color={theme === 'light' ? '#011149' : 'gray.100'}
+                      color="secondary.800"
                     >
                       Earn Points
                     </Heading>
-                    <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
+                    <Text color="secondary.600" fontSize={{ base: "sm", md: "md" }}>
                       Every purchase earns you valuable points based on the amount spent
                       and participating merchants.
                     </Text>
@@ -191,15 +152,12 @@ export default function Home() {
               </Card.Root>
 
               <Card.Root 
-                bg={theme === 'light' ? '#e1ffe9' : '#1a3f73'} 
+                className="card-background"
                 borderRadius="xl" 
-                shadow="xl" 
-                border="1px"
-                borderColor={theme === 'light' ? 'premium.100' : 'premium.600'}
                 _hover={{ 
                   transform: 'translateY(-4px)',
-                  shadow: '2xl',
-                  borderColor: 'premium.300'
+                  shadow: 'xl',
+                  borderColor: 'primary.300'
                 }}
                 transition="all 0.3s"
                 gridColumn={{ base: "1", sm: "1 / -1", md: "auto" }}
@@ -209,23 +167,23 @@ export default function Home() {
                     <Box
                       p={3}
                       borderRadius="full"
-                      bg={theme === 'light' ? 'premium.100' : 'premium.900'}
+                      bg="primary.100"
                       border="2px"
-                      borderColor="premium.300"
+                      borderColor="primary.300"
                       boxSize={12}
                       display="flex"
                       alignItems="center"
                       justifyContent="center"
                     >
-                      <Icon as={MdAccountBalanceWallet} boxSize={{ base: 6, md: 7 }} color="premium.600" />
+                      <Icon as={MdAccountBalanceWallet} boxSize={{ base: 6, md: 7 }} color="primary.600" />
                     </Box>
                     <Heading 
                       size={{ base: "sm", md: "md" }}
-                      color={theme === 'light' ? '#011149' : 'gray.100'}
+                      color="secondary.800"
                     >
                       Redeem Rewards
                     </Heading>
-                    <Text color={theme === 'light' ? '#011149' : 'gray.300'} fontSize={{ base: "sm", md: "md" }}>
+                    <Text color="secondary.600" fontSize={{ base: "sm", md: "md" }}>
                       Convert your points into cash, gift cards, or exclusive deals
                       from our partner network.
                     </Text>
@@ -236,11 +194,9 @@ export default function Home() {
 
             {/* CTA Section */}
             <Card.Root 
-              bgGradient={theme === 'light'
-                ? 'linear(to-r, brand.500, secondary.500)'
-                : 'linear(to-r, #6bbaff, #4caafc, #598dba, #1a3f73, #0f2f57)'}
+              bg="primary.600"
               borderRadius="2xl"
-              color={theme === 'light' ? '#011149' : '#e3f1ff'}
+              color="white"
               shadow="2xl"
             >
               <Card.Body textAlign="center" py={{ base: 6, md: 8 }} px={{ base: 4, md: 6 }}>
@@ -251,12 +207,12 @@ export default function Home() {
                   </Text>
                   <Link href="/signup">
                     <Button
-                      bg={theme === 'light' ? '#e1ffe9' : '#4caafc'}
-                      color={theme === 'light' ? '#011149' : '#0f2f57'}
+                      bg="white"
+                      color="primary.700"
                       size={{ base: "sm", md: "md" }}
                       fontWeight="bold"
                       _hover={{
-                        bg: theme === 'light' ? '#c2fdd9' : '#6bbaff',
+                        bg: 'gray.100',
                         transform: 'translateY(-2px)',
                         shadow: 'xl'
                       }}

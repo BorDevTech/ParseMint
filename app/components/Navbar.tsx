@@ -31,11 +31,7 @@ export function Navbar() {
         right={0}
         h="100vh"
         w="280px"
-        bg={theme === 'light'
-          ? "linear-gradient(to-br, var(--chakra-colors-brand-500), var(--chakra-colors-secondary-500))"
-          : "linear-gradient(to-br, var(--chakra-colors-gray-800), var(--chakra-colors-gray-900))"
-        }
-        color="white"
+        className="navbar-footer-theme"
         p={6}
         zIndex={1000}
         shadow="2xl"
@@ -61,24 +57,18 @@ export function Navbar() {
             <>
               <Link href="/dashboard" onClick={() => setIsMenuOpen(false)}>
                 <Button
-                  variant="solid"
-                  bg="whiteAlpha.200"
-                  color="white"
+                  className="secondary-button"
                   w="full"
                   size="lg"
-                  _hover={{ bg: 'whiteAlpha.300' }}
                 >
                   Dashboard
                 </Button>
               </Link>
               <Link href="/account" onClick={() => setIsMenuOpen(false)}>
                 <Button
-                  variant="solid"
-                  bg="whiteAlpha.200"
-                  color="white"
+                  className="secondary-button"
                   w="full"
                   size="lg"
-                  _hover={{ bg: 'whiteAlpha.300' }}
                 >
                   Profile Settings
                 </Button>
@@ -98,23 +88,18 @@ export function Navbar() {
             <>
               <Link href="/login" onClick={() => setIsMenuOpen(false)}>
                 <Button
-                  variant="solid"
-                  bg="whiteAlpha.200"
-                  color="white"
+                  className="secondary-button"
                   w="full"
                   size="lg"
-                  _hover={{ bg: 'whiteAlpha.300' }}
                 >
                   Login
                 </Button>
               </Link>
               <Link href="/signup" onClick={() => setIsMenuOpen(false)}>
                 <Button
-                  bg="white"
-                  color="brand.600"
+                  className="primary-button"
                   w="full"
                   size="lg"
-                  _hover={{ bg: 'gray.100' }}
                 >
                   Sign Up
                 </Button>
@@ -128,16 +113,12 @@ export function Navbar() {
 
   return (
     <Box
-      bgGradient={theme === 'light'
-        ? "linear(to-r, brand.500, secondary.500, accent.500)"
-        : "linear(to-r, gray.800, gray.900, black)"
-      }
-      shadow="xl"
+      className="navbar-footer-theme"
+      shadow="lg"
       position="sticky"
       top={0}
       zIndex={10}
       borderBottom="2px"
-      borderColor="white"
       h="100%"
       display="flex"
       alignItems="center"
@@ -150,13 +131,13 @@ export function Navbar() {
           {/* Center - ParseMint Brand */}
           <Box
             textAlign="center"
-            bg={theme === 'light' ? '#e1ffe9' : 'white'}
+            bg="white"
             px={{ base: 2, md: 4 }}
             py={{ base: 0.5, md: 1 }}
             borderRadius="full"
             shadow="lg"
             border="1px"
-            borderColor="white"
+            borderColor="primary.200"
             _hover={{
               transform: 'scale(1.05)',
               shadow: 'xl'
@@ -167,11 +148,11 @@ export function Navbar() {
               <Heading
                 as="h1"
                 size={{ base: "xs", md: "sm" }}
-                className="brand-gradient"
                 cursor="pointer"
                 fontWeight="bold"
                 fontSize={{ base: "sm", md: "lg" }}
                 letterSpacing="tight"
+                color="primary.700"
               >
                 ParseMint
               </Heading>
@@ -189,38 +170,16 @@ export function Navbar() {
                 <>
                   <Link href="/dashboard">
                     <Button
-                      variant="solid"
-                      bg="whiteAlpha.200"
-                      color="white"
-                      borderWidth="1px"
-                      borderColor="whiteAlpha.300"
+                      className="secondary-button"
                       size="sm"
-                      _hover={{
-                        bg: 'whiteAlpha.300',
-                        borderColor: 'white',
-                        transform: 'translateY(-1px)'
-                      }}
-                      fontWeight="semibold"
-                      transition="all 0.2s"
                     >
                       Dashboard
                     </Button>
                   </Link>
                   <Link href="/account">
                     <Button
-                      variant="solid"
-                      bg="whiteAlpha.200"
-                      color="white"
-                      borderWidth="1px"
-                      borderColor="whiteAlpha.300"
+                      className="secondary-button"
                       size="sm"
-                      _hover={{
-                        bg: 'whiteAlpha.300',
-                        borderColor: 'white',
-                        transform: 'translateY(-1px)'
-                      }}
-                      fontWeight="semibold"
-                      transition="all 0.2s"
                     >
                       Profile
                     </Button>
@@ -248,38 +207,16 @@ export function Navbar() {
                 <>
                   <Link href="/login">
                     <Button
-                      variant="solid"
-                      bg="whiteAlpha.800"
-                      color="#011149"
-                      borderWidth="1px"
-                      borderColor="whiteAlpha.300"
+                      className="secondary-button"
                       size="sm"
-                      _hover={{
-                        bg: 'white',
-                        borderColor: 'white',
-                        transform: 'translateY(-1px)'
-                      }}
-                      fontWeight="semibold"
-                      transition="all 0.2s"
                     >
                       Login
                     </Button>
                   </Link>
                   <Link href="/signup">
                     <Button
-                      bg="white"
-                      color="#011149"
-                      borderWidth="1px"
-                      borderColor="white"
+                      className="primary-button"
                       size="sm"
-                      _hover={{
-                        bg: 'gray.100',
-                        transform: 'translateY(-1px)',
-                        shadow: 'md'
-                      }}
-                      _active={{ transform: 'translateY(0)' }}
-                      transition="all 0.2s"
-                      fontWeight="bold"
                     >
                       Sign Up
                     </Button>
