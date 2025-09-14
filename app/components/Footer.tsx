@@ -33,7 +33,7 @@ export function Footer() {
           h="100%"
         >
           {/* Left side - Company Info */}
-          <VStack align={{ base: "center", md: "flex-start" }} gap={1} spacing={0}>
+          <VStack align={{ base: "center", md: "flex-start" }} gap={1}>
             <Text 
               fontSize={{ base: "md", md: "lg" }}
               fontWeight="bold"
