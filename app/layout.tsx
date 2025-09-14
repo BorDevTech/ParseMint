@@ -27,23 +27,25 @@ export default function RootLayout({
           <ThemeProvider>
             <AuthProvider>
               <Box 
-                minH="100vh" 
-                display="flex" 
-                flexDirection="column"
+                h="100vh" 
+                display="grid"
+                gridTemplateRows="10vh 80vh 10vh"
+                gridTemplateAreas={`"navbar" "main" "footer"`}
                 bgGradient="linear(to-br, brand.25, secondary.25, accent.25, premium.25)"
                 fontSize={{ base: "14px", sm: "16px" }}
+                overflow="hidden"
               >
-                <Box h="10vh">
+                <Box gridArea="navbar">
                   <Navbar />
                 </Box>
                 <Box 
-                  h="75vh"
+                  gridArea="main"
                   bgGradient="linear(to-br, white, brand.50, secondary.50)"
                   overflow="auto"
                 >
                   {children}
                 </Box>
-                <Box h="15vh">
+                <Box gridArea="footer">
                   <Footer />
                 </Box>
               </Box>

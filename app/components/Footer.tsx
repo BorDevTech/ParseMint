@@ -5,7 +5,6 @@ import {
   Container,
   Flex,
   Text,
-  VStack,
   HStack,
   Icon,
   Link as ChakraLink,
@@ -19,31 +18,28 @@ export function Footer() {
       bgGradient="linear(to-r, gray.800, gray.900)" 
       color="white" 
       h="100%"
-      borderTop="3px"
+      borderTop="2px"
       borderColor="brand.400"
       display="flex"
       alignItems="center"
     >
       <Container maxW="container.xl" h="100%">
         <Flex 
-          direction={{ base: 'column', md: 'row' }} 
+          direction="row"
           justify="space-between" 
           align="center"
-          gap={{ base: 2, md: 4 }}
+          gap={4}
           h="100%"
         >
           {/* Left side - Company Info */}
-          <VStack align={{ base: "center", md: "flex-start" }} gap={1}>
+          <HStack gap={3}>
             <Text 
-              fontSize={{ base: "md", md: "lg" }}
+              fontSize="sm"
               fontWeight="bold"
               bgGradient="linear(to-r, brand.300, secondary.300)"
               bgClip="text"
             >
               ParseMint™
-            </Text>
-            <Text color="gray.300" fontSize={{ base: "xs", md: "sm" }}>
-              Florida, US
             </Text>
             <ChakraLink 
               href="mailto:parsemint@bordevtech.com" 
@@ -52,15 +48,16 @@ export function Footer() {
                 color: 'brand.200',
                 textDecoration: 'underline'
               }}
-              fontSize={{ base: "xs", md: "sm" }}
+              fontSize="xs"
               transition="all 0.2s"
+              display={{ base: "none", md: "block" }}
             >
               parsemint@bordevtech.com
             </ChakraLink>
-          </VStack>
+          </HStack>
 
           {/* Center - Social Media Icons */}
-          <HStack gap={3} display={{ base: "flex", md: "flex" }}>
+          <HStack gap={2}>
             <ChakraLink 
               href="#" 
               p={1}
@@ -74,7 +71,7 @@ export function Footer() {
               transition="all 0.3s"
               aria-label="TikTok"
             >
-              <Icon as={FaTiktok} boxSize={4} />
+              <Icon as={FaTiktok} boxSize={3} />
             </ChakraLink>
             <ChakraLink 
               href="#" 
@@ -89,7 +86,7 @@ export function Footer() {
               transition="all 0.3s"
               aria-label="Instagram"
             >
-              <Icon as={FaInstagram} boxSize={4} />
+              <Icon as={FaInstagram} boxSize={3} />
             </ChakraLink>
             <ChakraLink 
               href="#" 
@@ -104,16 +101,12 @@ export function Footer() {
               transition="all 0.3s"
               aria-label="Facebook"
             >
-              <Icon as={FaFacebook} boxSize={4} />
+              <Icon as={FaFacebook} boxSize={3} />
             </ChakraLink>
           </HStack>
 
           {/* Right side - Navigation Links */}
-          <HStack 
-            gap={{ base: 2, md: 4 }}
-            wrap="wrap"
-            justify={{ base: "center", md: "flex-end" }}
-          >
+          <HStack gap={3}>
             <ChakraLink 
               as={Link}
               href="/about"
@@ -122,7 +115,7 @@ export function Footer() {
                 color: 'brand.300',
                 textDecoration: 'underline'
               }}
-              fontSize={{ base: "xs", md: "sm" }}
+              fontSize="xs"
               transition="all 0.2s"
             >
               About
@@ -135,7 +128,7 @@ export function Footer() {
                 color: 'accent.300',
                 textDecoration: 'underline'
               }}
-              fontSize={{ base: "xs", md: "sm" }}
+              fontSize="xs"
               transition="all 0.2s"
             >
               Privacy
@@ -148,7 +141,7 @@ export function Footer() {
                 color: 'premium.300',
                 textDecoration: 'underline'
               }}
-              fontSize={{ base: "xs", md: "sm" }}
+              fontSize="xs"
               transition="all 0.2s"
             >
               Support

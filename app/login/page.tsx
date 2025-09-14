@@ -57,15 +57,15 @@ export default function LoginPage() {
   };
 
   return (
-    <Box minH="100vh" bgGradient="linear(to-br, brand.50, secondary.50)" py={8}>
-      <Container maxW="md">
-        <VStack gap={6} align="stretch">
+    <Box h="100%" bgGradient="linear(to-br, brand.50, secondary.50)" py={4} overflow="auto">
+      <Container maxW="lg" h="100%" display="flex" alignItems="center">
+        <VStack gap={4} align="stretch" w="100%">
           {/* Header */}
           <Box textAlign="center">
             <Link href="/">
               <Heading
                 as="h1"
-                size="xl"
+                size="lg"
                 bgGradient="linear(to-r, brand.500, secondary.500)"
                 bgClip="text"
                 mb={2}
@@ -78,7 +78,7 @@ export default function LoginPage() {
                 ParseMint
               </Heading>
             </Link>
-            <Text color="gray.600" fontSize="lg">
+            <Text color="gray.600" fontSize="md">
               Welcome back!
             </Text>
           </Box>
@@ -86,19 +86,22 @@ export default function LoginPage() {
           {/* Login Form */}
           <Box 
             bg="white" 
-            p={8} 
+            p={6} 
             borderRadius="xl" 
             shadow="xl"
             border="1px"
             borderColor="brand.100"
+            w="100%"
+            maxW="md"
+            mx="auto"
           >
             <form onSubmit={handleSubmit}>
-              <VStack gap={6} align="stretch">
-                <Heading size="lg" textAlign="center" color="gray.800">
+              <VStack gap={4} align="stretch">
+                <Heading size="md" textAlign="center" color="gray.800">
                   Login to your account
                 </Heading>
                 
-                <Text fontSize="sm" color="gray.600" textAlign="center">
+                <Text fontSize="xs" color="gray.600" textAlign="center">
                   Test credentials: test@parsemint.com / password123
                 </Text>
 
@@ -117,7 +120,7 @@ export default function LoginPage() {
                 )}
 
                 <Box>
-                  <Text fontWeight="medium" mb={2} color="gray.700">
+                  <Text fontWeight="medium" mb={2} color="gray.700" fontSize="sm">
                     Email Address <Text as="span" color="red.500">*</Text>
                   </Text>
                   <Input
@@ -127,6 +130,7 @@ export default function LoginPage() {
                     placeholder="Enter your email address"
                     bg="white"
                     borderColor="gray.300"
+                    size="sm"
                     _focus={{ 
                       borderColor: 'brand.400',
                       boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)'
@@ -136,7 +140,7 @@ export default function LoginPage() {
                 </Box>
 
                 <Box>
-                  <Text fontWeight="medium" mb={2} color="gray.700">
+                  <Text fontWeight="medium" mb={2} color="gray.700" fontSize="sm">
                     Password <Text as="span" color="red.500">*</Text>
                   </Text>
                   <Input
@@ -146,6 +150,7 @@ export default function LoginPage() {
                     placeholder="Enter your password"
                     bg="white"
                     borderColor="gray.300"
+                    size="sm"
                     _focus={{ 
                       borderColor: 'brand.400',
                       boxShadow: '0 0 0 1px var(--chakra-colors-brand-400)'
@@ -158,7 +163,7 @@ export default function LoginPage() {
                   type="submit"
                   bg="accent.500"
                   color="white"
-                  size="lg"
+                  size="md"
                   loading={isSubmitting}
                   loadingText="Logging in..."
                   _hover={{ 
@@ -173,7 +178,7 @@ export default function LoginPage() {
                   Login
                 </Button>
 
-                <Text fontSize="sm" color="gray.500" textAlign="center">
+                <Text fontSize="xs" color="gray.500" textAlign="center">
                   Don&apos;t have an account?{' '}
                   <Link href="/signup">
                     <Text 
@@ -200,6 +205,7 @@ export default function LoginPage() {
               <Button 
                 variant="ghost" 
                 color="secondary.600"
+                size="sm"
                 _hover={{ 
                   bg: 'secondary.50',
                   color: 'secondary.700'
