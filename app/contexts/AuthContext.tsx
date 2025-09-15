@@ -222,7 +222,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           account_created_at: new Date().toISOString(),
           hearAboutUsOther: "",
           referralCode: "",
-          password: "test123",
+          password: "password123",
         },
         {
           id: "test-user-2",

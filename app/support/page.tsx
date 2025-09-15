@@ -42,37 +42,36 @@ export default function SupportPage() {
   };
 
   return (
-    <Box minH="100vh" bg="gray.50">
+    <Box minH="100vh" className="main-background">
       <Container maxW="container.lg" py={16}>
         <VStack gap={8} align="stretch">
           <Box textAlign="center">
             <Heading
               as="h1"
               size="2xl"
-              bgGradient="linear(to-r, teal.400, blue.500)"
-              bgClip="text"
+              color="secondary.900"
               mb={4}
             >
               Support Center
             </Heading>
-            <Text fontSize="xl" color="gray.600" maxW="3xl" mx="auto">
+            <Text fontSize="xl" color="secondary.600" maxW="3xl" mx="auto">
               We&apos;re here to help! Get answers to your questions or contact our support team.
             </Text>
           </Box>
 
           <SimpleGrid columns={{ base: 1, md: 2 }} gap={8}>
             {/* FAQ Section */}
-            <Box bg="white" p={8} borderRadius="lg" shadow="md">
+            <Box className="card-background" p={8} borderRadius="lg" shadow="md">
               <VStack gap={6} align="stretch">
-                <Heading size="lg" color="gray.700">
+                <Heading size="lg" color="secondary.900">
                   Frequently Asked Questions
                 </Heading>
 
                 <Box>
-                  <Heading size="md" color="gray.700" mb={2}>
+                  <Heading size="md" color="secondary.900" mb={2}>
                     How do I earn points?
                   </Heading>
-                  <Text color="gray.600">
+                  <Text color="secondary.600">
                     Simply upload a photo of your receipt through our platform. 
                     Our system will automatically calculate points based on your 
                     purchase amount and merchant partnerships.
@@ -80,10 +79,10 @@ export default function SupportPage() {
                 </Box>
 
                 <Box>
-                  <Heading size="md" color="gray.700" mb={2}>
+                  <Heading size="md" color="secondary.900" mb={2}>
                     How do I redeem my points?
                   </Heading>
-                  <Text color="gray.600">
+                  <Text color="secondary.600">
                     Visit your dashboard and click on &quot;Redeem Rewards&quot;. You can 
                     convert points to cash, gift cards, or exclusive deals from 
                     our partner network.
@@ -91,10 +90,10 @@ export default function SupportPage() {
                 </Box>
 
                 <Box>
-                  <Heading size="md" color="gray.700" mb={2}>
+                  <Heading size="md" color="secondary.900" mb={2}>
                     What receipts are accepted?
                   </Heading>
-                  <Text color="gray.600">
+                  <Text color="secondary.600">
                     We accept receipts from most retail stores, restaurants, 
                     gas stations, and online purchases. The receipt must be 
                     clear and show the purchase details.
@@ -102,10 +101,10 @@ export default function SupportPage() {
                 </Box>
 
                 <Box>
-                  <Heading size="md" color="gray.700" mb={2}>
+                  <Heading size="md" color="secondary.900" mb={2}>
                     How long does it take to process receipts?
                   </Heading>
-                  <Text color="gray.600">
+                  <Text color="secondary.600">
                     Most receipts are processed within minutes. Complex receipts 
                     may take up to 24 hours for manual review.
                   </Text>
@@ -114,15 +113,15 @@ export default function SupportPage() {
             </Box>
 
             {/* Contact Form */}
-            <Box bg="white" p={8} borderRadius="lg" shadow="md">
+            <Box className="card-background" p={8} borderRadius="lg" shadow="md">
               <form onSubmit={handleSubmit}>
                 <VStack gap={6} align="stretch">
-                  <Heading size="lg" color="gray.700">
+                  <Heading size="lg" color="secondary.900">
                     Contact Support
                   </Heading>
 
                   <Box>
-                    <Text fontWeight="medium" mb={2} color="gray.700">
+                    <Text fontWeight="medium" mb={2} color="secondary.900">
                       Name <Text as="span" color="red.500">*</Text>
                     </Text>
                     <Input
@@ -136,7 +135,7 @@ export default function SupportPage() {
                   </Box>
 
                   <Box>
-                    <Text fontWeight="medium" mb={2} color="gray.700">
+                    <Text fontWeight="medium" mb={2} color="secondary.900">
                       Email <Text as="span" color="red.500">*</Text>
                     </Text>
                     <Input
@@ -150,7 +149,7 @@ export default function SupportPage() {
                   </Box>
 
                   <Box>
-                    <Text fontWeight="medium" mb={2} color="gray.700">
+                    <Text fontWeight="medium" mb={2} color="secondary.900">
                       Subject <Text as="span" color="red.500">*</Text>
                     </Text>
                     <Input
@@ -164,7 +163,7 @@ export default function SupportPage() {
                   </Box>
 
                   <Box>
-                    <Text fontWeight="medium" mb={2} color="gray.700">
+                    <Text fontWeight="medium" mb={2} color="secondary.900">
                       Message <Text as="span" color="red.500">*</Text>
                     </Text>
                     <Textarea
@@ -179,7 +178,7 @@ export default function SupportPage() {
 
                   <Button
                     type="submit"
-                    colorScheme="teal"
+                    className="primary-button"
                     size="lg"
                     loading={isSubmitting}
                     loadingText="Sending..."
@@ -187,9 +186,9 @@ export default function SupportPage() {
                     Send Message
                   </Button>
 
-                  <Text fontSize="sm" color="gray.500" textAlign="center">
+                  <Text fontSize="sm" color="secondary.500" textAlign="center">
                     You can also reach us directly at{' '}
-                    <Text as="span" color="teal.500">
+                    <Text as="span" color="primary.500">
                       parsemint@bordevtech.com
                     </Text>
                   </Text>

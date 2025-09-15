@@ -13,7 +13,7 @@ import {
   NativeSelectRoot,
   NativeSelectField,
 } from '@chakra-ui/react';
-import { FaArrowDown } from 'react-icons/fa';
+import { FaArrowDown, FaPalette } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { useAuth, SessionTimeout } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
@@ -44,20 +44,49 @@ type ProfileData = Pick<
 
 export default function AccountPage() {
 
-
+  const { colorTheme, setColorTheme } = useTheme();
   const [profileData, setProfileData] = useState<ProfileData>({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
     auto_logout_duration: 5, // default value, adjust as needed
-    theme_selection: 'teal-blue', // default value, adjust as needed
+    theme_selection: colorTheme, // use theme from context
   });
+
+  const [previewTheme, setPreviewTheme] = useState<string | null>(null);
+  const [sessionTimeout, setSessionTimeout] = useState('5min');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   };
 
+  const handleThemeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const newTheme = e.target.value as 'teal-blue' | 'green-blue' | 'blue-purple' | 'green-teal';
+    setColorTheme(newTheme);
+    setProfileData(prev => ({ ...prev, theme_selection: newTheme }));
+    setPreviewTheme(null); // Clear preview when theme is selected
+  };
+
+  const handleThemePreview = (themeName: string) => {
+    if (themeName !== colorTheme) {
+      setPreviewTheme(themeName);
+      // Temporarily apply the theme for preview
+      const root = document.documentElement;
+      root.classList.remove('theme-teal-blue', 'theme-green-blue', 'theme-blue-purple', 'theme-green-teal');
+      root.classList.add(`theme-${themeName}`);
+    }
+  };
+
+  const handleThemeLeave = () => {
+    if (previewTheme) {
+      setPreviewTheme(null);
+      // Restore the current theme
+      const root = document.documentElement;
+      root.classList.remove('theme-teal-blue', 'theme-green-blue', 'theme-blue-purple', 'theme-green-teal');
+      root.classList.add(`theme-${colorTheme}`);
+    }
+  };
 
   const handlePasswordSubmit = async () => {
     // if (newPassword !== confirmPassword) {
@@ -71,9 +100,17 @@ export default function AccountPage() {
     // } 
   };
 
+  // Theme information for user guidance
+  const themeInfo = {
+    'teal-blue': { name: 'Teal & Blue', description: 'Calm and professional with teal and blue tones' },
+    'green-blue': { name: 'Lime Green & Blue', description: 'Fresh and vibrant with lime green accents' },
+    'blue-purple': { name: 'Blue & Purple', description: 'Modern and creative with blue and purple hues' },
+    'green-teal': { name: 'Green & Teal', description: 'Natural and balanced with green and teal colors' }
+  };
+
   const loading = false;
   const isAuthenticated = true;
-  const previewTheme = true;
+  
   // Show loading state while authentication is being determined
   if (loading) {
     return (
@@ -106,7 +143,7 @@ export default function AccountPage() {
   }
 
   return (
-    <Box minH="100vh" bg={"blue.500"} position="relative">
+    <Box minH="100vh" className="main-background" position="relative">
       {/* Sticky Skip to Save Button */}
       <Box
         position="fixed"
@@ -118,7 +155,9 @@ export default function AccountPage() {
       >
         <IconButton
           aria-label="Skip to save buttons"
-          colorScheme="teal"
+          bg="primary.600"
+          color="white"
+          _hover={{ bg: "primary.700" }}
           size="lg"
           borderRadius="full"
           shadow="lg"
@@ -132,24 +171,24 @@ export default function AccountPage() {
         <VStack gap={8} align="stretch">
           {/* Header */}
           <Box>
-            <Heading size="xl" color="gray.700" mb={2}>
+            <Heading size="xl" color="secondary.900" mb={2}>
               Account Settings
             </Heading>
-            <Text color="gray.600" fontSize="lg">
+            <Text color="secondary.600" fontSize="lg">
               Manage your profile and preferences.
             </Text>
           </Box>
 
           {/* Profile Section */}
-          <Box bg="white" p={8} borderRadius="lg" shadow="md">
+          <Box className="card-background" p={8} borderRadius="lg" shadow="md">
             <form onSubmit={handleSubmit}>
               <VStack gap={6} align="stretch">
-                <Heading size="md" color="gray.700">
+                <Heading size="md" color="secondary.900">
                   Profile Information
                 </Heading>
 
                 <Box>
-                  <Text fontWeight="medium" mb={2} color="gray.700">
+                  <Text fontWeight="medium" mb={2} color="secondary.900">
                     Full Name
                   </Text>
                   <Input
@@ -157,11 +196,14 @@ export default function AccountPage() {
                     value={profileData.firstName}
                     onChange={(e) => { null }}
                     bg="white"
+                    borderColor="neutral.300"
+                    _hover={{ borderColor: "primary.400" }}
+                    _focus={{ borderColor: "primary.500", boxShadow: "0 0 0 1px var(--primary-500)" }}
                   />
                 </Box>
 
                 <Box>
-                  <Text fontWeight="medium" mb={2} color="gray.700">
+                  <Text fontWeight="medium" mb={2} color="secondary.900">
                     Email Address
                   </Text>
                   <Input
@@ -169,11 +211,14 @@ export default function AccountPage() {
                     value={profileData.email}
                     onChange={(e) => { null }}
                     bg="white"
+                    borderColor="neutral.300"
+                    _hover={{ borderColor: "primary.400" }}
+                    _focus={{ borderColor: "primary.500", boxShadow: "0 0 0 1px var(--primary-500)" }}
                   />
                 </Box>
 
                 <Box>
-                  <Text fontWeight="medium" mb={2} color="gray.700">
+                  <Text fontWeight="medium" mb={2} color="secondary.900">
                     Phone Number
                   </Text>
                   <Input
@@ -181,6 +226,9 @@ export default function AccountPage() {
                     value={profileData.phone}
                     onChange={(e) => { null }}
                     bg="white"
+                    borderColor="neutral.300"
+                    _hover={{ borderColor: "primary.400" }}
+                    _focus={{ borderColor: "primary.500", boxShadow: "0 0 0 1px var(--primary-500)" }}
                   />
                 </Box>
               </VStack>
@@ -188,106 +236,118 @@ export default function AccountPage() {
           </Box>
 
           {/* Preferences Section */}
-          <Box bg="white" p={8} borderRadius="lg" shadow="md">
+          <Box 
+            className={`card-background ${previewTheme ? 'theme-preview-highlight' : ''}`} 
+            p={8} 
+            borderRadius="lg" 
+            shadow="md"
+          >
             <VStack gap={6} align="stretch">
-              <Heading size="md" color="gray.700">
-                Color Theme & Preferences
-              </Heading>
+              <HStack>
+                <FaPalette color="var(--primary-500)" />
+                <Heading size="md" color="secondary.900">
+                  Color Theme & Preferences
+                </Heading>
+              </HStack>
 
               <Box>
-                <Text fontWeight="medium" mb={2} color="gray.700">
+                <Text fontWeight="medium" mb={2} color="secondary.900">
                   Color Theme
                 </Text>
-                <Box position="relative">
+                <Box position="relative" className="theme-preview-container">
                   <NativeSelectRoot>
                     <NativeSelectField
-                      value={""
-                        // preferences.colorTheme 
-                      }
-                      onChange={() => { }
-                        // handleThemeChange
-
-                      }
-                      onMouseLeave={() => { }
-                        // handleThemeLeave
-                      }
+                      value={colorTheme}
+                      onChange={handleThemeChange}
+                      onMouseLeave={handleThemeLeave}
+                      className="theme-select"
                       bg="white"
-                      borderColor="gray.200"
-                      _hover={{ borderColor: "gray.300" }}
-                      _focus={{ borderColor: "teal.500", boxShadow: "0 0 0 1px var(--chakra-colors-teal-500)" }}
+                      color="neutral.900"
+                      borderColor="neutral.300"
+                      fontSize="md"
+                      fontWeight="500"
+                      _hover={{ borderColor: "primary.400" }}
+                      _focus={{ borderColor: "primary.500", boxShadow: "0 0 0 3px rgba(var(--primary-500), 0.1)" }}
                     >
                       <option
                         value="teal-blue"
-                        onMouseEnter={() => { null }}
+                        onMouseEnter={() => handleThemePreview('teal-blue')}
+                        style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}
                       >
-                        Teal & Blue (Default)
+                        {themeInfo['teal-blue'].name} (Default)
                       </option>
                       <option
                         value="green-blue"
-                        onMouseEnter={() => { null }}
+                        onMouseEnter={() => handleThemePreview('green-blue')}
+                        style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}
                       >
-                        Lime Green & Blue
+                        {themeInfo['green-blue'].name}
                       </option>
                       <option
                         value="blue-purple"
-                        onMouseEnter={() => { null }}
+                        onMouseEnter={() => handleThemePreview('blue-purple')}
+                        style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}
                       >
-                        Blue & Purple
+                        {themeInfo['blue-purple'].name}
                       </option>
                       <option
                         value="green-teal"
-                        onMouseEnter={() => { null }}
+                        onMouseEnter={() => handleThemePreview('green-teal')}
+                        style={{ backgroundColor: 'var(--background)', color: 'var(--foreground)' }}
                       >
-                        Green & Teal
+                        {themeInfo['green-teal'].name}
                       </option>
                     </NativeSelectField>
                   </NativeSelectRoot>
                   {previewTheme && (
                     <Box
                       position="absolute"
-                      top="-2px"
-                      left="-2px"
-                      right="-2px"
-                      bottom="-2px"
-                      border="2px solid"
-                      borderColor="blue.400"
-                      borderRadius="md"
+                      top="-3px"
+                      left="-3px"
+                      right="-3px"
+                      bottom="-3px"
+                      border="3px solid"
+                      borderColor="accent.400"
+                      borderRadius="lg"
                       pointerEvents="none"
                       zIndex={1}
+                      boxShadow="0 0 20px rgba(var(--accent-400), 0.3)"
                     />
                   )}
                 </Box>
-                <Text fontSize="sm" color="gray.500" mt={1}>
-                  Choose your preferred color scheme for the interface. Hover over options to preview.
+                <Text fontSize="sm" color="secondary.500" mt={2}>
+                  {themeInfo[colorTheme as keyof typeof themeInfo]?.description || 'Choose your preferred color scheme for the interface.'} 
+                  <br />
+                  <Text as="span" color="primary.600" fontWeight="medium">
+                    Hover over options to preview them instantly.
+                  </Text>
                 </Text>
               </Box>
             </VStack>
           </Box>
 
           {/* Security Section */}
-          <Box bg="white" p={8} borderRadius="lg" shadow="md">
+          <Box className="card-background" p={8} borderRadius="lg" shadow="md">
             <VStack gap={6} align="stretch">
-              <Heading size="md" color="gray.700">
+              <Heading size="md" color="secondary.900">
                 Security Settings
               </Heading>
 
               {/* Session Timeout Settings */}
               <Box>
-                <Text fontWeight="medium" mb={2} color="gray.700">
+                <Text fontWeight="medium" mb={2} color="secondary.900">
                   Auto-Logout After Inactivity
                 </Text>
                 <NativeSelectRoot>
                   <NativeSelectField
-                    value={""
-                      // sessionTimeout
-                    }
-                    onChange={() => { }
-                      // (e) => setSessionTimeout(e.target.value as SessionTimeout)
-                    }
+                    value={sessionTimeout}
+                    onChange={(e) => setSessionTimeout(e.target.value)}
+                    className="theme-select"
                     bg="white"
-                    borderColor="gray.200"
-                    _hover={{ borderColor: "gray.300" }}
-                    _focus={{ borderColor: "teal.500", boxShadow: "0 0 0 1px var(--chakra-colors-teal-500)" }}
+                    color="neutral.900"
+                    borderColor="neutral.300"
+                    _hover={{ borderColor: "primary.400" }}
+                    _focus={{ borderColor: "primary.500", boxShadow: "0 0 0 3px rgba(var(--primary-500), 0.1)" }}
                   >
                     <option value="3min">3 minutes</option>
                     <option value="5min">5 minutes (Default)</option>
@@ -295,13 +355,13 @@ export default function AccountPage() {
                     <option value="never">Never</option>
                   </NativeSelectField>
                 </NativeSelectRoot>
-                <Text fontSize="sm" color="gray.500" mt={1}>
+                <Text fontSize="sm" color="secondary.500" mt={1}>
                   Automatically log out after the specified period of inactivity. This includes tab switching and background activity.
                 </Text>
               </Box>
 
               <Box>
-                <Text fontWeight="medium" mb={2} color="gray.700">
+                <Text fontWeight="medium" mb={2} color="secondary.900">
                   Current Password
                 </Text>
                 <Input
@@ -309,11 +369,14 @@ export default function AccountPage() {
                   placeholder="Enter current password"
                   onChange={(e) => { null }}
                   bg="white"
+                  borderColor="neutral.300"
+                  _hover={{ borderColor: "primary.400" }}
+                  _focus={{ borderColor: "primary.500", boxShadow: "0 0 0 1px var(--primary-500)" }}
                 />
               </Box>
 
               <Box>
-                <Text fontWeight="medium" mb={2} color="gray.700">
+                <Text fontWeight="medium" mb={2} color="secondary.900">
                   New Password
                 </Text>
                 <Input
@@ -324,11 +387,14 @@ export default function AccountPage() {
                   }
                   onChange={(e) => { null }}
                   bg="white"
+                  borderColor="neutral.300"
+                  _hover={{ borderColor: "primary.400" }}
+                  _focus={{ borderColor: "primary.500", boxShadow: "0 0 0 1px var(--primary-500)" }}
                 />
               </Box>
 
               <Box>
-                <Text fontWeight="medium" mb={2} color="gray.700">
+                <Text fontWeight="medium" mb={2} color="secondary.900">
                   Confirm New Password
                 </Text>
                 <Input
@@ -339,6 +405,9 @@ export default function AccountPage() {
                   }
                   onChange={(e) => { null }}
                   bg="white"
+                  borderColor="neutral.300"
+                  _hover={{ borderColor: "primary.400" }}
+                  _focus={{ borderColor: "primary.500", boxShadow: "0 0 0 1px var(--primary-500)" }}
                 />
               </Box>
             </VStack>
@@ -347,21 +416,21 @@ export default function AccountPage() {
           {/* Save Buttons Section */}
           <Box
             id="save-buttons-section"
-            bg="white"
+            className="card-background"
             p={8}
             borderRadius="lg"
             shadow="md"
             borderTop="4px solid"
-            borderTopColor="teal.500"
+            borderTopColor="primary.500"
           >
             <VStack gap={6} align="stretch">
-              <Heading size="md" color="gray.700" textAlign="center">
+              <Heading size="md" color="secondary.900" textAlign="center">
                 Save Changes
               </Heading>
 
               <HStack justify="space-between" wrap="wrap" gap={4}>
                 <Button
-                  colorScheme="teal"
+                  className="primary-button"
                   size="lg"
                   loading={false
                     // isSubmitting
@@ -375,7 +444,7 @@ export default function AccountPage() {
                 </Button>
 
                 <Button
-                  colorScheme="blue"
+                  className="primary-button"
                   size="lg"
                   loading={false
                     // isPreferencesSubmitting
@@ -391,7 +460,7 @@ export default function AccountPage() {
                 </Button>
 
                 <Button
-                  colorScheme="purple"
+                  className="accent-button"
                   size="lg"
                   loading={false
                     // isPasswordSubmitting

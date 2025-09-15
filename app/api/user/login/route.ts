@@ -1,22 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import UserFetchByEmail from "@/data/controls/users/userFetchByID";
+export async function POST(request: NextRequest) {
+    try {
+        const body = await request.json();
+        const { email, password } = body;
 
+        if (!email || !password) {
+            return NextResponse.json(
+                { success: false, error: "Email and password are required" },
+                { status: 400 }
+            );
+        }
 
-export async function GET(request: NextRequest) {
-
-
-
-    const user = await UserFetchByEmail(email);
-    if (!user) {
-        // User not found
-        return { success: false, error: "User not found" };
-    }
-    if (user.password === inputPassword) {
-        // Password correct
-        return { success: true, userId: user.id };
-    } else {
-        // Password incorrect
-        return { success: false, error: "Invalid password" };
+        // For now, return a placeholder response since we don't have email-based lookup
+        // In a real implementation, you'd need a user lookup by email function
+        return NextResponse.json(
+            { success: false, error: "Login functionality not yet implemented" },
+            { status: 501 }
+        );
+    } catch (error) {
+        console.error("Login error:", error);
+        return NextResponse.json(
+            { success: false, error: "Internal server error" },
+            { status: 500 }
+        );
     }
 }   

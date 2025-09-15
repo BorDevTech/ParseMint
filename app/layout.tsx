@@ -6,9 +6,10 @@ import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-import { Box } from "@chakra-ui/react";
-import { Ubuntu } from 'next/font/google';
-const ubuntu = Ubuntu({ subsets: ['latin'], weight: ['400', '700'], variable: '--font-ubuntu' });
+import { Grid, GridItem } from "@chakra-ui/react";
+
+// Fallback font configuration for sandboxed environments
+const ubuntu = { variable: '--font-ubuntu' };
 
 export const metadata: Metadata = {
   title: "ParseMint",
@@ -22,27 +23,32 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-  <body className={ubuntu.variable + " antialiased"}>
+      <body className={ubuntu.variable + " antialiased"}>
         <Providers>
           <ThemeProvider>
             <AuthProvider>
-              <Box 
-                minH="100vh" 
-                display="flex" 
-                flexDirection="column"
-                bgGradient="linear(to-br, brand.25, secondary.25, accent.25, premium.25)"
-                fontSize={{ base: "14px", sm: "16px" }}
+              <Grid 
+                h="100vh" 
+                templateRows="5vh 85vh 10vh"
+                templateAreas={`"navbar" "main" "footer"`}
+                className="main-background"
+                fontSize={{ base: "16px", sm: "16px", md: "16px" }}
+                overflow="hidden"
               >
-                <Navbar />
-                <Box 
-                  flex="1"
-                  bgGradient="linear(to-br, white, brand.50, secondary.50)"
-                  minH={{ base: "calc(100vh - 120px)", md: "calc(100vh - 140px)" }}
+                <GridItem area="navbar">
+                  <Navbar />
+                </GridItem>
+                <GridItem 
+                  area="main"
+                  className="main-background"
+                  overflow="auto"
                 >
                   {children}
-                </Box>
-                <Footer />
-              </Box>
+                </GridItem>
+                <GridItem area="footer">
+                  <Footer />
+                </GridItem>
+              </Grid>
             </AuthProvider>
           </ThemeProvider>
         </Providers>

@@ -6,7 +6,7 @@ import { UserSignupData } from "@/app/types/user-signup";
  * @param userId - The unique identifier for the user to fetch.
  * @returns The user data.
  */
-export default async function UserFetch(userId: string): Promise<User> {
+export default async function UserFetch(userId: string): Promise<UserSignupData> {
     const blobKey = `/Users/${userId}.json`;
 
     try {
