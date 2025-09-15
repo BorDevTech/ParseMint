@@ -17,7 +17,7 @@ export default async function UserCreate(user: UserSignupData): Promise<string> 
   if (!token) throw new Error("Missing Blob token, failed to Create User");
 
   const createdBlob = await put(blobKey, JSON.stringify(user, null, 2), {
-    access: "public",
+    access: "private",
     contentType: "application/json",
     token
   });
